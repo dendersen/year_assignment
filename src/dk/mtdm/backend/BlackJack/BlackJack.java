@@ -3,6 +3,8 @@ package dk.mtdm.backend.BlackJack;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.security.auth.kerberos.KerberosKey;
+
 public class BlackJack {
   final static byte NUMBER_OF_SYMBOLS = 4;
   final static byte MAX_CARD_VALUE = 13;
@@ -44,7 +46,9 @@ public class BlackJack {
     }
 
     for (byte i = 0; i < NUMBER_OF_CARDS * 2; i++){
-      deck.
+      CardObject temp = deck.remove(i % NUMBER_OF_CARDS);
+      byte k = (byte) (Math.random() * NUMBER_OF_CARDS);
+      deck.add(k, temp);
     }
   }
 
@@ -61,7 +65,7 @@ public class BlackJack {
     //   }
     // }
   // }
-  public static void TEMPDrawCardToScreen(byte[] card,boolean shown){
+  public static void TEMPDrawCardToScreen(byte[] card,boolean shown){ //needs rework
     
     card[1] += (byte) (1);
     String cardString = Arrays.toString(card);
