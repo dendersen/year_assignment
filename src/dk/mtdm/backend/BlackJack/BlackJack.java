@@ -3,8 +3,6 @@ package dk.mtdm.backend.BlackJack;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.security.auth.kerberos.KerberosKey;
-
 public class BlackJack {
   final static byte NUMBER_OF_SYMBOLS = 4;
   final static byte MAX_CARD_VALUE = 13;
