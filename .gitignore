@@ -1,0 +1,10 @@
+.vscode
+core
+java
+lib
+modes
+out
+tools
+changes.md
+processing-java.exe
+processing.exe
