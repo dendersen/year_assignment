@@ -27,7 +27,7 @@ public class BlackJack {
     for(byte i = 0; i < deck.size(); i++){
       try{
       cardObject = deck.get(i);
-      System.out.println("index " + 1 + " [" + cardObject.getNumber()+","+cardObject.getSymbol()+","+cardObject.getSet()+"]");
+      System.out.println("index " + i + " [" + cardObject.getNumber()+","+cardObject.getSymbol()+","+cardObject.getSet()+"]");
       } catch (Exception e){
         System.out.println(e);
       }
@@ -43,10 +43,11 @@ public class BlackJack {
       }
     }
 
-    for (byte i = 0; i < NUMBER_OF_CARDS * 2; i++){
-      CardObject temp = deck.remove(i % NUMBER_OF_CARDS);
+    for (Integer start = 0; start < NUMBER_OF_CARDS * 4; start++){
+      byte scramble = (byte) ((start * (byte) (Math.random() * NUMBER_OF_CARDS)) % NUMBER_OF_CARDS);
+      CardObject temp = deck.remove(scramble);
       byte k = (byte) (Math.random() * NUMBER_OF_CARDS);
-      deck.add(k, temp);
+      deck.add(k % NUMBER_OF_CARDS, temp);
     }
   }
 
