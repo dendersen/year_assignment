@@ -18,9 +18,9 @@ public class PlayerHandObject {
   }
   public static void save(byte handId){
     try{
-      File myObj = new File("BlackJack save game.txt" + handId);
-      if(myObj.createNewFile()){
-        System.out.println("file created: " + myObj.getName());
+      File file = new File("BlackJack save game.txt" + handId);
+      if(file.createNewFile()){
+        System.out.println("file created: " + file.getName());
       }else {
         System.out.println("file already exists.");
       }
@@ -42,8 +42,8 @@ public class PlayerHandObject {
   public static void load(){
     String data = "";
     try {
-      File myObj = new File("BlackJack save game.txt");
-      Scanner myReader = new Scanner(myObj);
+      File file = new File("BlackJack save game.txt");
+      Scanner myReader = new Scanner(file);
       while (myReader.hasNextLine()) {
         data += myReader.nextLine();
         data += "\n";
@@ -53,15 +53,23 @@ public class PlayerHandObject {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-    hand = decode(data);
+    decode(data);
   }
   
-  private static ArrayList<CardObject> decode(String data){
-    ArrayList<CardObject> hand = new ArrayList<CardObject>();
+  private static void decode(String data){
     String[] dataSplit = data.split("{");
+    ArrayList <String[]> splitsplit= new ArrayList<String[]>();
     for(byte i = 0; i < dataSplit.length; i++){
-      dataSplit[1].replace("}", "");
+      splitsplit.add(dataSplit[i].split(","));
     }
-    return(hand);
+    for(byte i = 0; i < splitsplit.size(); i++){
+      String[] split = splitsplit.remove(i);
+      for(byte j = 0; j < split.length; j++){
+        Scanner splitPoint = new Scanner(split[j]);
+        if(splitPoint.hasNext()){
+          splitPoint.nextByte();
+        }
+      }
+    }
   }
 }
