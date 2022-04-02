@@ -38,7 +38,7 @@ public class BlackJackProcessing {
     for(byte i = 1; i <= NUMBER_OF_SYMBOLS; i++){
       for(byte j= 1; j <= MAX_CARD_VALUE; j++){
         for(byte l = 1; l <= NUMBER_OF_CARD_SETS; l++){
-          deck.add(new CardObject(i,j,l));
+          deck.add(new CardObject(i,j));
         }
       }
     }

@@ -5,12 +5,10 @@ public class CardObject {
 
   private final byte symbol;
   private final byte number;
-  private final byte set;
   
-  public CardObject( byte number, byte symbol, byte set){
+  public CardObject( byte number, byte symbol){
     this.number = number;
     this.symbol = symbol;
-    this.set = set;
   }
 
   public byte getNumber(){
@@ -20,9 +18,4 @@ public class CardObject {
   public byte getSymbol(){
     return symbol;
   }
-
-  public byte getSet(){
-    return set;
-  }
-  
 }

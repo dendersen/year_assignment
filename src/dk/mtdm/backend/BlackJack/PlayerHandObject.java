@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.io.FileWriter;
 import java.util.Scanner;
+
 import java.io.FileNotFoundException;
 
 public class PlayerHandObject {
@@ -18,7 +19,7 @@ public class PlayerHandObject {
   }
   public static void save(byte handId){
     try{
-      File file = new File("BlackJack save game.txt" + handId);
+      File file = new File("Saves\\" + handId + ".BlackJack");
       if(file.createNewFile()){
         System.out.println("file created: " + file.getName());
       }else {
@@ -30,8 +31,8 @@ public class PlayerHandObject {
     }
 
     try {
-      FileWriter myWriter = new FileWriter("BlackJack save game.txt");
-      myWriter.write("Files in Java might be tricky, but it is fun enough!");
+      FileWriter myWriter = new FileWriter("Saves\\" + handId + ".BlackJack");
+      myWriter.write(encode());
       myWriter.close();
       System.out.println("Successfully wrote to the file.");
     } catch (IOException e) {
@@ -39,10 +40,16 @@ public class PlayerHandObject {
       e.printStackTrace();
     }
   }
-  public static void load(){
+
+  private static String encode(){
+
+    return("");
+  }
+
+  public static void load(byte handId){
     String data = "";
     try {
-      File file = new File("BlackJack save game.txt");
+      File file = new File("Saves\\" + handId + ".BlackJack");
       Scanner myReader = new Scanner(file);
       while (myReader.hasNextLine()) {
         data += myReader.nextLine();
@@ -53,23 +60,28 @@ public class PlayerHandObject {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
-    decode(data);
+    decode(data, handId);
   }
   
-  private static void decode(String data){
-    String[] dataSplit = data.split("{");
-    ArrayList <String[]> splitsplit= new ArrayList<String[]>();
-    for(byte i = 0; i < dataSplit.length; i++){
-      splitsplit.add(dataSplit[i].split(","));
-    }
-    for(byte i = 0; i < splitsplit.size(); i++){
-      String[] split = splitsplit.remove(i);
-      for(byte j = 0; j < split.length; j++){
-        Scanner splitPoint = new Scanner(split[j]);
-        if(splitPoint.hasNext()){
-          splitPoint.nextByte();
+  private static void decode(String data, byte handId){
+    String[] dataSplit = data.split(",");//splits hand into cards
+
+      for(byte j = 0; j < dataSplit.length; j++){
+        try (Scanner splitPoint = new Scanner(dataSplit[j])) {
+          byte var1 = -1;
+          byte var2 = -1;
+          if(splitPoint.hasNext()){ //collects number
+            var1 = splitPoint.nextByte();
+          }
+          else System.out.println("missing number on card: " + j + ";  in hand: " + handId);
+          if(splitPoint.hasNext()){
+            splitPoint.skip(",");
+            var2 = splitPoint.nextByte();
+          }
+          else System.out.println("missing symbol on card: " + j + ";  in hand: " + handId);
+          CardObject card = new CardObject(var1, var2);
+          hand.add(card);
         }
       }
-    }
   }
 }
