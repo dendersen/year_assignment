@@ -42,8 +42,14 @@ public class PlayerHandObject {
   }
 
   private static String encode(){
-
-    return("");
+    String data = "";
+    for(byte i = 0; i < hand.size();i++){
+      data += hand.get(i).getNumber();
+      data += " ; ";
+      data += hand.get(i).getSymbol();
+      data += " ";
+    }
+    return(data);
   }
 
   public static void load(byte handId){
@@ -74,8 +80,8 @@ public class PlayerHandObject {
             var1 = splitPoint.nextByte();
           }
           else System.out.println("missing number on card: " + j + ";  in hand: " + handId);
-          if(splitPoint.hasNext()){
-            splitPoint.skip(",");
+          if(splitPoint.hasNext()){ 
+            splitPoint.skip(" ; ");
             var2 = splitPoint.nextByte();
           }
           else System.out.println("missing symbol on card: " + j + ";  in hand: " + handId);
