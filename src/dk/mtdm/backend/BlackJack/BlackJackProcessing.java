@@ -11,6 +11,7 @@ public class BlackJackProcessing {
   final static byte NUMBER_OF_CARDS = NUMBER_OF_SYMBOLS*MAX_CARD_VALUE*NUMBER_OF_CARD_SETS;
   /***@param deck row of card objects*/
   static ArrayList<CardObject> deck = new ArrayList<>();
+  static ArrayList <PlayerHandObject> players = new ArrayList<>();
   
   public static void main(byte antalSpillere) {
     
@@ -18,27 +19,32 @@ public class BlackJackProcessing {
     
     System.out.println("starting\033[38;5;206m BlackJack\u001B[0m, please wait.");
     
-    for (byte i = 0; i < antalSpillere-1; i++){
+    for (byte i = 0; i <= antalSpillere; i++){
       CardObject [] card = drawCards((byte) (2));
       TEMPDrawCardToScreen(card, true);
+      PlayerHandObject player = new PlayerHandObject();
+      player.addCard(card[0]);
+      player.addCard(card[1]);
+      players.add(player);
     }
+    
     CardObject [] card = drawCards((byte) (2));
-      TEMPDrawCardToScreen(card, true);
-    // for(byte i = 0; i < deck.size(); i++){
-    //   try{
-    //   cardObject = deck.get(i);
-    //   System.out.println("index " + i + " [" + cardObject.getNumber()+","+cardObject.getSymbol()+","+cardObject.getSet()+"]");
-    //   } catch (Exception e){
-    //     System.out.println(e);
-    //   }
-    // }
+    TEMPDrawCardToScreen(card, true);
+    PlayerHandObject player = new PlayerHandObject();
+    player.addCard(card[0]);
+    player.addCard(card[1]);
+    players.add(player);
+    
+    for(byte i = 0; i < players.size(); i++){
+      players.get(i).save(i);
+    }
   }
   
   private static void setup() {
     for(byte i = 1; i <= NUMBER_OF_SYMBOLS; i++){
       for(byte j= 1; j <= MAX_CARD_VALUE; j++){
         for(byte l = 1; l <= NUMBER_OF_CARD_SETS; l++){
-          deck.add(new CardObject(i,j));
+          deck.add(new CardObject(j,i));
         }
       }
     }
@@ -49,6 +55,7 @@ public class BlackJackProcessing {
       byte k = (byte) (Math.random() * NUMBER_OF_CARDS);
       deck.add(k % NUMBER_OF_CARDS, temp);
     }
+    
   }
 
   private static CardObject[] drawCards(byte numberOfDraws) {
@@ -73,4 +80,7 @@ public class BlackJackProcessing {
       System.out.println("[  ,  ]");
   }
   
+  public static void runGame(){
+
+  }
 }

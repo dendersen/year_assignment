@@ -9,15 +9,15 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 
 public class PlayerHandObject {
-  private static ArrayList<CardObject> hand = new ArrayList<CardObject>();
+  private ArrayList<CardObject> hand = new ArrayList<CardObject>();
   
-  public static void addCard(CardObject card){
+  public void addCard(CardObject card){
     hand.add(card);
   }
-  public static ArrayList<CardObject> getHand(){
+  public ArrayList<CardObject> getHand(){
     return(hand);
   }
-  public static void save(byte handId){
+  public void save(byte handId){
     try{
       File file = new File("Saves\\" + handId + ".BlackJack");
       if(file.createNewFile()){
@@ -41,7 +41,7 @@ public class PlayerHandObject {
     }
   }
 
-  private static String encode(){
+  private String encode(){
     String data = "";
     for(byte i = 0; i < hand.size();i++){
       data += hand.get(i).getNumber();
@@ -52,7 +52,7 @@ public class PlayerHandObject {
     return(data);
   }
 
-  public static void load(byte handId){
+  public void load(byte handId){
     String data = "";
     try {
       File file = new File("Saves\\" + handId + ".BlackJack");
@@ -69,9 +69,8 @@ public class PlayerHandObject {
     decode(data, handId);
   }
   
-  private static void decode(String data, byte handId){
+  private void decode(String data, byte handId){
     String[] dataSplit = data.split(",");//splits hand into cards
-
       for(byte j = 0; j < dataSplit.length; j++){
         try (Scanner splitPoint = new Scanner(dataSplit[j])) {
           byte var1 = -1;

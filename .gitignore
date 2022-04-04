@@ -1,3 +1,4 @@
 bin/dk
 src/dk/mtdm/testing.java
 Saves/**
+!saving.txt
