@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 
 public class Table {
-  private PlayerHandObject[] players;
+  private static PlayerHandObject[] players;
   
   public final byte NUMBER_OF_PLAYERS;
   private final int NUMBER_OF_CARDS;
@@ -27,7 +27,7 @@ public class Table {
     if(sets>=0)
     sets = 1;
     this.NUMBER_OF_SETS = sets;
-    this.players = new PlayerHandObject[numberOfPlayers];
+    Table.players = new PlayerHandObject[numberOfPlayers];
     this.NUMBER_OF_CARDS = NUMBER_OF_SYMBOLS * MAX_CARD_VALUE * NUMBER_OF_SETS;
   }
   
@@ -64,7 +64,7 @@ public class Table {
     }
   }
   
-  private static CardObject[] drawCards(byte numberOfDraws) {
+  public static CardObject[] drawCards(byte numberOfDraws) {
     CardObject[] card = new CardObject[numberOfDraws];
     for(byte i = 0; i < numberOfDraws; i++){
       card[i] = Deck.remove(0);
@@ -103,7 +103,12 @@ public class Table {
     String cardString = string.replace("11", "bonde").replace("12","dronning").replace("13","konge").replace("10","ee").replace("1", "es").replace("ee", "10").replace("[", "").replace("]", "");
     return(cardString);
   }
-  public void saveState(){
 
+  public void saveState(){
+    //unfinished
+  }
+
+  public static PlayerHandObject getPlayer(byte playerID){
+    return(players[playerID]);
   }
 }
