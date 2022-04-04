@@ -1,7 +1,1 @@
-{nummer;symbol,nummer;symbol,nummer;symbol,nummer;symbol,nummer;symbol}
-{nummer;symbol,nummer;symbol,nummer;symbol,nummer;symbol,nummer;symbol,nummer;symbol}
-{nummer;symbol,nummer;symbol,nummer;symbol,nummer;symbol}
-
-
-{,nummer;symbol,nummer;symbol,} = hånd
-,nummer;symbol, = kort
+.
