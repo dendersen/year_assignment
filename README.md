@@ -16,3 +16,15 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 ## Dependency Management
 
 The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+
+
+## backend file type
+.blackjack definition
+number ; symbol number ; space
+tal mellemrum ; mellemrum symbol mellemrum (nyt kort)
+
+hånd 0 = dealer
+
+CardObject
+array indeholder symbol og tal for et kort
+bruger en constructer til at opbygge info
