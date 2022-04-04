@@ -1,6 +1,7 @@
 package dk.mtdm.backend.BlackJack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @param Table sets the "table" used in blackjack, gives out starting cards to players and centralises variables for players. always run the setup right after the constructor.
@@ -9,12 +10,12 @@ import java.util.ArrayList;
 public class Table {
   private PlayerHandObject[] players;
   
-  private final byte NUMBER_OF_PLAYERS;
-  private final byte NUMBER_OF_CARDS;
+  public final byte NUMBER_OF_PLAYERS;
+  private final int NUMBER_OF_CARDS;
 
   private final byte NUMBER_OF_SETS;
   static private final byte NUMBER_OF_SYMBOLS = 4;
-  static private final byte MAX_CARD_VALUE = 52;
+  static private final byte MAX_CARD_VALUE = 13;
   
   static private ArrayList <CardObject> Deck = new ArrayList<CardObject>();
   /**
@@ -27,33 +28,34 @@ public class Table {
     sets = 1;
     this.NUMBER_OF_SETS = sets;
     this.players = new PlayerHandObject[numberOfPlayers];
-    this.NUMBER_OF_CARDS = (byte) (NUMBER_OF_SYMBOLS * MAX_CARD_VALUE * NUMBER_OF_SETS);
+    this.NUMBER_OF_CARDS = NUMBER_OF_SYMBOLS * MAX_CARD_VALUE * NUMBER_OF_SETS;
   }
   
   public void setup(){
-    for(byte i = 1; i <= NUMBER_OF_SYMBOLS; i++){ //creates deck
-      for(byte j= 1; j <= MAX_CARD_VALUE; j++){
-        for(byte l = 1; l <= NUMBER_OF_SETS; l++){
-          Deck.add(new CardObject(j,i));
+    for(byte l = 1; l <= NUMBER_OF_SETS; l++){
+      for(byte i = 1; i <= NUMBER_OF_SYMBOLS; i++){ //creates deck
+        for(byte j= 1; j <= MAX_CARD_VALUE; j++){
+          Deck.add(new CardObject(j, i));
         }
       }
     }
-    
-    int NUMBER_OF_CARDS = NUMBER_OF_SETS *  MAX_CARD_VALUE * NUMBER_OF_SYMBOLS; //scrambles deck
-    for (Integer start = 0; start < NUMBER_OF_CARDS * 4; start++){
-      byte scramble = (byte) ((start * (byte) (Math.random() * NUMBER_OF_CARDS)) % NUMBER_OF_CARDS);
+    for (Integer start = 0; start < NUMBER_OF_CARDS * 4; start++){//scrambles deck
+      int scramble = start % NUMBER_OF_CARDS;
+      
       CardObject temp = Deck.remove(scramble);
-      byte k = (byte) (Math.random() * NUMBER_OF_CARDS);
+      int k = (int) (Math.random() * NUMBER_OF_CARDS);
+      if(k < 0)
+      k = (int) (k * -1);
       Deck.add(k % NUMBER_OF_CARDS, temp);
     }
-    
+
     playerSetup();
     
     initialSave();
   }
   
   private void playerSetup(){
-    for (byte i = 0; i <= NUMBER_OF_PLAYERS; i++){
+    for (byte i = 0; i < NUMBER_OF_PLAYERS; i++){
       CardObject [] card = drawCards((byte) (2));
       PlayerHandObject player = new PlayerHandObject();
       player.addCard(card[0]);
@@ -82,8 +84,8 @@ public class Table {
   
   public String getSymbol(byte playerID, byte cardNumber){
     byte[] bytes = {players[playerID].getHand().get(cardNumber).getSymbol()};
-    String string = new String(bytes);
-    String done = string.replace("1,", "hjerter").replace("2,", "romber").replace("3,", "spar").replace("4,", "kloer");
+    String string = Arrays.toString(bytes);
+    String done = string.replace("[1]", "hjerter").replace("[2]", "romber").replace("[3]", "spar").replace("[4]", "kloer");
     return(done);
   }
   
@@ -97,8 +99,11 @@ public class Table {
 
   public String getNumberString(byte playerID, byte cardNumber){
     byte[] bytes = {players[playerID].getHand().get(cardNumber).getNumber()};
-    String string = new String(bytes);
-    String cardString = string.replace("11", "bonde").replace("12","dronning").replace("13","konge").replace("10","ee").replace("1", "es").replace("ee", "10");
+    String string = Arrays.toString(bytes);
+    String cardString = string.replace("11", "bonde").replace("12","dronning").replace("13","konge").replace("10","ee").replace("1", "es").replace("ee", "10").replace("[", "").replace("]", "");
     return(cardString);
+  }
+  public void saveState(){
+
   }
 }
