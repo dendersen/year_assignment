@@ -10,8 +10,8 @@ import java.util.Arrays;
 public class Table {
   private static PlayerHandObject[] players;
   
-  public final byte NUMBER_OF_PLAYERS;
   public static byte ACTIVE_PLAYER_ID;
+  public static byte NUMBER_OF_PLAYERS;
   
   private final int NUMBER_OF_CARDS;
 
@@ -21,11 +21,11 @@ public class Table {
   
   static private ArrayList <CardObject> Deck = new ArrayList<CardObject>();
   /**
-   * @param numberOfPlayers the number of players present in the game (dealer is player 0)
+   * @param numberOfPlayers the number of players present in the game (1 player means only dealer)
    * @param sets the number of full card sets in play (52 cards each)
    */
   public Table( byte numberOfPlayers, byte sets){
-    this.NUMBER_OF_PLAYERS = numberOfPlayers;
+    Table.NUMBER_OF_PLAYERS = numberOfPlayers;
     if(sets>=0)
     sets = 1;
     this.NUMBER_OF_SETS = sets;
