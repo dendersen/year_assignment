@@ -11,6 +11,8 @@ public class Table {
   private static PlayerHandObject[] players;
   
   public final byte NUMBER_OF_PLAYERS;
+  public static byte ACTIVE_PLAYER_ID;
+  
   private final int NUMBER_OF_CARDS;
 
   private final byte NUMBER_OF_SETS;
