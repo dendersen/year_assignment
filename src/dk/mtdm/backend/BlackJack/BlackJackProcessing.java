@@ -48,22 +48,20 @@ public class BlackJackProcessing {
     return (largestIndex);
   }
   
-  
->>>>>>> 3f11dc495c2fd9e311fb74eca63489a94c2ac76e
-public static String[] availablePlayerActions (byte playerValue){
-  String[] actions = new String[2];
-  
-  if(playerValue > 21){
-    actions [0] ="fold" ;
-    actions [1] = "" ;
+  public static String[] availablePlayerActions (byte playerValue){
+    String[] actions = new String[2];
+    
+    if(playerValue > 21){
+      actions [0] ="fold" ;
+      actions [1] = "" ;
+    }
+    else {
+      actions [0] = "hit";
+      actions [1] = "stand";
+    }
+    if(playerValue <= 10){
+      actions [1] = "stand (no chance of failure)";
+    }
+    return (actions);
   }
-  else {
-    actions [0] = "hit";
-    actions [1] = "stand";
-  }
-  if(playerValue <= 10){
-    actions [1] = "stand (no chance of failure)";
-  }
-  return (actions);
-}
 }
