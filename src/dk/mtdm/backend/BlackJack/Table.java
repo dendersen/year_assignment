@@ -81,7 +81,7 @@ public class Table {
   
   private void initialSave(){
     for(byte i = 0; i < players.length; i++){
-      players[i].save(i);
+      players[i].save(i,"BlackJack");
     }
   }
   
@@ -113,7 +113,7 @@ public class Table {
 
   public void saveState(byte currentPlayerID){
     for(byte i = 0; i < players.length; i++){
-      players[i].save(i);
+      players[i].save(i,"BlackJack");
     }
     {//saves the hand id of active player
       try{
@@ -141,7 +141,7 @@ public class Table {
 
   public byte loadState(){
     for(byte i = 0; i < players.length; i++){
-      players[i].load(i);
+      players[i].load(i,"BlackJack");
     }
     byte data = 0;
     try {

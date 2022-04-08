@@ -17,9 +17,9 @@ public class PlayerHandObject {
   public ArrayList<CardObject> getHand(){
     return(hand);
   }
-  public void save(byte handId){
+  public void save(byte handId, String Game){
     try{
-      File file = new File("Saves\\" + handId + ".BlackJack");
+      File file = new File("Saves\\" + handId + "." + Game);
       if(file.createNewFile()){
         System.out.println("file created: " + file.getName());
       }else {
@@ -31,7 +31,7 @@ public class PlayerHandObject {
     }
 
     try {
-      FileWriter myWriter = new FileWriter("Saves\\" + handId + ".BlackJack");
+      FileWriter myWriter = new FileWriter("Saves\\" + handId + "." + Game);
       myWriter.write(encode());
       myWriter.close();
       System.out.println("Successfully wrote to the file.");
@@ -52,10 +52,10 @@ public class PlayerHandObject {
     return(data);
   }
 
-  public void load(byte handId){
+  public void load(byte handId, String Game){
     String data = "";
     try {
-      File file = new File("Saves\\" + handId + ".BlackJack");
+      File file = new File("Saves\\" + handId + "." + Game);
       Scanner myReader = new Scanner(file);
       while (myReader.hasNextLine()) {
         data += myReader.nextLine();
