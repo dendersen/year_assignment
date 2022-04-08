@@ -26,6 +26,16 @@ public class BlackJackProcessing {
     return(total);
   }
   
+  public static byte hasEs(byte playerID){
+    byte es = 0;
+    for(byte index = 0; index < Table.getPlayer(playerID).getHand().size(); index++){
+      if(Table.getPlayer(playerID).getHand().get(index).getNumber() == 1){
+      es++;
+      }
+    }
+    return (es);
+  }
+  
   public static boolean isAlive(byte playerID){
     return(playerValue(playerID)<=21);
   }
