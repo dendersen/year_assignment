@@ -6,17 +6,23 @@ public class AI {
    */
   final float TrueDare;
   final byte playerID;
+  final boolean IsDealer;
   /**
    * 
-   * @param dareLevel a value between -100 and 100 that secides how daring the ai is. -100 rarely ever plays something that could be dangeruse 100 almost always plays a card 
+   * @param dareLevel a value between -100 and 100 that secides how daring the ai is. -100 rarely ever plays something that could be dangeruse 100 almost always plays a card. if equal to 123 it will be dealer
    * @throws Exception throws if dareLevel is out of range
    */
   public AI(byte dareLevel,byte playerID) throws Exception {
-    if(dareLevel > 100){
-      throw new Exception("dare level above range");
-    }
-    if(dareLevel < 100){
-      throw new Exception("dare level below range");
+    if(dareLevel == 123){
+      this.IsDealer = true;
+    }else {
+      this.IsDealer = false;
+      if(dareLevel > 100){
+        throw new Exception("dare level above range");
+      }
+      if(dareLevel < 100){
+        throw new Exception("dare level below range");
+      }
     }
     double random = (0.5 - Math.random())/1.5;
     this.TrueDare = (float) (random*dareLevel);
@@ -28,6 +34,7 @@ public class AI {
    * @return true = hit, false = stand
    */
   public boolean action(){
+    if(IsDealer) return(dealer());
     byte value = BlackJackProcessing.playerValue(playerID);
     byte es = BlackJackProcessing.hasEs(playerID);
     double check = Math.random();
@@ -55,5 +62,21 @@ public class AI {
     } else {
       return(false);
     }
+  }
+
+  private boolean dealer(){
+    if(BlackJackProcessing.playerValue(playerID) >= 16){
+      return (true);
+    }
+    if(
+        BlackJackProcessing.playerValue(
+          BlackJackProcessing.winnerID()
+        ) > ( 
+          BlackJackProcessing.playerValue(playerID)
+        )
+      ){
+      return (true);
+    }
+    return (false);
   }
 }
