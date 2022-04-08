@@ -1,7 +1,12 @@
 package dk.mtdm.backend.BlackJack;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * @param Table sets the "table" used in blackjack, gives out starting cards to players and centralises variables for players. always run the setup right after the constructor.
@@ -106,11 +111,64 @@ public class Table {
     return(cardString);
   }
 
-  public void saveState(){
-    //unfinished
+  public void saveState(byte currentPlayerID){
+    for(byte i = 0; i < players.length; i++){
+      players[i].save(i);
+    }
+    {//saves the hand id of active player
+      try{
+        File file = new File("Saves\\activePlayer.BlackJack");
+        if(file.createNewFile()){
+          System.out.println("file created: " + file.getName());
+        }else {
+          System.out.println("file already exists.");
+        }
+      }catch (IOException e){
+        System.out.println("an error occured while making file");
+        e.printStackTrace();
+      }
+      try {
+        FileWriter myWriter = new FileWriter("Saves\\activePlayer.BlackJack");
+        myWriter.write(currentPlayerID);
+        myWriter.close();
+        System.out.println("Successfully wrote to the file.");
+      } catch (IOException e) {
+        System.out.println("An error occurred.");
+        e.printStackTrace();
+      }
+    }
+  }
+
+  public byte loadState(){
+    for(byte i = 0; i < players.length; i++){
+      players[i].load(i);
+    }
+    byte data = 0;
+    try {
+      File file = new File("Saves\\activePlayer.BlackJack");
+      Scanner myReader = new Scanner(file);
+      data = myReader.nextByte();
+      myReader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+    return (data);
   }
 
   public static PlayerHandObject getPlayer(byte playerID){
     return(players[playerID]);
+  }
+
+  /**
+   * @param playerID id of the player you want to know the available actions from
+   * @return booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
+   */
+  public static boolean[] availableActions(byte playerID){
+    return(
+      BlackJackProcessing.availablePlayerActions(
+        BlackJackProcessing.playerValue(playerID)
+      )
+    );
   }
 }
