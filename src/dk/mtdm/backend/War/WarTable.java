@@ -12,6 +12,7 @@ public class WarTable {
   private final byte NUMBER_OF_CARDS = 52+4; //normal cards and 3 jokers
   private static ArrayList <PlayerHandObject> players = new ArrayList <PlayerHandObject>();
   private static CardObject[] inPlay;
+  private static ArrayList <CardObject> warBooty = new ArrayList<CardObject>();
   
   public WarTable(byte NumberOfPlayers) {
     this.NUMBER_OF_PLAYERS = NumberOfPlayers;
@@ -73,53 +74,62 @@ public class WarTable {
     }
   }
 
-  public byte Winner(){
+  public byte Winner(CardObject[] inPlai){
     byte high = 0;
     byte highID = 0;
-    boolean controll = true;
-    boolean noTwo = true;
     ArrayList<Byte> twoID = new ArrayList <Byte>();
     ArrayList<Byte> war = new ArrayList <Byte>();
-    for(byte i = 0; i < NUMBER_OF_PLAYERS; i++){
-      byte value = inPlay[i].getNumber();
-      if(controll && value > 1){
-        if (value == 2){
-          noTwo = false;
-          twoID.add(i);
-        }
-        if(value == high){
-          war.add(i);
-        } else if(value > high){
-          high = value;
-          highID = i;
-          while (war.size() > 0){
-            war.remove(0);
-          }
-          war.add(i);
-        }
+    
+    for(byte ID = 0; ID < NUMBER_OF_PLAYERS; ID++){
+      byte value = inPlai[ID].getNumber();
+      
+      if(value == 1){
+        value = 14;
       }
-      else if(value == 0){
-        if(noTwo){
-          controll = false;
-          if(value == high){
-            war.add(i);
-          }else if (20 > high){
-            high = 20;
-            highID = i;
-            while (war.size() > 0){
-              war.remove(0);
-            }
-            war.add(i);
-          }
-        }
-        else{
-          controll = false;
-        }
+      if(value == 0){
+        value = 20;
       }
-      else if (value == 1 && controll){
-        
+      
+      if(value == high){
+        war.add(ID);
+      }
+      
+      if(value > high){
+        for(byte i = 0; war.size() > i; i++){
+          war.remove(0);
+        }
+        highID = ID;
+        high = value;
+        war.add(ID);
+      }
+      if(value == 2){
+        twoID.add(ID);
       }
     }
-  return(highID);
+    if(war.size() > 1){
+      warRun(war);
+    }
+    return(highID);
+  }
+
+  public byte warRun(ArrayList<Byte> IDs){
+    ArrayList <CardObject> warPlay = new ArrayList<CardObject>();
+    for(byte iD = 0; iD < IDs.size(); iD++){
+      byte ID = IDs.get(iD);
+      CardObject[] hand = drawHand(ID);
+      warBooty.add(hand[0]);
+      warBooty.add(hand[1]);
+      hand = drawHand(ID);
+      warBooty.add(hand[0]);
+      warPlay.add(hand[1]);
+    }
+    CardObject[] play = (CardObject[]) warPlay.toArray();
+    byte iD = Winner(play);
+    return(IDs.get(iD));
+  }
+
+  public void playCard(CardObject unPlayedCard, CardObject playedCard, byte playerID){
+    depositHand(playerID, unPlayedCard);
+    inPlay[playerID] = playedCard;
   }
 }
