@@ -1,5 +1,7 @@
 package dk.mtdm.backend.BlackJack;
 
+import java.util.ArrayList;
+
 public class AI {
   /**
    * @param TrueDare -33 -> 33
@@ -49,7 +51,7 @@ public class AI {
     if(value - es*10 < 10 && (check > 0.75)){
       return (true);
     }
-    if((1- (value/21)*check) > check && check > TrueDare){
+    if((1- (value/21)*check) > check && check*66-33 > TrueDare){
       return (false);
     }else if(check < TrueDare){
       return (true);
@@ -57,11 +59,7 @@ public class AI {
     if(TrueDare> 25){
       return (true);
     }
-    if(check > 0.5){
-    return(true);
-    } else {
-      return(false);
-    }
+    return(prediction(check,value));
   }
 
   private boolean dealer(){
@@ -75,6 +73,26 @@ public class AI {
           BlackJackProcessing.playerValue(playerID)
         )
       ){
+      return (true);
+    }
+    return (false);
+  }
+
+  private boolean prediction(double check, byte value){
+    
+    ArrayList <CardObject> cards = Table.getDeck();
+    int total = 0;
+    
+    for(int i = 0; i < cards.size(); i++){
+      total += cards.get(i).getNumber();
+    }
+    byte average = (byte) (total / cards.size());
+    
+    if(21-value < average && (check*66-33)+TrueDare > 0){
+      return (true);
+    }
+    
+    if(average < (21-value)*(TrueDare/33)){
       return (true);
     }
     return (false);

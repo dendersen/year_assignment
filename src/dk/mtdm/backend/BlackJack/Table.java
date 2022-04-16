@@ -171,4 +171,8 @@ public class Table {
       )
     );
   }
+
+  public static ArrayList <CardObject> getDeck(){
+    return(Deck);
+  }
 }
