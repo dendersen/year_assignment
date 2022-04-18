@@ -17,7 +17,9 @@ public class Draw extends JFrame {
     public Draw() {
         setLayout(new BorderLayout());
         setSize(1800,1000);
-        setTitle("Cards");
+        setTitle("Black Jack");
+        ImageIcon icon = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png");
+        setIconImage(icon.getImage());
         JButton button = new JButton("Hit");
         button.setBounds(400,400,100,100);
         add(button);
