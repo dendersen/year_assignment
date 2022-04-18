@@ -176,4 +176,12 @@ public class Table {
   public static ArrayList <CardObject> getDeck(){
     return(Deck);
   }
+
+  public static String cardSymbolString (byte playerID, byte cardNumber){
+    return Table.getPlayer(playerID).getHand().get(cardNumber).getSymbolString();
+  }
+
+  public static String cardNumberString (byte playerID, byte cardNumber){
+    return Table.getPlayer(playerID).getHand().get(cardNumber).getNumberString();
+  }
 }
