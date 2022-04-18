@@ -156,8 +156,8 @@ public class Table {
     return (data);
   }
 
-  public static PlayerHandObject getPlayer(byte playerID){
-    return(players[playerID]);
+  public static PlayerHandObject getPlayer(byte i){
+    return(players[i]);
   }
 
   /**

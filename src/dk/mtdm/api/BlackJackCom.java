@@ -1,5 +1,6 @@
 package dk.mtdm.api;
 
+import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
 import dk.mtdm.frontend.Draw;
 
@@ -15,11 +16,13 @@ static Table table;
   public static void main (){
     setup();
     
-    
-    while (running){
-      for (byte i = 0; i < table.NUMBER_OF_PLAYERS; i++){
-
-        playerAction((byte) (i+1));
+    while(running){
+    for (byte i = 0; i < Table.NUMBER_OF_PLAYERS; i++){
+      byte playerID = (byte) (i+1);
+      while (true){
+        boolean escape = !playerAction(playerID);
+        break;
+        }
       }
     }
   }
@@ -28,11 +31,11 @@ static Table table;
     table.setup();
   }
 
-  private static void playerAction (byte playerID){
+  private static boolean playerAction (byte playerID){
     boolean action = Draw.buttons(Table.availableActions(playerID));
-    if(action){
-      Table.getPlayer(playerID).addCard(Table.drawCards((byte) 1)[0]);;
-    }
+    if(action) BlackJackProcessing.hit(playerID, false);
+Table.getPlayer((byte)(0)).getHand().get(index)
+    return (action);
   }
 
 }
