@@ -32,40 +32,46 @@ public class card implements ImageObserver {
             } else {
                 g.setColor(Color.white);
             }
-            g.fillRect(this.x() + width/2-this.w(), this.y(), this.w(),this.h());
-            g.setColor(Color.black);
-            g.drawRect(this.x()+ width/2-this.w(), this.y(), this.w(),this.h());
-            if (this.id == 0) return; //Checker om det er dealens første kort
-            switch (symbol){
-                case "hjerter":
-                    Image hjerter = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
-                    g.drawImage(hjerter,
-                            this.x() + this.w() / 2-64 + width/2-this.w(),
-                            this.y() + this.h() / 2,
-                            this);
-                case "romber":
-                    Image romber = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
-                    g.drawImage(romber,
-                            this.x() + this.w() / 2-64 + width/2-this.w(),
-                            this.y() + this.h() / 2,
-                            this);
-                case "klør":
-                    Image klor = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
-                    g.drawImage(klor,
-                            this.x() + this.w() / 2-64 + width/2-this.w(),
-                            this.y() + this.h() / 2,
-                            this);
-                case "spar":
-                    Image spar = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
-                    g.drawImage(spar,
-                            this.x() + this.w() / 2-64 + width/2-this.w(),
-                            this.y() + this.h() / 2,
-                            this);
+            if (this.id == 0) { //Checker om det er dealens første kort
+                Image back = new ImageIcon("src/dk/mtdm/frontend/icons/back.png").getImage();
+                g.drawImage(back,
+                        this.x() + width/2-this.w(), this.y(),
+                        this);
+            } else {
+                g.fillRect(this.x() + width / 2 - this.w(), this.y(), this.w(), this.h());
+                g.setColor(Color.black);
+                g.drawRect(this.x() + width / 2 - this.w(), this.y(), this.w(), this.h());
+
+                switch (symbol) {
+                    case "hjerter":
+                        Image hjerter = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                        g.drawImage(hjerter,
+                                this.x() + this.w() / 2 - 64 + width / 2 - this.w(),
+                                this.y() + this.h() / 2,
+                                this);
+                    case "romber":
+                        Image romber = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                        g.drawImage(romber,
+                                this.x() + this.w() / 2 - 64 + width / 2 - this.w(),
+                                this.y() + this.h() / 2,
+                                this);
+                    case "klør":
+                        Image klor = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                        g.drawImage(klor,
+                                this.x() + this.w() / 2 - 64 + width / 2 - this.w(),
+                                this.y() + this.h() / 2,
+                                this);
+                    case "spar":
+                        Image spar = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                        g.drawImage(spar,
+                                this.x() + this.w() / 2 - 64 + width / 2 - this.w(),
+                                this.y() + this.h() / 2,
+                                this);
+                }
+                g.setFont(new Font("consolas", Font.BOLD, 128));
+                g.drawString(this.number, this.x() + this.w() / 2 - 36 + width / 2 - this.w(), this.y() + this.h() / 2 - 32);
+
             }
-            g.setFont(new Font("consolas",Font.BOLD,128));
-            g.drawString(this.number,this.x() + this.w()/2 - 36 + width/2 - this.w(),this.y()+this.h()/2-32);
-
-
         } else {
             g.setColor(Color.white);
             g.fillRect(this.x() + width/2-this.w(), this.y()+height-this.h()-50, this.w(), this.h());
