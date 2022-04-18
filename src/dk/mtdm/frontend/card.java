@@ -15,16 +15,15 @@ public class card implements ImageObserver {
     private int h = 300;
     private int id;
     private boolean dealer;
-    card(String symbol, String number, int id,boolean dealer){
+    card(String symbol, String number, int id){
         this.symbol = symbol;
         this.number = number;
         this.x = 230*id; // Afstand mellem dem / afstand relative mellem 0,0
         this.id = id;
-        this.dealer = dealer;
-        System.out.println(this.symbol+ " " + this.number);
     }
 
-    public void show(Graphics g) {
+    public void show(Graphics g,boolean dealer) {
+        this.dealer = dealer;
         String path = "src/dk/mtdm/frontend/icons/";
         if (this.dealer){
             dealerCode(g, path);
