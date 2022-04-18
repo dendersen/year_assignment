@@ -42,7 +42,7 @@ public class CardObject {
     String string = "";
     switch(getNumber()){
       case 1:
-      string = "es";
+      string = "A";
       break;
       case 2:
       string = "2";
@@ -69,7 +69,7 @@ public class CardObject {
       string = "9";
       break;
       case 10:
-      string = "10";
+      string = "X";
       break;
       case 11:
       string = "B";
