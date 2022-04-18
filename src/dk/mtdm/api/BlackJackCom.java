@@ -16,19 +16,24 @@ static Table table;
   public static void main (){
     setup();
     
-    while(running){
-    for (byte i = 0; i < Table.NUMBER_OF_PLAYERS; i++){
-      byte playerID = (byte) (i+1);
-      while (true){
-        boolean escape = !playerAction(playerID);
-        break;
-        }
-      }
-    }
+    theGame();
   }
 
   private static void setup(){
     table.setup();
+  }
+
+  private static void theGame(){
+    while(running){
+      for (byte playerID = 1; playerID < Table.NUMBER_OF_PLAYERS; playerID++){
+        while (true){
+          boolean escape = !playerAction(playerID);
+          if (escape)
+          break;
+        }
+      }
+      Draw.winner(BlackJackProcessing.winnerID());
+    }
   }
 
   private static boolean playerAction (byte playerID){
