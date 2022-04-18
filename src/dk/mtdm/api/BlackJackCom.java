@@ -34,7 +34,7 @@ static Table table;
   private static boolean playerAction (byte playerID){
     boolean action = Draw.buttons(Table.availableActions(playerID));
     if(action) BlackJackProcessing.hit(playerID, false);
-Table.getPlayer((byte)(0)).getHand().get(index)
+Table.getPlayer((byte)(0)).getHand().get(playerID);
     return (action);
   }
 
