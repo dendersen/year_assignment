@@ -32,10 +32,12 @@ static Table table;
   }
 
   private static boolean playerAction (byte playerID){
-    boolean action = Draw.buttons(Table.availableActions(playerID));
-    if(action) BlackJackProcessing.hit(playerID, false);
-Table.getPlayer((byte)(0)).getHand().get(playerID);
-    return (action);
+    boolean contenue = Draw.buttons(Table.availableActions(playerID));
+    if(contenue){
+      BlackJackProcessing.hit(playerID, false);
+      contenue = BlackJackProcessing.isAlive(playerID);
+    }
+    return (contenue);
   }
 
 }
