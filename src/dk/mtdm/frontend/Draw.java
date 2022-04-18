@@ -2,50 +2,60 @@ package dk.mtdm.frontend;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
 
-public class Draw {
-    private final JFrame w = new JFrame();// creating a Frame
-    private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize(); //https://stackoverflow.com/questions/2442599/how-to-set-jframe-to-appear-centered-regardless-of-monitor-resolution
-        int width;
-        int height;
+public class draw extends JFrame {
+    private static final int width = 1800;
+    private static final int height = 1000;
+    private final MyCanvas canvas = new MyCanvas();
+    private static final card card = new card("hearts","2",width/2-50,10);
+    private static final card card2 = new card("hearts","2",width/2-50+110,10);
 
-    public void initialize(int w,int h){
-        width = w;
-        height = h;
-        button();
-        window();
+    public draw() {
+        setLayout(new BorderLayout());
+        setSize(1800,1000);
+        setTitle("Cards");
+        add("Center",canvas);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setBackground(Color.GREEN);
+        setLocationRelativeTo(null);
+
+        setVisible(true);
     }
 
-    private void window() {
-        w.setLayout(null);
-        w.setTitle("Black Jack");
-        w.setVisible(true);
-        w.setSize(width ,height);
-        w.setLocation(dim.width/2-w.getSize().width/2, dim.height/2-w.getSize().height/2);
-        w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//specifying close operation
+    static class MyCanvas extends Canvas {
+
+
+        public static ImageObserver paint() {
+            return null;
+        }
+
+        @Override
+        public void paint(Graphics g) {
+            //background
+            g.setColor(new Color(52, 166, 0));
+            g.fillRect(0,0,getWidth(),getHeight());
+
+            card.cards(g);
+            card2.cards(g);
+//            g.setColor(Color.black);
+//            g.drawString("My first canvas program",10,20);
+//            g.drawOval(50,50,100,25);
+//            g.drawRect(200,50,100,25);
+//            g.setColor(Color.yellow);
+//            g.fillOval(50,100,70,70);
+//            g.fillRect(200,100,90,90);
+//            Image andy = new ImageIcon("src/index.jpg").getImage();
+//            Image jony = new ImageIcon("src/index.jpg").getImage();
+//            g.drawImage(andy,330,30,this);
+//            g.drawImage(jony,350,50,this);
+//            g.setColor(Color.blue);
+//            g.setFont(new Font("Comic Sans MS",Font.BOLD,30));
+//            g.drawString("That's all, folks",10,250);
+        }
     }
 
-    private void button() {
-        JButton b = new JButton("Start");
-        b.setBounds(width/2-100/2 ,height/2-30/2,100,30);
-        b.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-                b.setVisible(false);
-                dealer();
-            }
-        });
-        w.add(b);
-    }
-    private void dealer() {
-        JLabel Dealer = new JLabel("Dealer"); //der burde være en JTextField
-        ImageIcon icon = new ImageIcon("src/dk/mtdm/frontend/placeholder.png");
-        Dealer.setIcon(icon);
-        Dealer.setBounds(width/2-250/2 ,height/2-250/2, 250,250);
-        w.add(Dealer);
-        w.revalidate();
-        w.repaint();
-    }
+
+
 
 }
