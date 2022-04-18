@@ -18,8 +18,7 @@ public class card implements ImageObserver {
     card(String symbol, String number, int id,boolean dealer){
         this.symbol = symbol;
         this.number = number;
-        this.x = 100*id;
-        this.y = y;
+        this.x = 230*id; // Afstand mellem dem / afstand relative mellem 0,0
         this.id = id;
         this.dealer = dealer;
         System.out.println(this.symbol+ " " + this.number);
@@ -36,37 +35,71 @@ public class card implements ImageObserver {
             g.fillRect(this.x() + width/2-this.w(), this.y(), this.w(),this.h());
             g.setColor(Color.black);
             g.drawRect(this.x()+ width/2-this.w(), this.y(), this.w(),this.h());
-            if (this.id == 0) return;
-            Image image = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
-            g.drawImage(image,this.x() + this.w() / 2-64 + width/2-this.w(),this.y() + this.h() / 2,this);
-//            switch (symbol){
-//                case "spar":
-//                case "":
-//                    System.out.println("Der er kun hearts");
-//            }
-            g.setFont(new Font("Roboto",Font.BOLD,128));
-            g.drawString(number,this.x() + this.w()/2 - 32 + width/2 - this.w(),this.y()+this.h()/2-30);
-        } else {
-            if (this.id == 0) {
-                g.setColor(Color.red);
-            } else {
-                g.setColor(Color.white);
-            }
-            g.fillRect(this.x(), this.y()+height-this.h()-20, this.w(),this.h());
-            g.setColor(Color.black);
-            g.drawRect(this.x(), this.y()+width-this.h()-10, this.w(),this.h());
-            if (this.id == 0) return;
+            if (this.id == 0) return; //Checker om det er dealens første kort
             switch (symbol){
+                case "hjerter":
+                    Image hjerter = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                    g.drawImage(hjerter,
+                            this.x() + this.w() / 2-64 + width/2-this.w(),
+                            this.y() + this.h() / 2,
+                            this);
+                case "romber":
+                    Image romber = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                    g.drawImage(romber,
+                            this.x() + this.w() / 2-64 + width/2-this.w(),
+                            this.y() + this.h() / 2,
+                            this);
+                case "klør":
+                    Image klor = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                    g.drawImage(klor,
+                            this.x() + this.w() / 2-64 + width/2-this.w(),
+                            this.y() + this.h() / 2,
+                            this);
                 case "spar":
-                    Image image = new ImageIcon("src/icons/hearts.png").getImage();
-                    g.drawImage(image,this.x()+this.w()/2-64,this.y()+this.h()/2,this);
-                case "":
-                    System.out.println("Der er kun hearts");
+                    Image spar = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                    g.drawImage(spar,
+                            this.x() + this.w() / 2-64 + width/2-this.w(),
+                            this.y() + this.h() / 2,
+                            this);
             }
-            g.setFont(new Font("Roboto",Font.BOLD,128));
-            g.drawString(number,this.x()+this.w()/2-32,this.y()+this.h()/2-30);
+            g.setFont(new Font("consolas",Font.BOLD,128));
+            g.drawString(this.number,this.x() + this.w()/2 - 36 + width/2 - this.w(),this.y()+this.h()/2-32);
+
+
+        } else {
+            g.setColor(Color.white);
+            g.fillRect(this.x() + width/2-this.w(), this.y()+height-this.h()-50, this.w(), this.h());
+            g.setColor(Color.black);
+            g.drawRect(this.x() + width/2-this.w(), this.y()+height-this.h()-50, this.w(), this.h());
+            switch (symbol){
+                case "hjerter":
+                    Image hjerter = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                    g.drawImage(hjerter,
+                            this.x() + this.w() / 2-64 + width/2-this.w(),
+                            this.y()+height-this.h()/2-30,
+                            this);
+                case "romber":
+                    Image romber = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                    g.drawImage(romber,
+                            this.x() + this.w() / 2-64 + width/2-this.w(),
+                            this.y()+height-this.h()/2-30,
+                            this);
+                case "klør":
+                    Image klor = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                    g.drawImage(klor,
+                            this.x() + this.w() / 2-64 + width/2-this.w(),
+                            this.y()+height-this.h()/2-30,
+                            this);
+                case "spar":
+                    Image spar = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png").getImage();
+                    g.drawImage(spar,
+                            this.x() + this.w() / 2-64 + width/2-this.w(),
+                            this.y()+height-this.h()/2-30,
+                            this);
+            }
+            g.setFont(new Font("consolas",Font.BOLD,130));
+            g.drawString(this.number,this.x()+width/2-this.w()/2-36,this.y()+height/2+this.h()/2+128);
         }
-//
     }
 
     public int x() {

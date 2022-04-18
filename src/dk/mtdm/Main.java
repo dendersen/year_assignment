@@ -5,7 +5,7 @@ import dk.mtdm.frontend.Draw;
 public class Main {
   public static void main(String[] args) {
     Draw card = new Draw();
-    Table table = new Table((byte) (2), (byte) (1));
+    Table table = new Table((byte) (3), (byte) (1));
     table.setup();
   }
 }
