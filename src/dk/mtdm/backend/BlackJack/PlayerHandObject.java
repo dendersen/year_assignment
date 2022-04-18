@@ -10,7 +10,17 @@ import java.io.FileNotFoundException;
 
 public class PlayerHandObject {
   private ArrayList<CardObject> hand = new ArrayList<CardObject>();
+  public boolean IS_AI;
   
+  
+  public PlayerHandObject() {
+    this.IS_AI = false;
+  }
+
+  public PlayerHandObject(boolean AI){
+    this.IS_AI = AI;
+  }
+
   public void addCard(CardObject card){
     hand.add(card);
   }

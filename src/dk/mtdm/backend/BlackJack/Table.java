@@ -60,6 +60,9 @@ public class Table {
     playerSetup();
     
     initialSave();
+
+    
+    System.out.println();
   }
   
   private void playerSetup(){

@@ -28,20 +28,20 @@ static Table table;
       for (byte playerID = 1; playerID < Table.NUMBER_OF_PLAYERS; playerID++){
         while (true){
           boolean escape = !playerAction(playerID);
-          if (escape)
+          if (escape || BlackJackProcessing.isAlive(playerID))
           break;
         }
       }
+      
 //      Draw.winner(BlackJackProcessing.winnerID());
     }
   }
 
   private static boolean playerAction (byte playerID){
     boolean contenue = Draw.buttons(Table.availableActions(playerID));
-    if(contenue){
+    if(contenue)
       BlackJackProcessing.hit(playerID, false);
-      contenue = BlackJackProcessing.isAlive(playerID);
-    }
+    
     return (contenue);
   }
 

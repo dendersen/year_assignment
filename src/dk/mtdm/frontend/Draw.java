@@ -118,7 +118,8 @@ public class Draw extends JFrame {
     }
 
     public static void PlayerDraw( int id) {
-        Cards.get(0).show(g);
-        Cards.get(1).show(g);
+        System.out.println(id);
+        Cards.get(2).show(g);
+        Cards.get(3).show(g);
     }
 }

@@ -21,7 +21,6 @@ public class card implements ImageObserver {
         this.x = 230*id; // Afstand mellem dem / afstand relative mellem 0,0
         this.id = id;
         this.dealer = dealer;
-        System.out.println(this.symbol+ " " + this.number);
     }
 
     public void show(Graphics g) {
