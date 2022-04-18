@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
+import static dk.mtdm.frontend.Draw.MyCanvas.g;
+
 public class Draw extends JFrame {
     public static final int width = 1800;
     public static final int height = 1000;
@@ -36,14 +38,16 @@ public class Draw extends JFrame {
             return null;
         }
 
+        static Graphics g;
         @Override
-        public void paint(Graphics g) {
-
+        public void paint(Graphics G) {
+            g = G;
             //background
             g.setColor(new Color(52, 166, 0));
             g.fillRect(0,0,getWidth(),getHeight());
             dealer(g);
             player(g);
+            PlayerDraw(2);
 
 
 
@@ -100,15 +104,21 @@ public class Draw extends JFrame {
 //        (byte) Table.getPlayer(0).getHand().size()
     }
 
-    private static void player(Graphics g) {
-        ArrayList<card> cards = new ArrayList<card>();
+    private static ArrayList<card> Cards = new ArrayList<card>();
+    public static void player(Graphics g) {
         for (byte j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
             for (byte i = 0; i < Table.getPlayer((byte) (j)).getHand().size(); i++) {
-                cards.add(new card(Table.getPlayer((byte) (0)).getHand().get(i).getSymbolString(),
+                Cards.add(new card(Table.getPlayer((byte) (0)).getHand().get(i).getSymbolString(),
                         Table.getPlayer((byte) (0)).getHand().get(i).getNumberString(),
-                        i, false));
+                        i,
+                        false));
+
             }
         }
-        cards.get(0).show(g);
+    }
+
+    public static void PlayerDraw( int id) {
+        Cards.get(0).show(g);
+        Cards.get(1).show(g);
     }
 }

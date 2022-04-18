@@ -42,6 +42,53 @@ public class CardObject {
     String string = "";
     switch(getNumber()){
       case 1:
+        string = "es";
+        break;
+      case 2:
+        string = "2";
+        break;
+      case 3:
+        string = "3";
+        break;
+      case 4:
+        string = "4";
+        break;
+      case 5:
+        string = "5";
+        break;
+      case 6:
+        string = "6";
+        break;
+      case 7:
+        string = "7";
+        break;
+      case 8:
+        string = "8";
+        break;
+      case 9:
+        string = "9";
+        break;
+      case 10:
+        string = "10";
+        break;
+      case 11:
+        string = "B";
+        break;
+      case 12:
+        string = "D";
+        break;
+      case 13:
+        string = "K";
+        break;
+
+    }
+    return string;
+  }
+
+  public String getNumberString(){
+    String string = "";
+    switch(getNumber()){
+      case 1:
       string = "A";
       break;
       case 2:
