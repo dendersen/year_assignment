@@ -11,4 +11,6 @@
 
 icon 256 x 256 (depicts a card or something else fun maybe pk?)
 
+200 x 300 card back
+
 21
