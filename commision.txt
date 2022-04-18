@@ -7,11 +7,8 @@
   king x 4 (heart, diamonds, spades, clubs)
   queen x 4 (heart, diamonds, spades, clubs)
   jack x 4 (heart, diamonds, spades, clubs)
-  joker x2 ?
 } --size = 128x128
-
-? dealer profile pic
 
 icon 256 x 256 (depicts a card or something else fun maybe pk?)
 
-24
+21
