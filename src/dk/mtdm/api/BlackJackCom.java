@@ -32,7 +32,7 @@ static Table table;
           break;
         }
       }
-      Draw.winner(BlackJackProcessing.winnerID());
+      // Draw.winner(BlackJackProcessing.winnerID());
     }
   }
 
