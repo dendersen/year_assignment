@@ -4,14 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.ImageObserver;
 
-public class draw extends JFrame {
+public class Draw extends JFrame {
     private static final int width = 1800;
     private static final int height = 1000;
+    private static boolean valg;
     private final MyCanvas canvas = new MyCanvas();
     private static final card card = new card("hearts","2",width/2-50,10);
     private static final card card2 = new card("hearts","2",width/2-50+110,10);
 
-    public draw() {
+    public Draw() {
         setLayout(new BorderLayout());
         setSize(1800,1000);
         setTitle("Cards");
@@ -19,7 +20,8 @@ public class draw extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBackground(Color.GREEN);
         setLocationRelativeTo(null);
-
+        JButton button = new JButton();
+        add(button);
         setVisible(true);
     }
 
@@ -35,9 +37,9 @@ public class draw extends JFrame {
             //background
             g.setColor(new Color(52, 166, 0));
             g.fillRect(0,0,getWidth(),getHeight());
-
             card.cards(g);
             card2.cards(g);
+
 //            g.setColor(Color.black);
 //            g.drawString("My first canvas program",10,20);
 //            g.drawOval(50,50,100,25);
@@ -54,8 +56,14 @@ public class draw extends JFrame {
 //            g.drawString("That's all, folks",10,250);
         }
     }
+    
+    /**
+   * @return true = hit,  flase = stand
+   * @param actions booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
+   */
+    public static boolean buttons(boolean[] actions) {
 
-
-
+        return valg;
+    }
 
 }

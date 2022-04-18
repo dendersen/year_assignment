@@ -1,10 +1,10 @@
 package dk.mtdm;
-import dk.mtdm.frontend.draw;
+import dk.mtdm.frontend.Draw;
 
 import java.awt.*;
 
 public class Main {
   public static void main(String[] args) {
-    draw card = new draw();
+    Draw card = new Draw();
   }
 }

@@ -22,7 +22,7 @@ public class WarTable {
       
       
       for(byte symbol = 1; symbol < 4; symbol++){
-        for(byte number = 0; number < 13; number++){ //0 = joker
+        for(byte number = 0; number <= 13; number++){ //0 = joker
           Deck.add(new CardObject(number, symbol));
         }
       }

@@ -31,7 +31,7 @@ public class Table {
    */
   public Table( byte numberOfPlayers, byte sets){
     Table.NUMBER_OF_PLAYERS = numberOfPlayers;
-    if(sets>=0)
+    if(sets<=0)
     sets = 1;
     this.NUMBER_OF_SETS = sets;
     Table.players = new PlayerHandObject[numberOfPlayers];
@@ -72,7 +72,7 @@ public class Table {
   }
   
   public static CardObject[] drawCards(byte numberOfDraws) {
-    CardObject[] card = new CardObject[numberOfDraws];
+    CardObject[] card = new CardObject[numberOfDraws];  
     for(byte i = 0; i < numberOfDraws; i++){
       card[i] = Deck.remove(0);
     }
