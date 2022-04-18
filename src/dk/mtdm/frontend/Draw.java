@@ -1,27 +1,31 @@
 package dk.mtdm.frontend;
+import dk.mtdm.backend.BlackJack.Table;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.ImageObserver;
+import java.util.ArrayList;
 
 public class Draw extends JFrame {
-    private static final int width = 1800;
-    private static final int height = 1000;
+    public static final int width = 1800;
+    public static final int height = 1000;
     private static boolean valg;
     private final MyCanvas canvas = new MyCanvas();
-    private static final card card = new card("hearts","2",width/2-50,10);
-    private static final card card2 = new card("hearts","2",width/2-50+110,10);
 
     public Draw() {
         setLayout(new BorderLayout());
         setSize(1800,1000);
         setTitle("Cards");
+        JButton button = new JButton("Hit");
+        button.setBounds(400,400,100,100);
+        add(button);
         add("Center",canvas);
+        canvas.setBounds(0,0,width,height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBackground(Color.GREEN);
         setLocationRelativeTo(null);
-        JButton button = new JButton();
-        add(button);
+
+        setLayout(null);
         setVisible(true);
     }
 
@@ -34,11 +38,14 @@ public class Draw extends JFrame {
 
         @Override
         public void paint(Graphics g) {
+
             //background
             g.setColor(new Color(52, 166, 0));
             g.fillRect(0,0,getWidth(),getHeight());
-            card.cards(g);
-            card2.cards(g);
+            dealer(g);
+            player(g);
+
+
 
 //            g.setColor(Color.black);
 //            g.drawString("My first canvas program",10,20);
@@ -55,6 +62,8 @@ public class Draw extends JFrame {
 //            g.setFont(new Font("Comic Sans MS",Font.BOLD,30));
 //            g.drawString("That's all, folks",10,250);
         }
+
+
     }
     
     /**
@@ -62,8 +71,44 @@ public class Draw extends JFrame {
    * @param actions booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
    */
     public static boolean buttons(boolean[] actions) {
-
+        if (actions[1]) {
+            // laver en knap til hit
+        }
+        if (actions[2]){
+            // laver en knap til stand
+        }
+        if (actions[3]) {
+            // laver en knap til hit men man kan ikke dø
+        }
         return valg;
     }
 
+
+    private static void dealer(Graphics g){
+        ArrayList<card> cards = new ArrayList<card>();
+        for (byte i = 0; i < Table.getPlayer((byte)(0)).getHand().size(); i++ ) {
+            cards.add(new card(Table.getPlayer((byte)(0)).getHand().get(i).getSymbolString(),
+                    Table.getPlayer((byte)(0)).getHand().get(i).getNumberString(),
+                    i, true));
+            cards.get(i).show(g);
+        }
+//        final card card2 = new card("hearts","2",0);
+//        final card card = new card("hearts","2",1);
+
+//        cards.show(g);
+//        card2.show(g);
+//        (byte) Table.getPlayer(0).getHand().size()
+    }
+
+    private static void player(Graphics g) {
+        ArrayList<card> cards = new ArrayList<card>();
+        for (byte j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
+            for (byte i = 0; i < Table.getPlayer((byte) (j)).getHand().size(); i++) {
+                cards.add(new card(Table.getPlayer((byte) (0)).getHand().get(i).getSymbolString(),
+                        Table.getPlayer((byte) (0)).getHand().get(i).getNumberString(),
+                        i, false));
+            }
+        }
+        cards.get(0).show(g);
+    }
 }

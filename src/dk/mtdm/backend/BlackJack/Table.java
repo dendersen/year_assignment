@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
+import dk.mtdm.backend.BlackJack.CardObject;
 
 /**
  * @param Table sets the "table" used in blackjack, gives out starting cards to players and centralises variables for players. always run the setup right after the constructor.
