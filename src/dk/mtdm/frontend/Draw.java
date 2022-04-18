@@ -117,9 +117,10 @@ public class Draw extends JFrame {
 //        (byte) Table.getPlayer(0).getHand().size()
     }
 
-
+    /**
+     * @param id shows players cards, based on they id
+     */
     public static void PlayerDraw(int id) {
-//        System.out.println(Cards.get(2).);
         Cards.get(2*id).show(g,false);
         Cards.get(2*id+1).show(g,false);
     }
