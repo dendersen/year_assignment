@@ -45,8 +45,8 @@ public class Draw extends JFrame {
             //background
             g.setColor(new Color(52, 166, 0));
             g.fillRect(0,0,getWidth(),getHeight());
-            dealer(g);
             player(g);
+            dealer(0);
             PlayerDraw(2);
 
 
@@ -88,14 +88,25 @@ public class Draw extends JFrame {
     }
 
 
-    private static void dealer(Graphics g){
-        ArrayList<card> cards = new ArrayList<card>();
-        for (byte i = 0; i < Table.getPlayer((byte)(0)).getHand().size(); i++ ) {
-            cards.add(new card(Table.getPlayer((byte)(0)).getHand().get(i).getSymbolString(),
-                    Table.getPlayer((byte)(0)).getHand().get(i).getNumberString(),
-                    i, true));
-            cards.get(i).show(g);
+
+
+    private static ArrayList<card> Cards = new ArrayList<card>();
+    private static void player(Graphics g) {
+        for (byte j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
+            for (byte i = 0; i < Table.getPlayer((byte) (j)).getHand().size(); i++) {
+                Cards.add(new card(Table.getPlayer((byte) (0)).getHand().get(i).getSymbolString(),
+                        Table.getPlayer((byte) (0)).getHand().get(i).getNumberString(),
+                        i));
+
+            }
         }
+
+    }
+
+    public static void dealer(int id){
+        Cards.get(2*id).show(g,true);
+        Cards.get(2*id+1).show(g,true);
+
 //        final card card2 = new card("hearts","2",0);
 //        final card card = new card("hearts","2",1);
 
@@ -104,22 +115,20 @@ public class Draw extends JFrame {
 //        (byte) Table.getPlayer(0).getHand().size()
     }
 
-    private static ArrayList<card> Cards = new ArrayList<card>();
-    public static void player(Graphics g) {
-        for (byte j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
-            for (byte i = 0; i < Table.getPlayer((byte) (j)).getHand().size(); i++) {
-                Cards.add(new card(Table.getPlayer((byte) (0)).getHand().get(i).getSymbolString(),
-                        Table.getPlayer((byte) (0)).getHand().get(i).getNumberString(),
-                        i,
-                        false));
 
-            }
-        }
-    }
-
-    public static void PlayerDraw( int id) {
-        System.out.println(id);
-        Cards.get(2).show(g);
-        Cards.get(3).show(g);
+    public static void PlayerDraw(int id) {
+//        System.out.println(Cards.get(2).);
+        Cards.get(2*id).show(g,false);
+        Cards.get(2*id+1).show(g,false);
     }
 }
+
+
+//0:
+//0 - 1
+//1:
+//2 - 3
+//2:
+//4 - 5
+//3:
+//6-7
