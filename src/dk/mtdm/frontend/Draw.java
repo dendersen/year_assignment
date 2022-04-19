@@ -97,9 +97,8 @@ public class Draw extends JFrame {
         for (byte j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
             for (byte i = 0; i < Table.getPlayer((byte) (j)).getHand().size(); i++) {
                 Cards.add(new card(
-                    Table.cardSymbolString(j, i),
-                    Table.cardNumberString(j, i),
-                    i
+                    Table.getPlayer(j).getHand().get(i).getSymbol(),
+                    Table.cardNumberString(j, i), i
                 ));
 
             }
