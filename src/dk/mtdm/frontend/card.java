@@ -58,7 +58,7 @@ public class card implements ImageObserver {
                 g.drawImage(spar, pathX, pathY, this);
         }
         g.setFont(new Font("consolas",Font.BOLD,130));
-        g.drawString(this.number,this.x()+width/2-this.w()/2-36,this.y()+height/2+this.h()/2+128);
+        g.drawString(this.number,this.x()+width/2-this.w()/2-36,this.y()+height/2+this.h()/2+32);
     }
 
     private void dealerCode(Graphics g, String path) {

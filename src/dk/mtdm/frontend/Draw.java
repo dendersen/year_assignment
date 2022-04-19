@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import static dk.mtdm.frontend.Draw.MyCanvas.g;
 
 public class Draw extends JFrame {
-    public static final int width = 1800;
-    public static final int height = 1000;
+    public static final int width = 1000;
+    public static final int height = 800;
     private static boolean valg;
     private final MyCanvas canvas = new MyCanvas();
 
     public Draw() {
         setLayout(new BorderLayout());
-        setSize(1800,1000);
+        setSize(width,height);
         setTitle("Black Jack");
         ImageIcon icon = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png");
         setIconImage(icon.getImage());
