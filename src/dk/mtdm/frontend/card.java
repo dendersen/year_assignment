@@ -7,7 +7,7 @@ import static dk.mtdm.frontend.Draw.height;
 import static dk.mtdm.frontend.Draw.width;
 
 public class card implements ImageObserver {
-    private String symbol;
+    private int symbol;
     private String number;
     private int x = 0;
     private int y = 0;
@@ -15,12 +15,11 @@ public class card implements ImageObserver {
     private int h = 300;
     private int id;
     private boolean dealer;
-    card(String symbol, String number, int id){
+    card(int symbol, String number, int id){
         this.symbol = symbol;
         this.number = number;
         this.x = 230*id; // Afstand mellem dem / afstand relative mellem 0,0
         this.id = id;
-        this.dealer = dealer;
 
     }
 
@@ -42,20 +41,29 @@ public class card implements ImageObserver {
         g.setColor(Color.black);
         g.drawRect(pathX, pathY, this.w(), this.h());
         pathX = this.x() + this.w() / 2-64 + width/2-this.w();
-        pathY = this.y()+height-this.h()/2-30;
-        switch (symbol){
-            case "hjerter":
-                Image hjerter = new ImageIcon(path + "hearts.png").getImage();
+        pathY = this.y()+height-this.h()/2-30-16;
+        System.out.println("e:" + this.symbol);
+        switch (this.symbol){
+            case 1:
+                Image hjerter = new ImageIcon(path + "hjerter.png").getImage();
                 g.drawImage(hjerter, pathX, pathY, this);
-            case "romber":
-                Image romber = new ImageIcon(path + "hearts.png").getImage();
+                System.out.println("1");
+                break;
+            case 2:
+                Image romber = new ImageIcon(path + "romber.png").getImage();
                 g.drawImage(romber, pathX, pathY, this);
-            case "klør":
-                Image klor = new ImageIcon(path + "hearts.png").getImage();
+                System.out.println("2");
+                break;
+            case 3:
+                Image klor = new ImageIcon(path + "klør.png").getImage();
                 g.drawImage(klor, pathX, pathY, this);
-            case "spar":
-                Image spar = new ImageIcon(path + "hearts.png").getImage();
+                System.out.println("3");
+                break;
+            case 4:
+                Image spar = new ImageIcon(path + "spar.png").getImage();
                 g.drawImage(spar, pathX, pathY, this);
+                System.out.println("4");
+                break;
         }
         g.setFont(new Font("consolas",Font.BOLD,130));
         g.drawString(this.number,this.x()+width/2-this.w()/2-36,this.y()+height/2+this.h()/2+32);
@@ -87,18 +95,22 @@ public class card implements ImageObserver {
         int simpX = this.x() + this.w() / 2 - 64 + width / 2 - this.w();
         int simpY = this.y() + this.h() / 2;
         switch (symbol) {
-            case "hjerter":
-                Image hjerter = new ImageIcon(path + "hearts.png").getImage();
+            case 1:
+                Image hjerter = new ImageIcon(path + "hjerter.png").getImage();
                 g.drawImage(hjerter, simpX,simpY, this);
-            case "romber":
-                Image romber = new ImageIcon(path + "hearts.png").getImage();
+                break;
+            case 2:
+                Image romber = new ImageIcon(path + "romber.png").getImage();
                 g.drawImage(romber, simpX,simpY, this);
-            case "klør":
-                Image klor = new ImageIcon(path + "hearts.png").getImage();
+                break;
+            case 3:
+                Image klor = new ImageIcon(path + "klør.png").getImage();
                 g.drawImage(klor, simpX,simpY, this);
-            case "spar":
-                Image spar = new ImageIcon(path + "hearts.png").getImage();
+                break;
+            case 4:
+                Image spar = new ImageIcon(path + "spar.png").getImage();
                 g.drawImage(spar, simpX,simpY, this);
+                break;
         }
         g.setFont(new Font("consolas", Font.BOLD, 128));
         g.drawString(this.number, this.x() + this.w() / 2 - 36 + width / 2 - this.w(), this.y() + this.h() / 2 - 32);
