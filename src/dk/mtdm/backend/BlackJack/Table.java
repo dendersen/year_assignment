@@ -87,6 +87,7 @@ public class Table {
     for(byte i = 0; i < players.length; i++){
       players[i].save(i,"BlackJack");
     }
+    saveTable();
   }
   
   public byte getNumber(byte playerID, byte cardNumber){
@@ -113,34 +114,6 @@ public class Table {
     String string = Arrays.toString(bytes);
     String cardString = string.replace("11", "bonde").replace("12","dronning").replace("13","konge").replace("10","ee").replace("1", "es").replace("ee", "10").replace("[", "").replace("]", "");
     return(cardString);
-  }
-
-  public void saveState(byte currentPlayerID){
-    for(byte i = 0; i < players.length; i++){
-      players[i].save(i,"BlackJack");
-    }
-    {//saves the hand id of active player
-      try{
-        File file = new File("Saves\\activePlayer.BlackJack");
-        if(file.createNewFile()){
-          System.out.println("file created: " + file.getName());
-        }else {
-          System.out.println("file already exists.");
-        }
-      }catch (IOException e){
-        System.out.println("an error occured while making file");
-        e.printStackTrace();
-      }
-      try {
-        FileWriter myWriter = new FileWriter("Saves\\activePlayer.BlackJack");
-        myWriter.write(currentPlayerID);
-        myWriter.close();
-        System.out.println("Successfully wrote to the file.");
-      } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-      }
-    }
   }
 
   public byte loadState(){
@@ -186,5 +159,69 @@ public class Table {
 
   public static String cardNumberString (byte playerID, byte cardNumber){
     return Table.getPlayer(playerID).getHand().get(cardNumber).getNumberString();
+  }
+
+  private void saveTable(byte currentPlayerID){
+    try{
+      File file = new File("Saves\\table.BlackJack");
+      if(file.createNewFile()){
+        System.out.println("file created: " + file.getName());
+      }else {
+        System.out.println("file already exists.");
+      }
+    }catch (IOException e){
+      System.out.println("an error occured while making file");
+      e.printStackTrace();
+    }
+
+    try {
+      FileWriter myWriter = new FileWriter("Saves\\table.BlackJack");
+      myWriter.write(encode(currentPlayerID));
+      myWriter.close();
+      System.out.println("Successfully wrote to the file.");
+    } catch (IOException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+  }
+  
+  private String encode(byte currentPlayerID){
+    String table = "";
+
+    for(byte i = 0; i < Table.Deck.size(); i++){
+      CardObject card = Table.Deck.get(i);
+      table += card.getNumber();
+      table += " ";
+      table += card.getSymbol();
+      table += " ; ";
+    }
+    table += " | ";
+    table += NUMBER_OF_PLAYERS;
+    table += " | ";
+    table += NUMBER_OF_SETS;
+    
+    table += currentPlayerID;
+    return table;
+  }
+
+  private byte loadTable(){
+    String data = 0;
+    try {
+      File file = new File("Saves\\activePlayer.BlackJack");
+      Scanner myReader = new Scanner(file);
+      data = myReader.nextByte();
+      myReader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+
+    byte currentPlayer = decode(data)
+
+    return (currentPlayer);
+  }
+
+  private static byte decode(String data){
+
   }
 }

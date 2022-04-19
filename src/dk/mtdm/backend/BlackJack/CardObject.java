@@ -23,17 +23,17 @@ public class CardObject {
     String string = "";
     switch (getSymbol()){
       case 1:
-        string = "hjerter";
-        break;
+      string = "hjerter";
+      break;
       case 2:
-        string = "romber";
-        break;
+      string = "romber";
+      break;
       case 3:
-        string = "klør";
-        break;
+      string = "klør";
+      break;
       case 4:
-        string = "spar";
-        break;
+      string = "spar";
+      break;
     }
     return string;
   }
