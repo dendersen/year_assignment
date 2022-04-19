@@ -87,7 +87,7 @@ public class Table {
     for(byte i = 0; i < players.length; i++){
       players[i].save(i,"BlackJack");
     }
-    saveTable();
+    saveTable((byte)(0));
   }
   
   public byte getNumber(byte playerID, byte cardNumber){
@@ -206,24 +206,24 @@ public class Table {
     return table;
   }
 
-  private byte loadTable(){
-    String data = 0;
+  public byte loadTable(){
+    String data = "";
     try {
       File file = new File("Saves\\activePlayer.BlackJack");
       Scanner myReader = new Scanner(file);
-      data = myReader.nextByte();
+      data = myReader.next();
       myReader.close();
     } catch (FileNotFoundException e) {
       System.out.println("An error occurred.");
       e.printStackTrace();
     }
 
-    byte currentPlayer = decode(data)
+    byte currentPlayer = decode(data);
 
     return (currentPlayer);
   }
 
   private static byte decode(String data){
-
+return((byte) (1));
   }
 }
