@@ -1,5 +1,6 @@
 package dk.mtdm.api;
 
+
 import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
 import dk.mtdm.frontend.Draw;
@@ -37,7 +38,19 @@ public class BlackJackCom {
     }else {
     currentPlayer++;
     }
-    CurrentData transfer = new CurrentData(currentPlayer);
-    Draw.buttons(transfer);
+    if(currentPlayer != data.playerID){
+      if(currentPlayer >= Table.NUMBER_OF_PLAYERS)
+      currentPlayer = 0;
+    }
+    boolean done = false;
+    if(data.playerID == 0 && currentPlayer != data.playerID){
+      done = true;
+    }
+    if(!done){
+      CurrentData transfer = new CurrentData(currentPlayer);
+      Draw.buttons(transfer);
+    } else {
+      Draw.winner(BlackJackProcessing.winnerID());
+    }
   }
 }

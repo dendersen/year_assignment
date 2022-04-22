@@ -126,6 +126,10 @@ public class Draw extends JFrame {
         Cards.get(2*id).show(g,false);
         Cards.get(2*id+1).show(g,false);
     }
+
+    public static void winner(byte winner){
+        
+    }
 }
 
 
