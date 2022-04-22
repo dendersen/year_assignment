@@ -7,12 +7,12 @@ import dk.mtdm.frontend.Draw;
 public class BlackJackCom {
 static Table table;
 
+  private DataTransfer transfer = new DataTransfer((byte)(1), BlackJackProcessing.availablePlayerActions((byte) (1)));
+  
   public BlackJackCom(byte numberOfPlayers) {
     table = new Table(numberOfPlayers, (byte) (1));
   }
 
-  private static boolean running = true;
-  
   public static void main (){
     setup();
     
@@ -24,25 +24,26 @@ static Table table;
   }
 
   private static void theGame(){
-    while(running){
-      for (byte playerID = 1; playerID < Table.NUMBER_OF_PLAYERS; playerID++){
-        while (true){
-          boolean escape = !playerAction(playerID);
-          if (escape || BlackJackProcessing.isAlive(playerID))
-          break;
-        }
-      }
+    Draw.buttons(DataTransfer.availableActions)
+//     while(running){
+//       for (byte playerID = 1; playerID < Table.NUMBER_OF_PLAYERS; playerID++){
+//         while (true){ 
+//           boolean escape = !playerAction(playerID);
+//           if (escape || !BlackJackProcessing.isAlive(playerID))
+//           break;
+//         }
+//       }
       
-//      Draw.winner(BlackJackProcessing.winnerID());
-    }
+// //      Draw.winner(BlackJackProcessing.winnerID());
+//     }
   }
 
-  private static boolean playerAction (byte playerID){
-    boolean contenue = Draw.buttons(Table.availableActions(playerID));
-    if(contenue)
-      BlackJackProcessing.hit(playerID, false);
+  // private static boolean playerAction (byte playerID){
+  //   boolean contenue = Draw.buttons(Table.availableActions(playerID));
+  //   if(contenue)
+  //     BlackJackProcessing.hit(playerID, false);
     
-    return (contenue);
-  }
+  //   return (contenue);
+  // }
 
 }

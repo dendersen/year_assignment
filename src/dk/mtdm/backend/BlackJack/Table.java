@@ -21,7 +21,7 @@ public class Table {
   
   private final int NUMBER_OF_CARDS;
 
-  private final byte NUMBER_OF_SETS;
+  private static byte NUMBER_OF_SETS;
   static private final byte NUMBER_OF_SYMBOLS = 4;
   static private final byte MAX_CARD_VALUE = 13;
   
@@ -199,9 +199,9 @@ public class Table {
     }
     table += " | ";
     table += NUMBER_OF_PLAYERS;
-    table += " | ";
+    table += " ";
     table += NUMBER_OF_SETS;
-    
+    table += " ";
     table += currentPlayerID;
     return table;
   }
@@ -224,6 +224,20 @@ public class Table {
   }
 
   private static byte decode(String data){
-return((byte) (1));
+    String[] datasplitt = data.split(" | ");
+    String[] datasplit = datasplitt[0].split(" ; ");
+    for(byte i = 0; i < datasplit.length; i++){
+      try (Scanner scanner = new Scanner(datasplit[i])) {
+        Table.Deck.add(new CardObject (scanner.nextByte(),scanner.nextByte()));
+      }
+    }
+    byte currentPlayer;
+    try (Scanner scanner = new Scanner(datasplitt[0])){
+      Table.NUMBER_OF_PLAYERS = scanner.nextByte();
+      Table.NUMBER_OF_SETS = scanner.nextByte();
+      currentPlayer = scanner.nextByte();
+    }
+    
+    return(currentPlayer);
   }
 }
