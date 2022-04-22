@@ -1,14 +1,12 @@
 package dk.mtdm.api;
 
-import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
 import dk.mtdm.frontend.Draw;
 
 public class BlackJackCom {
-static Table table;
+  static Table table;
 
-  private DataTransfer transfer = new DataTransfer((byte)(1), BlackJackProcessing.availablePlayerActions((byte) (1)));
-  
+
   public BlackJackCom(byte numberOfPlayers) {
     table = new Table(numberOfPlayers, (byte) (1));
   }
@@ -16,34 +14,15 @@ static Table table;
   public static void main (){
     setup();
     
-    theGame();
+    theGame((byte) 1);
   }
 
   private static void setup(){
     table.setup();
   }
 
-  private static void theGame(){
-    Draw.buttons(DataTransfer.availableActions)
-//     while(running){
-//       for (byte playerID = 1; playerID < Table.NUMBER_OF_PLAYERS; playerID++){
-//         while (true){ 
-//           boolean escape = !playerAction(playerID);
-//           if (escape || !BlackJackProcessing.isAlive(playerID))
-//           break;
-//         }
-//       }
-      
-// //      Draw.winner(BlackJackProcessing.winnerID());
-//     }
-  }
-
-  // private static boolean playerAction (byte playerID){
-  //   boolean contenue = Draw.buttons(Table.availableActions(playerID));
-  //   if(contenue)
-  //     BlackJackProcessing.hit(playerID, false);
+  private static void theGame(byte currentPlayer){
+    CurrentData transfer = new CurrentData(currentPlayer);
     
-  //   return (contenue);
-  // }
-
+  }
 }
