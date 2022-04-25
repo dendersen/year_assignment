@@ -1,14 +1,14 @@
 package dk.mtdm.api;
 
+
 import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
 import dk.mtdm.frontend.Draw;
 
 public class BlackJackCom {
-static Table table;
+  static Table table;
 
-  private DataTransfer transfer = new DataTransfer((byte)(1), BlackJackProcessing.availablePlayerActions((byte) (1)));
-  
+
   public BlackJackCom(byte numberOfPlayers) {
     table = new Table(numberOfPlayers, (byte) (1));
   }
@@ -16,34 +16,41 @@ static Table table;
   public static void main (){
     setup();
     
-    theGame();
+    startGame();
   }
 
   private static void setup(){
     table.setup();
   }
 
-  private static void theGame(){
-    Draw.buttons(DataTransfer.availableActions)
-//     while(running){
-//       for (byte playerID = 1; playerID < Table.NUMBER_OF_PLAYERS; playerID++){
-//         while (true){ 
-//           boolean escape = !playerAction(playerID);
-//           if (escape || !BlackJackProcessing.isAlive(playerID))
-//           break;
-//         }
-//       }
-      
-// //      Draw.winner(BlackJackProcessing.winnerID());
-//     }
+  private static void startGame(){
+    CurrentData transfer = new CurrentData((byte) 1);
+    Draw.buttons(transfer);
   }
 
-  // private static boolean playerAction (byte playerID){
-  //   boolean contenue = Draw.buttons(Table.availableActions(playerID));
-  //   if(contenue)
-  //     BlackJackProcessing.hit(playerID, false);
-    
-  //   return (contenue);
-  // }
-
+  public static void theGame(CurrentData data){
+    byte currentPlayer = data.playerID;
+    if(data.action){
+      BlackJackProcessing.hit(data.playerID, false);
+      if(!BlackJackProcessing.isAlive(data.playerID)){
+        currentPlayer++;
+      }
+    }else {
+    currentPlayer++;
+    }
+    if(currentPlayer != data.playerID){
+      if(currentPlayer >= Table.NUMBER_OF_PLAYERS)
+      currentPlayer = 0;
+    }
+    boolean done = false;
+    if(data.playerID == 0 && currentPlayer != data.playerID){
+      done = true;
+    }
+    if(!done){
+      CurrentData transfer = new CurrentData(currentPlayer);
+      Draw.buttons(transfer);
+    } else {
+      Draw.winner(BlackJackProcessing.winnerID());
+    }
+  }
 }

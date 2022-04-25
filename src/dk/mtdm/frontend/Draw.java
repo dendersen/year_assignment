@@ -1,4 +1,6 @@
 package dk.mtdm.frontend;
+import dk.mtdm.api.CurrentData;
+import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
 
 import javax.swing.*;
@@ -76,17 +78,16 @@ public class Draw extends JFrame {
    * @return true = hit,  flase = stand
    * @param actions booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
    */
-    public static boolean buttons(boolean[] actions) {
-        if (actions[1]) {
+    public static void buttons(CurrentData data) {
+        if (data.AVAILABLE_ACTIONS[1]) {
             // laver en knap til hit
         }
-        if (actions[2]){
+        if (data.AVAILABLE_ACTIONS[2]){
             // laver en knap til stand
         }
-        if (actions[3]) {
+        if (data.AVAILABLE_ACTIONS[3]) {
             // laver en knap til hit men man kan ikke dø
         }
-        return valg;
     }
 
 
@@ -124,6 +125,10 @@ public class Draw extends JFrame {
     public static void PlayerDraw(int id) {
         Cards.get(2*id).show(g,false);
         Cards.get(2*id+1).show(g,false);
+    }
+
+    public static void winner(byte winner){
+        
     }
 }
 

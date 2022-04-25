@@ -34,7 +34,7 @@ public class Table {
     Table.NUMBER_OF_PLAYERS = numberOfPlayers;
     if(sets<=0)
     sets = 1;
-    this.NUMBER_OF_SETS = sets;
+    Table.NUMBER_OF_SETS = sets;
     Table.players = new PlayerHandObject[numberOfPlayers];
     this.NUMBER_OF_CARDS = NUMBER_OF_SYMBOLS * MAX_CARD_VALUE * NUMBER_OF_SETS;
   }
