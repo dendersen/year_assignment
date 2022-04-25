@@ -5,3 +5,5 @@ src/dk/mtdm/testing.java
 Saves/**
 !saving.txt
 year_assignment.iml
+.vscode\
+launch.json
