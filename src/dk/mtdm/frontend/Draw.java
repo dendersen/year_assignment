@@ -1,7 +1,6 @@
 package dk.mtdm.frontend;
 import dk.mtdm.api.BlackJackCom;
 import dk.mtdm.api.CurrentData;
-import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
 
 import javax.swing.*;
@@ -9,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.ImageObserver;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import static dk.mtdm.frontend.Draw.MyCanvas.g;
@@ -21,6 +21,7 @@ public class Draw extends JFrame {
     private static JButton hit;
     private static JButton stand;
     private static CurrentData Trans;
+    private static boolean make;
 
     public Draw() {
         setLayout(new BorderLayout());
@@ -117,30 +118,34 @@ public class Draw extends JFrame {
     }
 
 
-    private static ArrayList<card> Cards = new ArrayList<card>();
+
+    private static final ArrayList<card> Cards = new ArrayList<card>();
     private static void player(Graphics g) {
+        make = false;
+        System.out.println("Laver kortene");
         for (byte j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
             for (byte i = 0; i < Table.getPlayer((byte) (j)).getHand().size(); i++) {
                 Cards.add(new card(
                     Table.getPlayer(j).getHand().get(i).getSymbol(),
                     Table.cardNumberString(j, i), i
                 ));
-
             }
         }
+        make = true;
+        System.out.println("Faerdig");
+    }
 
+    public boolean done(){
+        return make;
+    }
+
+    public void showDealer(){
+        Cards.get(0).dealerCode(true);
     }
 
     public static void dealer(int id){
         Cards.get(2*id).show(g,true);
         Cards.get(2*id+1).show(g,true);
-
-//        final card card2 = new card("hearts","2",0);
-//        final card card = new card("hearts","2",1);
-
-//        cards.show(g);
-//        card2.show(g);
-//        (byte) Table.getPlayer(0).getHand().size()
     }
 
     /**
