@@ -15,18 +15,20 @@ import static dk.mtdm.frontend.Draw.MyCanvas.g;
 public class Draw extends JFrame {
     public static final int width = 1000;
     public static final int height = 800;
-    private static boolean valg;
-    private final MyCanvas canvas = new MyCanvas();
     private static JButton hit;
     private static JButton stand;
     private static CurrentData Trans;
-    private static boolean make;
+
+    private static JButton flipBTN;
+
+    private static int test = 40;
+    private static boolean flip;
 
     public Draw() {
         setLayout(new BorderLayout());
-        setSize(width,height);
+        setSize(width+10,height+33);
         setTitle("Black Jack");
-        ImageIcon icon = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png");
+        ImageIcon icon = new ImageIcon("src/dk/mtdm/frontend/icons/sort_es.png");
         setIconImage(icon.getImage());
         hit = new JButton("Hit");
         hit.setBounds(100,100,100,100);
@@ -45,8 +47,22 @@ public class Draw extends JFrame {
                 Trans.setAction(false);
             }
         } );
+        MyCanvas canvas = new MyCanvas();
 
-        add("Center",canvas);
+
+        flipBTN = new JButton("Flip");
+        flipBTN.setBounds(width / 2-50,height / 2-50,100,100);
+        add(flipBTN);
+        flipBTN.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                flip = !flip;
+                repaint();
+            }
+        } );
+
+
+        add("Center", canvas);
         canvas.setBounds(0,0,width,height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBackground(Color.GREEN);
@@ -58,51 +74,37 @@ public class Draw extends JFrame {
         stand.setVisible(false);
     }
 
-    static class MyCanvas extends Canvas {
+    static class MyCanvas extends JPanel {
         public static ImageObserver paint() {
             return null;
         }
-        static Graphics g;
+        public static Graphics g;
+
         @Override
         public void paint(Graphics G) {
             g = G;
-            //background
-            g.setColor(new Color(52, 166, 0));
-            g.fillRect(0,0,getWidth(),getHeight());
-            player(g);
-            dealer(0);
-            PlayerDraw(2);
+            setBackground(new Color(52, 166, 0));
+            dealerShow(0);
+            playerDraw(1);
+            if (flip == true) {
+                showDealer();
+            }
+            System.out.println("Canvas Reloaded");
 
-
-
-//            g.setColor(Color.black);
-//            g.drawString("My first canvas program",10,20);
-//            g.drawOval(50,50,100,25);
-//            g.drawRect(200,50,100,25);
-//            g.setColor(Color.yellow);
-//            g.fillOval(50,100,70,70);
-//            g.fillRect(200,100,90,90);
-//            Image andy = new ImageIcon("src/index.jpg").getImage();
-//            Image jony = new ImageIcon("src/index.jpg").getImage();
-//            g.drawImage(andy,330,30,this);
-//            g.drawImage(jony,350,50,this);
-//            g.setColor(Color.blue);
-//            g.setFont(new Font("Comic Sans MS",Font.BOLD,30));
-//            g.drawString("That's all, folks",10,250);
         }
     }
-    
+
+
     /**
-   * @return true = hit,  flase = stand
-   * @param actions booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
+   * @param data booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
    */
     public static void buttons(CurrentData data) {
         Trans = data;
-        if (data.AVAILABLE_ACTIONS[1]) {
+        if (Trans.AVAILABLE_ACTIONS[1]) {
             hit.setVisible(true);
             // laver en knap til hit
         }
-        if (data.AVAILABLE_ACTIONS[2]){
+        if (Trans.AVAILABLE_ACTIONS[2]){
             // laver en knap til stand
             stand.setVisible(true);
         }
@@ -119,8 +121,10 @@ public class Draw extends JFrame {
 
 
     private static final ArrayList<card> Cards = new ArrayList<card>();
-    private static void player(Graphics g) {
-        make = false;
+    public static void player() {
+        if(!Cards.isEmpty()) {
+            return;
+        }
         System.out.println("Laver kortene");
         for (byte j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
             for (byte i = 0; i < Table.getPlayer((byte) (j)).getHand().size(); i++) {
@@ -130,19 +134,15 @@ public class Draw extends JFrame {
                 ));
             }
         }
-        make = true;
         System.out.println("Faerdig");
     }
 
-    public boolean done(){
-        return make;
+    //flipper dealerens kort
+    public static void showDealer(){
+        Cards.get(0).dealerCode(false);
     }
 
-    public void showDealer(){
-        Cards.get(0).dealerCode(true);
-    }
-
-    public static void dealer(int id){
+    public static void dealerShow(int id){
         Cards.get(2*id).show(g,true);
         Cards.get(2*id+1).show(g,true);
     }
@@ -150,7 +150,7 @@ public class Draw extends JFrame {
     /**
      * @param id shows players cards, based on they id
      */
-    public static void PlayerDraw(int id) {
+    public static void playerDraw(int id) {
         Cards.get(2*id).show(g,false);
         Cards.get(2*id+1).show(g,false);
     }
@@ -159,13 +159,3 @@ public class Draw extends JFrame {
         
     }
 }
-
-
-//0:
-//0 - 1
-//1:
-//2 - 3
-//2:
-//4 - 5
-//3:
-//6-7

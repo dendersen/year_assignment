@@ -46,8 +46,7 @@ public class BlackJackCom {
     currentPlayer++;
     }
     if(currentPlayer != data.playerID){
-      if(currentPlayer >= Table.NUMBER_OF_PLAYERS)
-      currentPlayer = 0;
+      if(currentPlayer >= Table.NUMBER_OF_PLAYERS) currentPlayer = 0;
     }
     boolean done = false;
     if(data.playerID == 0 && currentPlayer != data.playerID){
