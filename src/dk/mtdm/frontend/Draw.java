@@ -1,10 +1,13 @@
 package dk.mtdm.frontend;
+import dk.mtdm.api.BlackJackCom;
 import dk.mtdm.api.CurrentData;
 import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
@@ -15,6 +18,9 @@ public class Draw extends JFrame {
     public static final int height = 800;
     private static boolean valg;
     private final MyCanvas canvas = new MyCanvas();
+    private static JButton hit;
+    private static JButton stand;
+    private static CurrentData Trans;
 
     public Draw() {
         setLayout(new BorderLayout());
@@ -22,9 +28,24 @@ public class Draw extends JFrame {
         setTitle("Black Jack");
         ImageIcon icon = new ImageIcon("src/dk/mtdm/frontend/icons/hearts.png");
         setIconImage(icon.getImage());
-        JButton button = new JButton("Hit");
-        button.setBounds(400,400,100,100);
-        add(button);
+        hit = new JButton("Hit");
+        hit.setBounds(100,100,100,100);
+        add(hit);
+        hit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            Trans.setAction(true);
+            }
+        } );
+
+        stand = new JButton("Stand");
+        stand.setBounds(100,height - 250,100,100);
+        add(stand);
+        stand.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Trans.setAction(false);
+            }
+        } );
+
         add("Center",canvas);
         canvas.setBounds(0,0,width,height);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,15 +54,14 @@ public class Draw extends JFrame {
 
         setLayout(null);
         setVisible(true);
+        hit.setVisible(false);
+        stand.setVisible(false);
     }
 
     static class MyCanvas extends Canvas {
-
-
         public static ImageObserver paint() {
             return null;
         }
-
         static Graphics g;
         @Override
         public void paint(Graphics G) {
@@ -70,8 +90,6 @@ public class Draw extends JFrame {
 //            g.setFont(new Font("Comic Sans MS",Font.BOLD,30));
 //            g.drawString("That's all, folks",10,250);
         }
-
-
     }
     
     /**
@@ -79,18 +97,24 @@ public class Draw extends JFrame {
    * @param actions booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
    */
     public static void buttons(CurrentData data) {
+        Trans = data;
         if (data.AVAILABLE_ACTIONS[1]) {
+            hit.setVisible(true);
             // laver en knap til hit
         }
         if (data.AVAILABLE_ACTIONS[2]){
             // laver en knap til stand
+            stand.setVisible(true);
         }
         if (data.AVAILABLE_ACTIONS[3]) {
             // laver en knap til hit men man kan ikke dø
+            hit.setVisible(true);
         }
     }
 
-
+    public static void returnBtn(){
+        BlackJackCom.theGame(Trans);
+    }
 
 
     private static ArrayList<card> Cards = new ArrayList<card>();
