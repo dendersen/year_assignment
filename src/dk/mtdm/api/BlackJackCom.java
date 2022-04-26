@@ -7,7 +7,7 @@ import dk.mtdm.frontend.Draw;
 
 public class BlackJackCom {
   static Table table;
-
+  static Draw draw;
 
   public BlackJackCom(byte numberOfPlayers) {
     table = new Table(numberOfPlayers, (byte) (1));
@@ -15,6 +15,8 @@ public class BlackJackCom {
 
   public static void main (){
     setup();
+    
+    draw = new Draw();
     
     startGame();
   }
@@ -25,9 +27,14 @@ public class BlackJackCom {
 
   private static void startGame(){
     CurrentData transfer = new CurrentData((byte) 1);
+    
     Draw.buttons(transfer);
   }
 
+
+  /**
+   * @param data the curent game data that is used to run the game
+   */
   public static void theGame(CurrentData data){
     byte currentPlayer = data.playerID;
     if(data.action){
