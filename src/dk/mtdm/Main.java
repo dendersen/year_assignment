@@ -8,5 +8,8 @@ public class Main {
     Draw window = new Draw();
     Table table = new Table((byte) (3), (byte) (1));
     table.setup();
+    if (window.done()) {
+      window.showDealer();
+    }
   }
 }
