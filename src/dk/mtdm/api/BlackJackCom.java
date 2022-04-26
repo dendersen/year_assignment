@@ -22,7 +22,7 @@ public class BlackJackCom {
   }
 
   private static void setup(){
-    table.setup();
+    table.TableSetup();
   }
 
   private static void startGame(){

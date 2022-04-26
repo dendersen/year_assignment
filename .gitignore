@@ -1,4 +1,4 @@
-bin/dk
+bin/src
 .idea
 out
 src/dk/mtdm/testing.java
