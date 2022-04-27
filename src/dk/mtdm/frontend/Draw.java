@@ -21,7 +21,7 @@ public class Draw extends JFrame {
 
     private static JButton flipBTN;
 
-    private static int test = 40;
+    // private static int test = 40;
     private static boolean flip;
 
     public Draw() {
