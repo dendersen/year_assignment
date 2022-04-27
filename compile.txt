@@ -1,2 +1,4 @@
 -d ..\bin
 -source 17
+--enable-preview
+--release 17

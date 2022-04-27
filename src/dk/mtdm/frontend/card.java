@@ -17,7 +17,7 @@ public class card implements ImageObserver {
     private boolean dealer;
     private Image back;
     public Graphics g;
-    public String path = "src/dk/mtdm/frontend/icons/";
+    public String path = "dk/mtdm/frontend/icons/";
 
 
     card(int symbol, String number, int id){
