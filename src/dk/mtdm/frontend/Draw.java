@@ -100,15 +100,15 @@ public class Draw extends JFrame {
    */
     public static void buttons(CurrentData data) {
         Trans = data;
-        if (Trans.AVAILABLE_ACTIONS[1]) {
+        if (Trans.AVAILABLE_ACTIONS[0]) {
             hit.setVisible(true);
             // laver en knap til hit
         }
-        if (Trans.AVAILABLE_ACTIONS[2]){
+        if (Trans.AVAILABLE_ACTIONS[1]){
             // laver en knap til stand
             stand.setVisible(true);
         }
-        if (data.AVAILABLE_ACTIONS[3]) {
+        if (data.AVAILABLE_ACTIONS[2]) {
             // laver en knap til hit men man kan ikke dø
             hit.setVisible(true);
         }
@@ -143,16 +143,25 @@ public class Draw extends JFrame {
     }
 
     public static void dealerShow(int id){
-        Cards.get(2*id).show(g,true);
-        Cards.get(2*id+1).show(g,true);
+        try {
+            Cards.get(2*id).show(g,true);
+            Cards.get(2*id+1).show(g,true);
+        } catch (Exception e) {
+            System.out.println("Table not made");
+        }
     }
 
     /**
      * @param id shows players cards, based on they id
      */
     public static void playerDraw(int id) {
-        Cards.get(2*id).show(g,false);
-        Cards.get(2*id+1).show(g,false);
+        try {
+            Cards.get(2*id).show(g,false);
+            Cards.get(2*id+1).show(g,false);
+        } catch (Exception e) {
+            System.out.println("Table not made");
+        }
+
     }
 
     public static void winner(byte winner){

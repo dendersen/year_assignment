@@ -13,7 +13,7 @@ public class BlackJackCom {
     table = new Table(numberOfPlayers, (byte) (1));
   }
 
-  public static void main (){
+  public static void main(){
     setup();
     
     draw = new Draw();
