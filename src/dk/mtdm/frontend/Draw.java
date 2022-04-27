@@ -21,6 +21,7 @@ public class Draw extends JFrame {
 
     private static JButton flipBTN;
 
+    private static int test = 40;
     private static boolean flip;
 
     public Draw() {
@@ -34,9 +35,7 @@ public class Draw extends JFrame {
         add(hit);
         hit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Hit clicked");
-                Trans.setAction(true);
-                returnBtn();
+            Trans.setAction(true);
             }
         } );
 
@@ -45,9 +44,7 @@ public class Draw extends JFrame {
         add(stand);
         stand.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Stand Clicked");
                 Trans.setAction(false);
-                returnBtn();
             }
         } );
         MyCanvas canvas = new MyCanvas();
@@ -83,14 +80,10 @@ public class Draw extends JFrame {
         }
         public static Graphics g;
 
-        public MyCanvas() {
-            setBackground(new Color(52, 166, 0));
-
-        }
-
         @Override
         public void paint(Graphics G) {
             g = G;
+            setBackground(new Color(52, 166, 0));
             dealerShow(0);
             playerDraw(1);
             if (flip == true) {
@@ -107,15 +100,15 @@ public class Draw extends JFrame {
    */
     public static void buttons(CurrentData data) {
         Trans = data;
-        if (Trans.AVAILABLE_ACTIONS[0]) {
+        if (Trans.AVAILABLE_ACTIONS[1]) {
             hit.setVisible(true);
             // laver en knap til hit
         }
-        if (Trans.AVAILABLE_ACTIONS[1]){
+        if (Trans.AVAILABLE_ACTIONS[2]){
             // laver en knap til stand
             stand.setVisible(true);
         }
-        if (data.AVAILABLE_ACTIONS[2]) {
+        if (data.AVAILABLE_ACTIONS[3]) {
             // laver en knap til hit men man kan ikke dø
             hit.setVisible(true);
         }
@@ -146,33 +139,20 @@ public class Draw extends JFrame {
 
     //flipper dealerens kort
     public static void showDealer(){
-        try {
-            Cards.get(0).dealerCode(false);
-        } catch (Exception e) {
-            System.out.println("Table not made, try run player()");
-        }
+        Cards.get(0).dealerCode(false);
     }
 
     public static void dealerShow(int id){
-        try {
-            Cards.get(2*id).show(g,true);
-            Cards.get(2*id+1).show(g,true);
-        } catch (Exception e) {
-            System.out.println("Table not made, try run player()");
-        }
-
+        Cards.get(2*id).show(g,true);
+        Cards.get(2*id+1).show(g,true);
     }
 
     /**
      * @param id shows players cards, based on they id
      */
     public static void playerDraw(int id) {
-        try {
-            Cards.get(2*id).show(g,false);
-            Cards.get(2*id+1).show(g,false);
-        } catch (Exception e) {
-            System.out.println("Table not made, try run player()");
-        }
+        Cards.get(2*id).show(g,false);
+        Cards.get(2*id+1).show(g,false);
     }
 
     public static void winner(byte winner){
