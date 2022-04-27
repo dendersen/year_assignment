@@ -26,5 +26,5 @@ tal mellemrum ; mellemrum symbol mellemrum (nyt kort)
 hånd 0 = dealer
 
 CardObject
-array indeholder symbol og tal for et kort
+list indeholder symbol og tal for et kort
 bruger en constructer til at opbygge info
