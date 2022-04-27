@@ -11,18 +11,13 @@ public class BlackJackCom {
 
   public BlackJackCom(byte numberOfPlayers) {
     table = new Table(numberOfPlayers, (byte) (1));
+    table.TableSetup();
+    draw = new Draw();
+    Draw.player();
   }
 
   public static void main (){
-    setup();
-    
-    draw = new Draw();
-    
     startGame();
-  }
-
-  private static void setup(){
-    table.TableSetup();
   }
 
   private static void startGame(){

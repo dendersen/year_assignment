@@ -1,14 +1,11 @@
 package dk.mtdm;
-import dk.mtdm.backend.BlackJack.Table;
-import dk.mtdm.frontend.Draw;
+import dk.mtdm.api.BlackJackCom;
+
 
 public class Main {
 //  public static Draw window;
   public static void main(String[] args) {
-    Draw window = new Draw();
-    Table table = new Table((byte) (3), (byte) (1));
-    table.TableSetup();
-    Draw.player();
-//    Draw.showDealer();
+    BlackJackCom Game = new BlackJackCom((byte) 2);
+    BlackJackCom.main();
   }
 }
