@@ -41,6 +41,9 @@ public class CardObject {
   public String getNumberString(){
     String string = "";
     switch(getNumber()){
+      case 0: 
+      string = "j";
+      break;
       case 1:
       string = "A";
       break;

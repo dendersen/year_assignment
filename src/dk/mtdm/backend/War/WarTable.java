@@ -7,7 +7,8 @@ import dk.mtdm.backend.BlackJack.PlayerHandObject;
 
 public class WarTable {
   
-  private final byte NUMBER_OF_PLAYERS;
+  public
+  final byte NUMBER_OF_PLAYERS;
 
   private final byte NUMBER_OF_CARDS = 52+4; //normal cards and 3 jokers
   private static ArrayList <PlayerHandObject> players = new ArrayList <PlayerHandObject>();
