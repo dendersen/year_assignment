@@ -21,7 +21,7 @@ public class Draw extends JFrame {
 
     private static JButton flipBTN;
 
-    // private static int test = 40;
+    private static int test = 40;
     private static boolean flip;
 
     public Draw() {
@@ -87,7 +87,7 @@ public class Draw extends JFrame {
             dealerShow(0);
             playerDraw(1);
             if (flip == true) {
-                showDealer();
+                showHiden();
             }
             System.out.println("Canvas Reloaded");
 
@@ -138,21 +138,40 @@ public class Draw extends JFrame {
     }
 
     //flipper dealerens kort
-    public static void showDealer(){
-        Cards.get(0).dealerCode(false);
+    public static void showHiden(){
+        try {
+            Cards.get(0).dealerCode(false);
+        } catch (Exception e){
+            System.out.println("showHiden() failed");
+            System.out.println("Table not created, try run player()");
+        }
     }
 
     public static void dealerShow(int id){
-        Cards.get(2*id).show(g,true);
-        Cards.get(2*id+1).show(g,true);
+        try {
+            Cards.get(2*id).show(g,true);
+            Cards.get(2*id+1).show(g,true);
+        } catch (Exception e) {
+            System.out.println("dealerShow() failed");
+            System.out.println("Table not created, try run player()");
+        }
+
     }
 
     /**
      * @param id shows players cards, based on they id
      */
     public static void playerDraw(int id) {
-        Cards.get(2*id).show(g,false);
-        Cards.get(2*id+1).show(g,false);
+        try {
+
+            Cards.get(2*id).show(g,false);
+            Cards.get(2*id+1).show(g,false);
+        } catch (Exception e) {
+            System.out.println("playerDraw() failed");
+        System.out.println("Table not created, try run player()");
+        }
+
+
     }
 
     public static void winner(byte winner){
