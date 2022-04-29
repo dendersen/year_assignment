@@ -11,18 +11,13 @@ public class BlackJackCom {
 
   public BlackJackCom(byte numberOfPlayers) {
     table = new Table(numberOfPlayers, (byte) (1));
+    table.TableSetup();
+    draw = new Draw();
+    Draw.player();
   }
 
   public static void main (){
-    setup();
-    
-    draw = new Draw();
-    
     startGame();
-  }
-
-  private static void setup(){
-    table.TableSetup();
   }
 
   private static void startGame(){
@@ -43,11 +38,10 @@ public class BlackJackCom {
         currentPlayer++;
       }
     }else {
-    currentPlayer++;
+      currentPlayer++;
     }
     if(currentPlayer != data.playerID){
-      if(currentPlayer >= Table.NUMBER_OF_PLAYERS)
-      currentPlayer = 0;
+      if(currentPlayer >= Table.NUMBER_OF_PLAYERS) currentPlayer = 0;
     }
     boolean done = false;
     if(data.playerID == 0 && currentPlayer != data.playerID){

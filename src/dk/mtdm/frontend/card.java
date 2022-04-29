@@ -13,7 +13,7 @@ public class card implements ImageObserver {
     private int y = 25;
     private int w = 200;
     private int h = 300;
-    private int id;
+    private final int id;
     private boolean dealer;
     private Image back;
     public Graphics g;
@@ -66,17 +66,62 @@ public class card implements ImageObserver {
             }
         }
         g.setFont(new Font("consolas",Font.BOLD,130));
-        g.drawString(this.number,this.x()+width/2-this.w()/2-36,this.y()+height/2+this.h()/2+32);
+
+        switch (this.number) {
+            case "K" -> {
+                Image Kongen;
+                if (this.symbol == 1 || this.symbol == 2) {
+                    Kongen = new ImageIcon(path + "rød_konge.png").getImage();
+                } else {
+                    Kongen = new ImageIcon(path + "sort_konge.png").getImage();
+                }
+                g.drawImage(Kongen, this.x()+width/2-this.w()/2-64, this.y()+height/2+this.h()/2-64-10, this);
+            }
+            case "D" -> {
+                Image Dronning;
+                if (this.symbol == 1 || this.symbol == 2) {
+                    Dronning = new ImageIcon(path + "rød_dronning.png").getImage();
+                } else {
+                    Dronning = new ImageIcon(path + "sort_dronning.png").getImage();
+                }
+                g.drawImage(Dronning, this.x()+width/2-this.w()/2-64, this.y()+height/2+this.h()/2-64-10, this);
+            }
+            case "B" -> {
+                Image Bonde;
+                if (this.symbol == 1 || this.symbol == 2) {
+                    Bonde = new ImageIcon(path + "rød_bonde.png").getImage();
+                } else {
+                    Bonde = new ImageIcon(path + "sort_bonde.png").getImage();
+                }
+                g.drawImage(Bonde, this.x()+width/2-this.w()/2-64, this.y()+height/2+this.h()/2-64-10, this);
+            }
+            case "A" -> {
+                Image Es;
+                if (this.symbol == 1 || this.symbol == 2) {
+                    Es = new ImageIcon(path + "rød_es.png").getImage();
+                } else {
+                    Es = new ImageIcon(path + "sort_es.png").getImage();
+                }
+                g.drawImage(Es, this.x()+width/2-this.w()/2-64, this.y()+height/2+this.h()/2-64-10, this);
+            }
+            default -> {
+                g.drawString(this.number,this.x()+width/2-this.w()/2-36,this.y()+height/2+this.h()/2+32);
+            }
+        }
     }
 
     /**
-     * @param flip bestemmer om det første kort skal være flipet
+     * @param flip bestemmer om det første kort skal være flipet, true ikke vis og false  vis
      */
-
     public void dealerCode(boolean flip) {
-        g.setColor(Color.white);
+
+        if (g == null) return;
         if (this.id == 0) { //Checker om det er dealens første kort
-            DrawCard(path);
+            if (flip) {
+                DrawCard(path, false);
+            } else {
+                DrawCard(path, true);
+            }
             if(flip) {
                 back = new ImageIcon("src/dk/mtdm/frontend/icons/back.png").getImage();
                 g.drawImage(back,
@@ -84,16 +129,20 @@ public class card implements ImageObserver {
                         this);
             }
         } else {
-            DrawCard(path);
-
+            DrawCard(path ,false);
         }
     }
 
-    private void DrawCard(String path) {
+    private void DrawCard(String path, boolean hide) {
+        g.setColor(Color.white);
         g.fillRect(this.x() + width / 2 - this.w(), this.y(), this.w(), this.h());
         g.setColor(Color.black);
         g.drawRect(this.x() + width / 2 - this.w(), this.y(), this.w(), this.h());
-
+        if (hide) {
+            g.setColor(Color.white);
+        } else {
+            g.setColor(Color.BLACK);
+        }
         int simpX = this.x() + this.w() / 2 - 64 + width / 2 - this.w();
         int simpY = this.y() + this.h() / 2;
         switch (symbol) {
@@ -115,8 +164,51 @@ public class card implements ImageObserver {
             }
         }
         g.setFont(new Font("consolas", Font.BOLD, 128));
-        g.drawString(this.number, this.x() + this.w() / 2 - 36 + width / 2 - this.w(), this.y() + this.h() / 2 - 32);
+        switch (this.number) {
+            case "K" -> {
+                Image Kongen;
+                if (this.symbol == 1 || this.symbol == 2) {
+                    Kongen = new ImageIcon(path + "rød_konge.png").getImage();
+                } else {
+                    Kongen = new ImageIcon(path + "sort_konge.png").getImage();
+                }
+                g.drawImage(Kongen, this.x() + this.w() / 2 - 64 + width / 2 - this.w(), this.y() + this.h() / 2 - 128, this);
+            }
+            case "D" -> {
+                Image Dronning;
+                if (this.symbol == 1 || this.symbol == 2) {
+                    Dronning = new ImageIcon(path + "rød_dronning.png").getImage();
+                } else {
+                    Dronning = new ImageIcon(path + "sort_dronning.png").getImage();
+                }
+                g.drawImage(Dronning, this.x() + this.w() / 2 - 64 + width / 2 - this.w(), this.y() + this.h() / 2 - 128, this);
+            }
+            case "B" -> {
+                Image Bonde;
+                if (this.symbol == 1 || this.symbol == 2) {
+                    Bonde = new ImageIcon(path + "rød_bonde.png").getImage();
+                } else {
+                    Bonde = new ImageIcon(path + "sort_bonde.png").getImage();
+                }
+                g.drawImage(Bonde, this.x() + this.w() / 2 - 64 + width / 2 - this.w(), this.y() + this.h() / 2 - 128, this);
+            }
+            case "A" -> {
+                Image Es;
+                if (this.symbol == 1 || this.symbol == 2) {
+                    Es = new ImageIcon(path + "rød_es.png").getImage();
+                } else {
+                    Es = new ImageIcon(path + "sort_es.png").getImage();
+                }
+                g.drawImage(Es, this.x() + this.w() / 2 - 64 + width / 2 - this.w(), this.y() + this.h() / 2 - 128, this);
+            }
+            default -> {
+                g.setColor(Color.BLACK);
+                g.drawString(this.number,this.x() + this.w() / 2 - 36 + width / 2 - this.w(),  this.h() / 2 + 32);
+            }
+        }
     }
+//    this.x() + this.w() / 2 - 64 + width / 2 - this.w();
+//this.y() + this.h() / 2;
 
     public int x() {
         return x;
