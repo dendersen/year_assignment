@@ -62,8 +62,11 @@ public class WarTable {
         LastCard[0] = players.get(playerID).getHand().remove(0);
       return LastCard;
     }else{
-      shuffleDiscard(playerID);
+      if(shuffleDiscard(playerID))
       return(drawHand(playerID));
+      CardObject[] zerocard = new CardObject[1];
+      zerocard[0] = new CardObject((byte)0,(byte)-1);
+      return(zerocard);
     }
   }
 
@@ -156,13 +159,18 @@ public class WarTable {
     }
   }
 
-  public void shuffleDiscard(byte playerID){
+  public boolean shuffleDiscard(byte playerID){
     CardObject[] cards = players.get(playerID).emptyDiscard();
     
+    if(cards.length == 0){
+      return false;
+    }
+
     for(byte i = 0; i < cards.length; i++){
       CardObject card = cards[i];
       players.get(playerID).addCard(card);
     }
     shuffle(playerID);
+    return true;
   }
 }

@@ -9,14 +9,13 @@ public class WarAPI {
     WarTable table = new WarTable(numberOfPlayers);
     while (true){
       for(byte playerID = 0; playerID < table.NUMBER_OF_PLAYERS; playerID++){ //needs to allow for only 1 card left
+        boolean deadPlayer = false;
+
         CardObject[] cards = table.drawHand(playerID);
-        System.out.println("what will you play?");
-        System.out.println();
-        for(byte i = 0; i < 2; i++){
-          String name = cards[i].getNumberString(); 
-          name = translate(name);
-          System.out.println( name + "of " + cards[i].getSymbolString());
-        }
+        if(cards[0].getSymbol() == -1)
+          deadPlayer = true;
+        
+        pickCard(cards);
         
         boolean action = pickCard(); //true = card 1
         
@@ -24,9 +23,9 @@ public class WarAPI {
         else       table.playCard(cards[0],cards[1],playerID);
         
       }
-      byte shortWinner = table.Winner(table.inPlay); 
-      System.out.println("winner is: "+ shortWinner);
-      table.collectWinnings(shortWinner);
+      tempWinner(table);
+
+      
       /**
        *next up
        * 3. remove people with 0 cards
@@ -34,6 +33,22 @@ public class WarAPI {
        */
       
     }
+  }
+
+  private static void pickCard(CardObject[] cards) {
+    System.out.println("what will you play?");
+    System.out.println();
+    for(byte i = 0; i < 2; i++){
+      String name = cards[i].getNumberString(); 
+      name = translate(name);
+      System.out.println( name + "of " + cards[i].getSymbolString());
+    }
+  }
+
+  private static void tempWinner(WarTable table) {
+    byte shortWinner = table.Winner(table.inPlay); 
+    System.out.println("winner is: "+ shortWinner);
+    table.collectWinnings(shortWinner);
   }
 
   private static boolean pickCard() {
