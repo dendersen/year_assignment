@@ -7,12 +7,11 @@ import dk.mtdm.backend.BlackJack.PlayerHandObject;
 
 public class WarTable {
   
-  public
-  final byte NUMBER_OF_PLAYERS;
+  public byte NUMBER_OF_PLAYERS;
 
   private final byte NUMBER_OF_CARDS = 52+4; //normal cards and 3 jokers
   private static ArrayList <PlayerHandObject> players = new ArrayList <PlayerHandObject>();
-  private static CardObject[] inPlay;
+  public CardObject[] inPlay;
   private static ArrayList <CardObject> warBooty = new ArrayList<CardObject>();
   
   public WarTable(byte NumberOfPlayers) {
@@ -53,10 +52,19 @@ public class WarTable {
   }
 
   public CardObject[] drawHand(byte playerID){
-    CardObject[] cards = new CardObject[2];
+    if(players.get(playerID).getHand().size() >= 2){
+      CardObject[] cards = new CardObject[2];
     cards[0] = players.get(playerID).getHand().remove(0);
     cards[1] = players.get(playerID).getHand().remove(0);
     return(cards);
+    }else if(players.get(playerID).getHand().size() == 1){
+      CardObject[] LastCard = new CardObject[1];
+        LastCard[0] = players.get(playerID).getHand().remove(0);
+      return LastCard;
+    }else{
+      shuffleDiscard(playerID);
+      return(drawHand(playerID));
+    }
   }
 
   public void depositHand(byte playerID, CardObject Card){
@@ -107,8 +115,16 @@ public class WarTable {
         twoID.add(ID);
       }
     }
+    if(high == 20 && twoID.size() >= 1){
+      for(byte i = 0; war.size() > i; i++){
+        war.remove(0);
+      }
+      for(byte i = 0; i < twoID.size(); i++){
+        war.add(twoID.get(i));
+      }
+    }
     if(war.size() > 1){
-      warRun(war);
+      highID=warRun(war);
     }
     return(highID);
   }
@@ -132,5 +148,21 @@ public class WarTable {
   public void playCard(CardObject unPlayedCard, CardObject playedCard, byte playerID){
     depositHand(playerID, unPlayedCard);
     inPlay[playerID] = playedCard;
+  }
+
+  public void collectWinnings(byte playerID){
+    for(byte i = 0; i < inPlay.length; i++){
+      players.get(playerID).addToDiscard(inPlay[i]);
+    }
+  }
+
+  public void shuffleDiscard(byte playerID){
+    CardObject[] cards = players.get(playerID).emptyDiscard();
+    
+    for(byte i = 0; i < cards.length; i++){
+      CardObject card = cards[i];
+      players.get(playerID).addCard(card);
+    }
+    shuffle(playerID);
   }
 }

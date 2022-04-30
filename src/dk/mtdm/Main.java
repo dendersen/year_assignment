@@ -10,6 +10,7 @@ public class Main {
   public static void main(String[] args) {
     choose();
   }
+
   private static void choose(){
     while (true) {
       boolean game = false;
@@ -17,7 +18,7 @@ public class Main {
         String string = scan.nextLine();
         switch (string) {
           case "war":
-          WarAPI.main();
+          WarAPI.main((byte) 1);
           break;
           
           case "":

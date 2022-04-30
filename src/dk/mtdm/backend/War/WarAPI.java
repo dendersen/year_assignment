@@ -5,11 +5,11 @@ import java.util.Scanner;
 import dk.mtdm.backend.BlackJack.CardObject;
 
 public class WarAPI {
-  public static void main() {
-    WarTable table = new WarTable((byte) 2);
+  public static void main(byte numberOfPlayers) {
+    WarTable table = new WarTable(numberOfPlayers);
     while (true){
-      for(byte j = 0; j < table.NUMBER_OF_PLAYERS; j++){
-        CardObject[] cards = table.drawHand(j);
+      for(byte playerID = 0; playerID < table.NUMBER_OF_PLAYERS; playerID++){ //needs to allow for only 1 card left
+        CardObject[] cards = table.drawHand(playerID);
         System.out.println("what will you play?");
         System.out.println();
         for(byte i = 0; i < 2; i++){
@@ -17,13 +17,44 @@ public class WarAPI {
           name = translate(name);
           System.out.println( name + "of " + cards[i].getSymbolString());
         }
-        while (true){
-          try (Scanner scan = new Scanner(System.in)) {
-          
-          }
+        
+        boolean action = pickCard(); //true = card 1
+        
+        if(action) table.playCard(cards[1],cards[0],playerID);
+        else       table.playCard(cards[0],cards[1],playerID);
+        
+      }
+      byte shortWinner = table.Winner(table.inPlay); 
+      System.out.println("winner is: "+ shortWinner);
+      table.collectWinnings(shortWinner);
+      /**
+       *next up
+       * 3. remove people with 0 cards
+       * 4. figure out when only 1 card
+       */
+      
+    }
+  }
+
+  private static boolean pickCard() {
+    boolean action = true;
+    while (true){
+      try (Scanner scan = new Scanner(System.in)) {
+        boolean succes = false;
+        String  string = scan.nextLine();
+        if(string.contains("1") && !string.contains("2")){
+          succes = true;
+          action = true;
+        }else if (!string.contains("1") && string.contains("2")){
+          succes = true;
+          action = false;
         }
+        if(succes)
+        break;
+        System.out.println("please use \" 1 \" or \" 2 \" to select the first or second card");
       }
     }
+    return action;
   }
 
   private static String translate(String names){
