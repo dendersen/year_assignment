@@ -7,15 +7,15 @@ import dk.mtdm.backend.BlackJack.PlayerHandObject;
 
 public class WarTable {
   
-  public byte NUMBER_OF_PLAYERS;
+  static public byte NUMBER_OF_PLAYERS;
 
-  private final byte NUMBER_OF_CARDS = 52+4; //normal cards and 3 jokers
+  private static final byte NUMBER_OF_CARDS = 52+4; //normal cards and 3 jokers
   private static ArrayList <PlayerHandObject> players = new ArrayList <PlayerHandObject>();
-  public CardObject[] inPlay;
+  public static CardObject[] inPlay;
   private static ArrayList <CardObject> warBooty = new ArrayList<CardObject>();
   
   public WarTable(byte NumberOfPlayers) {
-    this.NUMBER_OF_PLAYERS = NumberOfPlayers;
+    WarTable.NUMBER_OF_PLAYERS = NumberOfPlayers;
     
     {
       ArrayList <CardObject> Deck = new ArrayList<CardObject>();
@@ -51,7 +51,7 @@ public class WarTable {
     inPlay = new CardObject[NumberOfPlayers];
   }
 
-  public CardObject[] drawHand(byte playerID){
+  static public CardObject[] drawHand(byte playerID){
     if(players.get(playerID).getHand().size() >= 2){
       CardObject[] cards = new CardObject[2];
     cards[0] = players.get(playerID).getHand().remove(0);
@@ -66,16 +66,17 @@ public class WarTable {
       return(drawHand(playerID));
       CardObject[] zerocard = new CardObject[1];
       zerocard[0] = new CardObject((byte)0,(byte)-1);
+      players.get(playerID).IS_ALIVE = false;
       return(zerocard);
     }
   }
 
-  public void depositHand(byte playerID, CardObject Card){
+  static public void depositHand(byte playerID, CardObject Card){
     players.get(playerID).addCard(Card);
     shuffle(playerID);
   }
 
-  public void shuffle(byte playerID){
+  static public void shuffle(byte playerID){
     byte numberOfCards = (byte) (players.get(playerID).getHand().size());
     for(byte i = 0; i < players.get(playerID).getHand().size()*4; i++){
       CardObject temp = players.get(playerID).getHand().remove(i);
@@ -86,7 +87,7 @@ public class WarTable {
     }
   }
 
-  public byte Winner(CardObject[] inPlai){
+  static public byte Winner(CardObject[] inPlai){
     byte high = 0;
     byte highID = 0;
     ArrayList<Byte> twoID = new ArrayList <Byte>();
@@ -132,7 +133,7 @@ public class WarTable {
     return(highID);
   }
 
-  public byte warRun(ArrayList<Byte> IDs){
+  static public byte warRun(ArrayList<Byte> IDs){
     ArrayList <CardObject> warPlay = new ArrayList<CardObject>();
     for(byte iD = 0; iD < IDs.size(); iD++){
       byte ID = IDs.get(iD);
@@ -148,18 +149,20 @@ public class WarTable {
     return(IDs.get(iD));
   }
 
-  public void playCard(CardObject unPlayedCard, CardObject playedCard, byte playerID){
-    depositHand(playerID, unPlayedCard);
+  static public void playCard(CardObject unPlayedCard, CardObject playedCard, byte playerID){
     inPlay[playerID] = playedCard;
+    if(unPlayedCard.getSymbol() == -1 || unPlayedCard == playedCard) return;
+    depositHand(playerID, unPlayedCard);
   }
 
-  public void collectWinnings(byte playerID){
+  static public void collectWinnings(byte playerID){
     for(byte i = 0; i < inPlay.length; i++){
+      if(inPlay[i].getSymbol() != -1)
       players.get(playerID).addToDiscard(inPlay[i]);
     }
   }
 
-  public boolean shuffleDiscard(byte playerID){
+  static public boolean shuffleDiscard(byte playerID){
     CardObject[] cards = players.get(playerID).emptyDiscard();
     
     if(cards.length == 0){
@@ -172,5 +175,10 @@ public class WarTable {
     }
     shuffle(playerID);
     return true;
+  }
+
+  static public boolean isAlive(byte playerID){
+    
+    return(players.get(playerID).IS_AI);
   }
 }

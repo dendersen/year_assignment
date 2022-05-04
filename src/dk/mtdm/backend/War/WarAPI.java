@@ -1,5 +1,6 @@
 package dk.mtdm.backend.War;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import dk.mtdm.backend.BlackJack.CardObject;
@@ -8,34 +9,32 @@ public class WarAPI {
   public static void main(byte numberOfPlayers) {
     WarTable table = new WarTable(numberOfPlayers);
     while (true){
-      for(byte playerID = 0; playerID < table.NUMBER_OF_PLAYERS; playerID++){ //needs to allow for only 1 card left
+      for(byte playerID = 0; playerID < WarTable.NUMBER_OF_PLAYERS; playerID++){ //needs to allow for only 1 card left
         boolean deadPlayer = false;
 
-        CardObject[] cards = table.drawHand(playerID);
+        CardObject[] cards = WarTable.drawHand(playerID);
         if(cards[0].getSymbol() == -1)
           deadPlayer = true;
         
-        pickCard(cards);
-        
-        boolean action = pickCard(); //true = card 1
-        
-        if(action) table.playCard(cards[1],cards[0],playerID);
-        else       table.playCard(cards[0],cards[1],playerID);
-        
+        if(!deadPlayer && cards.length == 2){
+          talkCard(cards);
+          boolean action = pickCard(); //true = card 1
+          
+          if(action) WarTable.playCard(cards[1],cards[0],playerID);
+          else       WarTable.playCard(cards[0],cards[1],playerID);
+        }else
+        WarTable.playCard(cards[0], cards[0], playerID);
       }
       tempWinner(table);
-
-      
-      /**
-       *next up
-       * 3. remove people with 0 cards
-       * 4. figure out when only 1 card
-       */
-      
+      byte winner = checkForWinner();
+      if(winner != -1){
+        win(winner);
+        break;
+      }
     }
   }
 
-  private static void pickCard(CardObject[] cards) {
+  private static void talkCard(CardObject[] cards) {
     System.out.println("what will you play?");
     System.out.println();
     for(byte i = 0; i < 2; i++){
@@ -46,9 +45,9 @@ public class WarAPI {
   }
 
   private static void tempWinner(WarTable table) {
-    byte shortWinner = table.Winner(table.inPlay); 
+    byte shortWinner = WarTable.Winner(WarTable.inPlay); 
     System.out.println("winner is: "+ shortWinner);
-    table.collectWinnings(shortWinner);
+    WarTable.collectWinnings(shortWinner);
   }
 
   private static boolean pickCard() {
@@ -105,4 +104,41 @@ public class WarAPI {
     }
     return(name);
   } 
+
+  private static byte checkForWinner(){
+  ArrayList <Byte> alive = new ArrayList<Byte>();
+  for(byte playerID = 0; playerID < WarTable.NUMBER_OF_PLAYERS; playerID++){
+    if(WarTable.isAlive(playerID)) alive.add(playerID);
+  }
+  if(alive.size() == 1)
+    return alive.get(0);
+  return (byte)-1;
+}
+
+  private static void win(byte winner){
+    String reset = "\033[0m";
+
+    System.out.print("\n\n" + "good news everyone" + "\n" + "we have a " + "\033[38;5;43m" + "WINNER" + reset +"\n");
+    System.out.print("\033[38;5;93m" + "The winner is: \"" + winner + "!\"\n");
+    System.out.print("\033[38;5;93m" + "congrats!" + reset);
+    System.out.println("this is when the game ends, but do you want to play again?");
+    NewGame();
+  }
+
+  private static void NewGame() {
+    try (Scanner reply = new Scanner(System.in)) {
+      if(reply.nextLine().contains("yes")){
+        while(true){
+          try {
+            try(Scanner reply2 = new Scanner(System.in)){
+              main(reply2.nextByte());
+              break;
+            }
+          } catch (Exception e) {
+            System.out.println("please only use numbers");
+          }
+        }
+      }
+    }
+  }
 }
