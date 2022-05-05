@@ -17,7 +17,7 @@ public class Warcontroller {
           deadPlayer = true;
         
         if(!deadPlayer && cards.length == 2){
-          talkCard(cards);
+          talkCard(cards,playerID);
           boolean action = pickCard(); //true = card 1
           
           if(action) WarTable.playCard(cards[1],cards[0],playerID);
@@ -34,8 +34,8 @@ public class Warcontroller {
     }
   }
 
-  private static void talkCard(CardObject[] cards) {
-    System.out.println("what will you play?");
+  private static void talkCard(CardObject[] cards, byte playerID) {
+    System.out.println("what will you play?\n" + "player: " + playerID);
     System.out.println();
     for(byte i = 0; i < 2; i++){
       String name = cards[i].getNumberString(); 
@@ -53,20 +53,24 @@ public class Warcontroller {
   private static boolean pickCard() {
     boolean action = true;
     while (true){
-      try (Scanner scan = new Scanner(System.in)) {
-        boolean succes = false;
-        String  string = scan.nextLine();
-        if(string.contains("1") && !string.contains("2")){
-          succes = true;
-          action = true;
-        }else if (!string.contains("1") && string.contains("2")){
-          succes = true;
-          action = false;
-        }
-        if(succes)
-        break;
-        System.out.println("please use \" 1 \" or \" 2 \" to select the first or second card");
-      }
+    Scanner scan = new Scanner(System.in);
+    boolean succes = false;
+    String  string = scan.next();
+    if(string.contains("1") && !string.contains("2")){
+      succes = true;
+      action = true;
+    }else if (!string.contains("1") && string.contains("2")){
+      succes = true;
+      action = false;
+    }
+    if(succes){
+      System.out.println("accepted");
+      scan.close();
+      System.out.println("choice accepted: " + string + "\n\n");
+      break;
+    }
+    scan.close();
+    System.out.println("please use \" 1 \" or \" 2 \" to select the first or second card");
     }
     return action;
   }
