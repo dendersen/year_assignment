@@ -28,16 +28,16 @@ public class WarTable {
       }
 
       for (Integer start = 0; start < NUMBER_OF_CARDS * 4; start++){//scrambles deck
-        int scramble = start % NUMBER_OF_CARDS;
+        int scramble = start % Deck.size();
         
         CardObject temp = Deck.remove(scramble);
         int k = (int) (Math.random() * NUMBER_OF_CARDS);
         if(k < 0)
         k = (int) (k * -1);
-        Deck.add((k % NUMBER_OF_CARDS) - 1, temp);
+        Deck.add(k % Deck.size(), temp);
       }
       
-      for (byte i = 0; i > NUMBER_OF_PLAYERS; i++){
+      for (byte i = 0; i < NUMBER_OF_PLAYERS; i++){
         players.add(new PlayerHandObject());
       }
       byte deckRole = 0;
@@ -75,13 +75,13 @@ public class WarTable {
   }
 
   static public void shuffle(byte playerID){
-    byte numberOfCards = (byte) (players.get(playerID).getHand().size());
+    byte availableCards = (byte) (players.get(playerID).getHand().size());
     for(byte i = 0; i < players.get(playerID).getHand().size()*4; i++){
       CardObject temp = players.get(playerID).getHand().remove(i);
-      int k = (int) (Math.random() * numberOfCards);
-      if(k < 0)
-      k = (int) (k * -1);
-      players.get(playerID).getHand().add(k % numberOfCards, temp);
+      int scramble = (int) (Math.random() * availableCards);
+      if(scramble < 0)
+      scramble = (int) (scramble * -1);
+      players.get(playerID).getHand().add(scramble % availableCards, temp);
     }
   }
 
