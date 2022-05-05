@@ -40,7 +40,7 @@ public class Warcontroller {
     for(byte i = 0; i < 2; i++){
       String name = cards[i].getNumberString(); 
       name = translate(name);
-      System.out.println( name + "of " + cards[i].getSymbolString());
+      System.out.println( name + " of " + cards[i].getSymbolString());
     }
   }
 
