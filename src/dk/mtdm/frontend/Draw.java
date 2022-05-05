@@ -1,6 +1,5 @@
 package dk.mtdm.frontend;
-import dk.mtdm.api.BlackJackCom;
-import dk.mtdm.api.CurrentData;
+import dk.mtdm.controller.*;
 import dk.mtdm.backend.BlackJack.Table;
 
 import javax.swing.*;

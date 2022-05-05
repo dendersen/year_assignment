@@ -24,7 +24,7 @@ public class Main {
                 System.out.println("how many players will be in the game");
                 // Scanner playerNumber = new Scanner(System.in);
                 byte number = scan.nextByte();
-                WarAPI.main(number);
+                Warcontroller.main(number);
                 break;
               
             } catch(InputMismatchException e){
