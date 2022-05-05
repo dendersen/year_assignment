@@ -10,7 +10,9 @@ import java.io.FileNotFoundException;
 
 public class PlayerHandObject {
   private ArrayList<CardObject> hand = new ArrayList<CardObject>();
+  private ArrayList<CardObject> hand2 = new ArrayList<CardObject>();
   public boolean IS_AI;
+  public boolean IS_ALIVE = true;
   
   
   public PlayerHandObject() {
@@ -98,5 +100,19 @@ public class PlayerHandObject {
           hand.add(card);
         }
       }
+  }
+
+  public void addToDiscard(CardObject card) {
+    hand2.add(card);
+  }
+
+  public CardObject[] emptyDiscard(){
+    int amount = hand2.size();
+    
+    CardObject[] cards = new CardObject [amount];
+    for (byte i = 0; i < amount ; i++){
+      cards[i] = hand2.remove(0);
+    }
+    return(cards);
   }
 }

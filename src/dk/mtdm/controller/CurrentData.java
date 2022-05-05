@@ -1,4 +1,4 @@
-package dk.mtdm.api;
+package dk.mtdm.controller;
 
 import dk.mtdm.backend.BlackJack.Table;
 
