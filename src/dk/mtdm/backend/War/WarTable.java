@@ -30,13 +30,11 @@ public class WarTable {
       for (Integer start = 0; start < NUMBER_OF_CARDS * 4; start++){//scrambles deck
         int scramble = start % NUMBER_OF_CARDS;
         
-        for(byte i = 0; i < NUMBER_OF_CARDS*4; i++){
-          CardObject temp = Deck.remove(scramble);
-          int k = (int) (Math.random() * NUMBER_OF_CARDS);
-          if(k < 0)
-          k = (int) (k * -1);
-          Deck.add(k % NUMBER_OF_CARDS, temp);
-        }
+        CardObject temp = Deck.remove(scramble);
+        int k = (int) (Math.random() * NUMBER_OF_CARDS);
+        if(k < 0)
+        k = (int) (k * -1);
+        Deck.add((k % NUMBER_OF_CARDS) - 1, temp);
       }
       
       for (byte i = 0; i > NUMBER_OF_PLAYERS; i++){

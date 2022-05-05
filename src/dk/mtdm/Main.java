@@ -1,4 +1,5 @@
 package dk.mtdm;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dk.mtdm.api.BlackJackCom;
@@ -16,12 +17,25 @@ public class Main {
       boolean game = false;
       try (Scanner scan = new Scanner(System.in)) {
         String string = scan.nextLine();
-        switch (string) {
+        switch (string.toLowerCase()) {
           case "war":
-          WarAPI.main((byte) 1);
+          while (true){
+            try{
+                System.out.println("how many players will be in the game");
+                // Scanner playerNumber = new Scanner(System.in);
+                byte number = scan.nextByte();
+                WarAPI.main(number);
+                break;
+              
+            } catch(InputMismatchException e){
+              System.out.println(e);
+              System.out.println("please only use whole numbers");
+            }
+          }
           break;
           
           case "":
+          case "blackjack":
           BlackJack();
           System.out.println("game finished");
           game = true;
