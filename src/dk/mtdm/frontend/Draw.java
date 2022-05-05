@@ -83,9 +83,9 @@ public class Draw extends JFrame {
         public void paint(Graphics G) {
             g = G;
             setBackground(new Color(52, 166, 0));
-            dealerShow(0);
+            playerDraw(0);
             playerDraw(1);
-            if (flip == true) {
+            if (flip) {
                 showHiden();
             }
             System.out.println("Canvas Reloaded");
@@ -99,15 +99,15 @@ public class Draw extends JFrame {
    */
     public static void buttons(CurrentData data) {
         Trans = data;
-        if (Trans.AVAILABLE_ACTIONS[1]) {
+        if (Trans.AVAILABLE_ACTIONS[0]) {
             hit.setVisible(true);
             // laver en knap til hit
         }
-        if (Trans.AVAILABLE_ACTIONS[2]){
+        if (Trans.AVAILABLE_ACTIONS[1]){
             // laver en knap til stand
             stand.setVisible(true);
         }
-        if (data.AVAILABLE_ACTIONS[3]) {
+        if (data.AVAILABLE_ACTIONS[2]) {
             // laver en knap til hit men man kan ikke dø
             hit.setVisible(true);
         }
@@ -146,29 +146,28 @@ public class Draw extends JFrame {
         }
     }
 
-    public static void dealerShow(int id){
-        try {
-            Cards.get(2*id).show(g,true);
-            Cards.get(2*id+1).show(g,true);
-        } catch (Exception e) {
-            System.out.println("dealerShow() failed");
-            System.out.println("Table not created, try run player()");
-        }
-
-    }
-
     /**
      * @param id shows players cards, based on they id
      */
     public static void playerDraw(int id) {
-        try {
-
-            Cards.get(2*id).show(g,false);
-            Cards.get(2*id+1).show(g,false);
-        } catch (Exception e) {
-            System.out.println("playerDraw() failed");
-        System.out.println("Table not created, try run player()");
+        if (id == 0) {
+            try {
+                Cards.get(2*id).show(g,true);
+                Cards.get(2*id+1).show(g,true);
+            } catch (Exception e) {
+                System.out.println("playerDraw() failed");
+                System.out.println("Table not created, try run player()");
+            }
+        } else {
+            try {
+                Cards.get(2*id).show(g,false);
+                Cards.get(2*id+1).show(g,false);
+            } catch (Exception e) {
+                System.out.println("playerDraw() failed");
+                System.out.println("Table not created, try run player()");
+            }
         }
+
 
 
     }
