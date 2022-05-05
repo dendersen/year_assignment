@@ -75,9 +75,9 @@ public class WarTable {
   }
 
   static public void shuffle(byte playerID){
-    byte availableCards = (byte) (players.get(playerID).getHand().size());
+    byte availableCards = (byte) (players.get(playerID).getHand().size()-1);
     for(byte i = 0; i < players.get(playerID).getHand().size()*4; i++){
-      CardObject temp = players.get(playerID).getHand().remove(i);
+      CardObject temp = players.get(playerID).getHand().remove(i % availableCards);
       int scramble = (int) (Math.random() * availableCards);
       if(scramble < 0)
       scramble = (int) (scramble * -1);

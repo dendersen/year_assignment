@@ -29,6 +29,7 @@ public class Main {
               
             } catch(InputMismatchException e){
               System.out.println(e);
+              System.out.println("input mismatch");
               System.out.println("please only use whole numbers");
             }
           }
