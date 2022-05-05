@@ -2,8 +2,8 @@ package dk.mtdm;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import dk.mtdm.api.BlackJackCom;
-import dk.mtdm.backend.War.WarAPI;
+import dk.mtdm.backend.War.Warcontroller;
+import dk.mtdm.controller.BlackJackCom;
 
 
 public class Main {
