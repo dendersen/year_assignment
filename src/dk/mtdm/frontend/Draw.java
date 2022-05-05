@@ -25,7 +25,7 @@ public class Draw extends JFrame {
         setLayout(new BorderLayout());
         setSize(width+10,height+33);
         setTitle("Black Jack");
-        ImageIcon icon = new ImageIcon("src/dk/mtdm/frontend/icons/sort_es.png");
+        ImageIcon icon = new ImageIcon("src/dk/mtdm/frontend/icons/pk_icon.png");
         setIconImage(icon.getImage());
         hit = new JButton("Hit");
         hit.setBounds(100,100,100,100);
