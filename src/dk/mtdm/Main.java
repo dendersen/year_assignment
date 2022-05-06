@@ -24,6 +24,8 @@ public class Main {
                 System.out.println("how many players will be in the game");
                 // Scanner playerNumber = new Scanner(System.in);
                 byte number = scan.nextByte();
+                scan.nextLine();
+                scan.close();
                 Warcontroller.main(number);
                 break;
               
