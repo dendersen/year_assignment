@@ -53,27 +53,33 @@ public class Warcontroller {
   private static boolean pickCard() {
     boolean action = true;
     while (true){
-    Scanner scan = new Scanner(System.in);
-    boolean succes = false;
-    String  string = scan.next();
-    if(string.contains("1") && !string.contains("2")){
-      succes = true;
-      action = true;
-    }else if (!string.contains("1") && string.contains("2")){
-      succes = true;
-      action = false;
+      String  string;
+      boolean succes = false;
+      try {
+        Scanner scan = new Scanner(System.in);
+        string = scan.nextLine();
+        scan.close();
+        if(string.contains("1") && !string.contains("2")){
+          succes = true;
+          action = true;
+        }else if (!string.contains("1") && string.contains("2")){
+          succes = true;
+          action = false;
+        }
+        if(succes){
+          System.out.println("accepted");
+          System.out.println("choice accepted: " + string + "\n\n");
+          break;
+        }
+        scan.close();
+        System.out.println("please use \" 1 \" or \" 2 \" to select the first or second card");
+      } catch (Exception e) {
+        System.out.println("something went wrong");
+        System.out.println(e);
+      }
+      }
+      return action;
     }
-    if(succes){
-      System.out.println("accepted");
-      scan.close();
-      System.out.println("choice accepted: " + string + "\n\n");
-      break;
-    }
-    scan.close();
-    System.out.println("please use \" 1 \" or \" 2 \" to select the first or second card");
-    }
-    return action;
-  }
 
   private static String translate(String names){
     String name;
