@@ -39,7 +39,7 @@ public class Table {
     this.NUMBER_OF_CARDS = NUMBER_OF_SYMBOLS * MAX_CARD_VALUE * NUMBER_OF_SETS;
   }
   
-  public void TableSetup(){ //necessary code for creating a Table
+  public void TableSetup(byte numberOfAI){ //necessary code for creating a Table
     for(byte l = 1; l <= NUMBER_OF_SETS; l++){
       for(byte i = 1; i <= NUMBER_OF_SYMBOLS; i++){ //creates deck
         for(byte j= 1; j <= MAX_CARD_VALUE; j++){
@@ -61,6 +61,7 @@ public class Table {
     
     initialSave();
 
+    setupAI(numberOfAI);
     
     System.out.println("Table setup done");
   }
@@ -237,5 +238,11 @@ public class Table {
     }
     
     return(currentPlayer);
+  }
+
+  private static void setupAI(byte numberOfAI){
+    for(byte i = 0; i < numberOfAI; i++){
+      //missing some ai code
+    }
   }
 }

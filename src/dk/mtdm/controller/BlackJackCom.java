@@ -9,9 +9,9 @@ public class BlackJackCom {
   static Table table;
   static Draw draw;
 
-  public BlackJackCom(byte numberOfPlayers) {
-    table = new Table(numberOfPlayers, (byte) (1));
-    table.TableSetup();
+  public BlackJackCom(byte numberOfPlayers, byte numberOfSets, byte numberOfAI) {
+    table = new Table(numberOfPlayers, numberOfSets);
+    table.TableSetup(numberOfAI);
     draw = new Draw();
     Draw.player();
   }
