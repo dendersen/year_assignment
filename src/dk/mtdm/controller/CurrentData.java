@@ -3,7 +3,7 @@ package dk.mtdm.controller;
 import dk.mtdm.backend.BlackJack.Table;
 
 public class CurrentData {
-  public byte playerID;
+  public final byte playerID;
   public boolean[] AVAILABLE_ACTIONS;
   public boolean action;
 
