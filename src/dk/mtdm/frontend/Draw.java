@@ -32,7 +32,9 @@ public class Draw extends JFrame {
         add(hit);
         hit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            Trans.setAction(true);
+                System.out.println("hit");
+                Trans.setAction(true);
+                returnBtn();
             }
         } );
 
@@ -41,7 +43,9 @@ public class Draw extends JFrame {
         add(stand);
         stand.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("stand");
                 Trans.setAction(false);
+                returnBtn();
             }
         } );
         MyCanvas canvas = new MyCanvas();
