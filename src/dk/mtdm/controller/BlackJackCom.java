@@ -31,24 +31,34 @@ public class BlackJackCom {
    * @param data the curent game data that is used to run the game
    */
   public static void theGame(CurrentData data){
-    byte currentPlayer = data.playerID;
-    if(data.action){
-      BlackJackProcessing.hit(data.playerID, false);
-      if(!BlackJackProcessing.isAlive(data.playerID)){
+    if(Table.getPlayer(data.playerID).IS_AI){
+      performAction(data.playerID, data.action);
+    }
+    else{
+      boolean action = Table.getPlayer(data.playerID).aiAction();
+      performAction(data.playerID, action);
+    }
+  }
+
+  private static void performAction(byte playerID, boolean action) {
+    byte currentPlayer = playerID;
+    if(action){
+      BlackJackProcessing.hit(playerID, false);
+      if(!BlackJackProcessing.isAlive(playerID)){
         currentPlayer++;
       }
     }else {
       currentPlayer++;
     }
-    if(currentPlayer != data.playerID){
+    if(currentPlayer != playerID){
       if(currentPlayer >= Table.NUMBER_OF_PLAYERS) currentPlayer = 0;
     }
     boolean done = false;
-    if(data.playerID == 0 && currentPlayer != data.playerID){
+    if(playerID == 0 && currentPlayer != playerID){
       done = true;
     }
     if(!done){
-      CurrentData transfer = new CurrentData(currentPlayer);
+      CurrentData transfer = new CurrentData(currentPlayer); // impliment some dealer code
       Draw.buttons(transfer);
     } else {
       Draw.winner(BlackJackProcessing.winnerID());
