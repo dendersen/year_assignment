@@ -241,8 +241,24 @@ public class Table {
   }
 
   private static void setupAI(byte numberOfAI){
-    for(byte i = 0; i < numberOfAI; i++){
-      //missing some ai code
+    for(byte playerID = (byte) (NUMBER_OF_PLAYERS-1); playerID < numberOfAI; playerID--){
+      getPlayer(playerID).IS_AI = true;
+      try {
+        byte dare = (byte) (Math.random()*200-100);
+        System.out.println(playerID + " is an ai with dareLevel of: " + dare);
+        getPlayer(playerID).implimentAI(new AI(dare, playerID));
+      }
+      catch (Exception e){
+        System.out.println("error in ai setup");
+        System.out.println(e);
+      };
+    }
+    getPlayer((byte) 0).IS_AI = true;
+    try {
+      getPlayer((byte) 0).implimentAI(new AI((byte)123, (byte)0));
+    } catch (Exception e) {
+      System.out.println("failed to impliment dealer ai");
+      System.out.println(e);
     }
   }
 }

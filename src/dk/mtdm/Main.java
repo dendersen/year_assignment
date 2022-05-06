@@ -58,7 +58,7 @@ public class Main {
   }
 
   private static void BlackJack(){
-    new BlackJackCom((byte) 2);
+    new BlackJackCom((byte) 2,(byte) 1, (byte) 1);
     BlackJackCom.main();
   }
 }

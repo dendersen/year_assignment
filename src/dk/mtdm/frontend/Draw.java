@@ -159,6 +159,7 @@ public class Draw extends JFrame {
             } catch (Exception e) {
                 System.out.println("playerDraw() failed");
                 System.out.println("Table not created, try run player()");
+                System.out.println(e);
             }
         } else {
             try {
@@ -167,6 +168,7 @@ public class Draw extends JFrame {
             } catch (Exception e) {
                 System.out.println("playerDraw() failed");
                 System.out.println("Table not created, try run player()");
+                System.out.println(e);
             }
         }
 

@@ -11,7 +11,7 @@ public class AI {
   final boolean IsDealer;
   /**
    * 
-   * @param dareLevel a value between -100 and 100 that secides how daring the ai is. -100 rarely ever plays something that could be dangeruse 100 almost always plays a card. if equal to 123 it will be dealer
+   * @param dareLevel a value between -100 and 100 that decides how daring the ai is. -100 rarely ever plays something that could be dangeruse 100 almost always plays a card. if equal to 123 it will be dealer
    * @throws Exception throws if dareLevel is out of range
    */
   public AI(byte dareLevel,byte playerID) throws Exception {
@@ -19,10 +19,10 @@ public class AI {
       this.IsDealer = true;
     }else {
       this.IsDealer = false;
-      if(dareLevel > 100){
+      if(dareLevel >= 100){
         throw new Exception("dare level above range");
       }
-      if(dareLevel < 100){
+      if(dareLevel <= -100){
         throw new Exception("dare level below range");
       }
     }
