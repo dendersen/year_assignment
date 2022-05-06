@@ -157,8 +157,6 @@ public class Table {
     return Table.getPlayer(playerID).getHand().get(cardNumber).getSymbolString();
   }
 
-
-
   public static String cardNumberString (byte playerID, byte cardNumber){
     return Table.getPlayer(playerID).getHand().get(cardNumber).getNumberString();
   }
