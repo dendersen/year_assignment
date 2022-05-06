@@ -13,7 +13,7 @@ public class PlayerHandObject {
   private ArrayList<CardObject> hand2 = new ArrayList<CardObject>();
   public boolean IS_AI;
   public boolean IS_ALIVE = true;
-  
+  private AI ai;
   
   public PlayerHandObject() {
     this.IS_AI = false;
@@ -114,5 +114,13 @@ public class PlayerHandObject {
       cards[i] = hand2.remove(0);
     }
     return(cards);
+  }
+
+  public void implimentAI(AI ai){
+    this.ai = ai;
+  }
+
+  public boolean aiAction(){
+    return(ai.action());
   }
 }
