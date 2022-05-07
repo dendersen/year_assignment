@@ -97,7 +97,7 @@ public class Main {
   }
 
   private static void BlackJack(byte numberOfHumans, byte numberOfAI, byte numberOfCardSets){
-    new BlackJackCom((byte) 2,(byte) 1, (byte) 0);
+    new BlackJackCom(numberOfHumans,numberOfCardSets, numberOfAI);
     BlackJackCom.main();
   }
 }
