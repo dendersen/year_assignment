@@ -15,6 +15,7 @@ public class Main {
   private static void choose(){
     while (true) {
       boolean game = false;
+      System.out.println("what game shall we play today?");
       try (Scanner scan = new Scanner(System.in)) {
         String string = scan.nextLine();
         switch (string.toLowerCase()) {
