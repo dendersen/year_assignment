@@ -2,6 +2,8 @@ package dk.mtdm;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import org.xml.sax.SAXException;
+
 import dk.mtdm.backend.War.Warcontroller;
 import dk.mtdm.controller.BlackJackCom;
 
@@ -40,15 +42,50 @@ public class Main {
           
           case "":
           case "blackjack":
-          BlackJack();
-          System.out.println("game finished");
+          while (true){
+            try{
+            System.out.println("how many humans will be in the game?");
+            byte human = scan.nextByte();
+            scan.nextLine();
+            System.out.println("how many ai will be in the game?");
+            byte ai = scan.nextByte();
+            scan.nextLine();
+            System.out.println("how many sets of playing cards will be in the game?");
+            byte cards = scan.nextByte();
+            scan.nextLine();
+            BlackJack(human, ai, cards);
+            break;
+            } catch (Exception e){
+              System.out.println("something went wrong");
+              System.out.println(e);
+              e.printStackTrace();
+            }
+          }
           game = true;
           break;
           
           default:
             System.out.println("this game is not supportet");
             System.out.println("let's play blackJack instead");
-            BlackJack();
+            while (true){
+              try{
+              System.out.println("how many humans will be in the game?");
+              byte human = scan.nextByte();
+              scan.nextLine();
+              System.out.println("how many ai will be in the game?");
+              byte ai = scan.nextByte();
+              scan.nextLine();
+              System.out.println("how many sets of playing cards will be in the game?");
+              byte cards = scan.nextByte();
+              scan.nextLine();
+              BlackJack(human, ai, cards);
+              break;
+              } catch (Exception e){
+                System.out.println("something went wrong");
+                System.out.println(e);
+                e.printStackTrace();
+              }
+            }
             game = true;
             break;
         }
@@ -56,9 +93,10 @@ public class Main {
       if(game)
       break;
     }
+    System.out.println("game finished");
   }
 
-  private static void BlackJack(){
+  private static void BlackJack(byte numberOfHumans, byte numberOfAI, byte numberOfCardSets){
     new BlackJackCom((byte) 2,(byte) 1, (byte) 0);
     BlackJackCom.main();
   }
