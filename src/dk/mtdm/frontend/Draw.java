@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static dk.mtdm.frontend.Draw.MyCanvas.g;
 
@@ -81,12 +83,15 @@ public class Draw extends JFrame {
         }
         public static Graphics g;
 
+
         @Override
         public void paint(Graphics G) {
             g = G;
             setBackground(new Color(52, 166, 0));
-            playerDraw(0);
-            playerDraw(1);
+            int[] test = {0,1};
+            int[] test1 = {0,1};
+            playerDraw(test,true);
+            playerDraw(test1,false);
             if (flip) {
                 showHiden();
             }
@@ -122,6 +127,7 @@ public class Draw extends JFrame {
 
 
     private static final ArrayList<card> Cards = new ArrayList<card>();
+    private static final ArrayList<card> Player = new ArrayList<card>();
     public static void player() {
         if(!Cards.isEmpty()) {
             return;
@@ -149,31 +155,33 @@ public class Draw extends JFrame {
     }
 
     /**
-     * @param id shows players cards, based on they id
+     * @param range shows players cards, based on they range
+     * @param dealer
      */
-    public static void playerDraw(int id) {
-        if (id == 0) {
-            try {
-                Cards.get(2*id).show(g,true);
-                Cards.get(2*id+1).show(g,true);
-            } catch (Exception e) {
-                System.out.println("playerDraw() failed");
-                System.out.println("Table not created, try run player()");
-                System.out.println(e);
-            }
-        } else {
-            try {
-                Cards.get(2*id).show(g,false);
-                Cards.get(2*id+1).show(g,false);
-            } catch (Exception e) {
-                System.out.println("playerDraw() failed");
-                System.out.println("Table not created, try run player()");
-                System.out.println(e);
-            }
+    public static void playerDraw(int[] range, boolean dealer) {
+
+        for (int i = 0; i < range.length; i++) {
+            Cards.get(i).show(g, dealer, List.of(range).indexOf(i), range.length);
         }
-
-
-
+//        if (id == 0) {
+//            try {
+//                Cards.get(0).show(g,true);
+//                Cards.get(1).show(g,true);
+//            } catch (Exception e) {
+//                System.out.println("playerDraw() failed");
+//                System.out.println("Table not created, try run player()");
+//                throw (e);
+//            }
+//        } else {
+//            try {
+//                Cards.get(2*id).show(g,false);
+//                Cards.get(2*id+1).show(g,false);
+//            } catch (Exception e) {
+//                System.out.println("playerDraw() failed");
+//                System.out.println("Table not created, try run player()");
+//                throw (e);
+//            }
+//        }
     }
 
     public static void winner(byte winner){

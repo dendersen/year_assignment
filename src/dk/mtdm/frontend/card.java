@@ -7,8 +7,8 @@ import static dk.mtdm.frontend.Draw.height;
 import static dk.mtdm.frontend.Draw.width;
 
 public class card implements ImageObserver {
-    private int symbol;
-    private String number;
+    private final int symbol;
+    private final String number;
     private int x = 0;
     private int y = 25;
     private int w = 200;
@@ -23,30 +23,33 @@ public class card implements ImageObserver {
     card(int symbol, String number, int id){
         this.symbol = symbol;
         this.number = number;
-        this.x = 230*id; // Afstand mellem dem / afstand relative mellem 0,0
         this.id = id;
-
+        this.x = 150 * this.id; // Afstand mellem dem / afstand relative mellem 0,0
     }
 
-    public void show(Graphics g,boolean dealer) {
+    public void show(Graphics g,boolean dealer,int pos,int length) {
         this.g = g;
         this.dealer = dealer;
         if (this.dealer){
             dealerCode(true);
         } else {
-            playerCode();
+            playerCode(pos,length);
         }
     }
 
-    private void playerCode() {
-        int pathY = this.y()+height-this.h()-50;
-        int pathX = this.x() + width/2-this.w();
+    private void playerCode(int pos, int length) {
+
+//        rect(this.x + range.indexOf(this.id) * 75, this.y, this.w, this.h);
+//        rect(this.x + 25 + range.indexOf(this.id) * 75  , this.y + 50, 50, 50);
+
+        int pathX = this.x() + width / 2 - 100 * length;
+        int pathY = this.y() + height - this.h() - 50;
         g.setColor(Color.white);
         g.fillRect(pathX, pathY, this.w(), this.h());
         g.setColor(Color.black);
         g.drawRect(pathX, pathY, this.w(), this.h());
-        pathX = this.x() + this.w() / 2-64 + width/2-this.w();
-        pathY = this.y()+height-this.h()/2-30-16;
+        pathX = this.x() + width / 2 + 32 - 100 * length;
+        pathY = this.y() + height - this.h() / 2 - 30 - 16;
         switch (this.symbol) {
             case 1 -> {
                 Image hjerter = new ImageIcon(path + "hjerter.png").getImage();
@@ -75,7 +78,7 @@ public class card implements ImageObserver {
                 } else {
                     Kongen = new ImageIcon(path + "sort_konge.png").getImage();
                 }
-                g.drawImage(Kongen, this.x()+width/2-this.w()/2-64, this.y()+height/2+this.h()/2-64-10, this);
+                g.drawImage(Kongen, pathX, this.y()+height/2+this.h()/2-64-10, this);
             }
             case "D" -> {
                 Image Dronning;
@@ -84,7 +87,7 @@ public class card implements ImageObserver {
                 } else {
                     Dronning = new ImageIcon(path + "sort_dronning.png").getImage();
                 }
-                g.drawImage(Dronning, this.x()+width/2-this.w()/2-64, this.y()+height/2+this.h()/2-64-10, this);
+                g.drawImage(Dronning, pathX, this.y()+height/2+this.h()/2-64-10, this);
             }
             case "B" -> {
                 Image Bonde;
@@ -93,7 +96,7 @@ public class card implements ImageObserver {
                 } else {
                     Bonde = new ImageIcon(path + "sort_bonde.png").getImage();
                 }
-                g.drawImage(Bonde, this.x()+width/2-this.w()/2-64, this.y()+height/2+this.h()/2-64-10, this);
+                g.drawImage(Bonde, pathX, this.y()+height/2+this.h()/2-64-10, this);
             }
             case "A" -> {
                 Image Es;
@@ -102,10 +105,10 @@ public class card implements ImageObserver {
                 } else {
                     Es = new ImageIcon(path + "sort_es.png").getImage();
                 }
-                g.drawImage(Es, this.x()+width/2-this.w()/2-64, this.y()+height/2+this.h()/2-64-10, this);
-            }
-            default -> {
-                g.drawString(this.number,this.x()+width/2-this.w()/2-36,this.y()+height/2+this.h()/2+32);
+                g.drawImage(Es, pathX, this.y()+height/2+this.h()/2-64-10, this);
+            } //64
+            default -> {//36
+                g.drawString(this.number,pathX+18,this.y()+height/2+this.h()/2+32);
             }
         }
     }
@@ -132,6 +135,7 @@ public class card implements ImageObserver {
             DrawCard(path ,false);
         }
     }
+
 
     private void DrawCard(String path, boolean hide) {
         g.setColor(Color.white);
@@ -163,6 +167,7 @@ public class card implements ImageObserver {
                 g.drawImage(spar, simpX, simpY, this);
             }
         }
+
         g.setFont(new Font("consolas", Font.BOLD, 128));
         switch (this.number) {
             case "K" -> {

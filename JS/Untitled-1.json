@@ -1,0 +1,28 @@
+{
+  "player": [
+    {
+      "deck": [
+        {
+          "symbol": "spar",
+          "number": 2
+        },
+        {
+          "symbol": "spar",
+          "number": 5
+        }
+      ]
+    },
+    {
+      "deck": [
+        {
+          "symbol": "klor",
+          "number": 4
+        },
+        {
+          "symbol": "klor",
+          "number": 9
+        }
+      ]
+    }
+  ]
+}
