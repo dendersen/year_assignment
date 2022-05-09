@@ -2,8 +2,6 @@ package dk.mtdm;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import org.xml.sax.SAXException;
-
 import dk.mtdm.backend.War.Warcontroller;
 import dk.mtdm.controller.BlackJackCom;
 
@@ -36,6 +34,7 @@ public class Main {
               System.out.println(e);
               System.out.println("input mismatch");
               System.out.println("please only use whole numbers");
+              scan.nextLine();
             }
           }
           break;
@@ -59,6 +58,7 @@ public class Main {
               System.out.println("something went wrong");
               System.out.println(e);
               e.printStackTrace();
+              scan.nextLine();
             }
           }
           game = true;
@@ -84,6 +84,7 @@ public class Main {
                 System.out.println("something went wrong");
                 System.out.println(e);
                 e.printStackTrace();
+                scan.nextLine();
               }
             }
             game = true;

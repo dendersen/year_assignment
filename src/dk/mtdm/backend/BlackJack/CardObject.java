@@ -83,7 +83,6 @@ public class CardObject {
       case 13:
       string = "K";
       break;
-
     }
     return string;
   }

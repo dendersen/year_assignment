@@ -55,8 +55,8 @@ public class Warcontroller {
     while (true){
       String  string;
       boolean succes = false;
+      Scanner scan = new Scanner(System.in);
       try {
-        Scanner scan = new Scanner(System.in);
         string = scan.nextLine();
         scan.close();
         if(string.contains("1") && !string.contains("2")){
@@ -76,6 +76,7 @@ public class Warcontroller {
       } catch (Exception e) {
         System.out.println("something went wrong");
         System.out.println(e);
+        scan.nextLine();
       }
       }
       return action;
@@ -138,12 +139,15 @@ public class Warcontroller {
   private static void NewGame() {
     try (Scanner reply = new Scanner(System.in)) {
       if(reply.nextLine().contains("yes")){
+
         while(true){
           try {
-            try(Scanner reply2 = new Scanner(System.in)){
+            Scanner reply2 = new Scanner(System.in);
               main(reply2.nextByte());
+              reply2.nextLine();
+              reply2.close();
+              
               break;
-            }
           } catch (Exception e) {
             System.out.println("please only use numbers");
           }

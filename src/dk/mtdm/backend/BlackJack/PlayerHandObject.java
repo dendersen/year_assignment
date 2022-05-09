@@ -13,7 +13,7 @@ public class PlayerHandObject {
   private ArrayList<CardObject> hand2 = new ArrayList<CardObject>();
   public boolean IS_AI = false;
   public boolean IS_ALIVE = true;
-  private AI ai;
+  public AI ai;
 
   public void addCard(CardObject card){
     hand.add(card);
