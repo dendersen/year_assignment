@@ -22,6 +22,7 @@ public class Draw extends JFrame {
 
     private static JButton flipBTN;
     private static boolean flip;
+    private boolean show = true;
 
     public Draw() {
         setLayout(new BorderLayout());
@@ -37,6 +38,9 @@ public class Draw extends JFrame {
                 System.out.println("hit");
                 Trans.setAction(true);
                 returnBtn();
+                hit.setVisible(false);
+                stand.setVisible(false);
+                repaint();
             }
         } );
 
@@ -48,21 +52,24 @@ public class Draw extends JFrame {
                 System.out.println("stand");
                 Trans.setAction(false);
                 returnBtn();
+                stand.setVisible(false);
+                hit.setVisible(false);
+                repaint();
             }
         } );
         MyCanvas canvas = new MyCanvas();
 
 
-        flipBTN = new JButton("Flip");
-        flipBTN.setBounds(width / 2-50,height / 2-50,100,100);
-        add(flipBTN);
-        flipBTN.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                flip = !flip;
-                repaint();
-            }
-        } );
+//        flipBTN = new JButton("Flip");
+//        flipBTN.setBounds(width / 2-50,height / 2-50,100,100);
+//        add(flipBTN);
+//        flipBTN.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                flip = !flip;
+//                repaint();
+//            }
+//        } );
 
 
         add("Center", canvas);
@@ -73,8 +80,6 @@ public class Draw extends JFrame {
 
         setLayout(null);
         setVisible(true);
-        hit.setVisible(false);
-        stand.setVisible(false);
     }
 
     static class MyCanvas extends JPanel {
@@ -96,9 +101,9 @@ public class Draw extends JFrame {
                 showHiden();
             }
             System.out.println("Canvas Reloaded");
-
         }
     }
+
 
 
     /**
