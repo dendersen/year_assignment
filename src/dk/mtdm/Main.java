@@ -3,7 +3,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dk.mtdm.backend.War.Warcontroller;
-import dk.mtdm.controller.BlackJackCom;
+import dk.mtdm.controller.BlackJackController;
 
 
 public class Main {
@@ -20,75 +20,19 @@ public class Main {
         String string = scan.nextLine();
         switch (string.toLowerCase()) {
           case "war":
-          while (true){
-            try{
-                System.out.println("how many players will be in the game");
-                // Scanner playerNumber = new Scanner(System.in);
-                byte number = scan.nextByte();
-                scan.nextLine();
-                scan.close();
-                Warcontroller.main(number);
-                break;
-              
-            } catch(InputMismatchException e){
-              System.out.println(e);
-              System.out.println("input mismatch");
-              System.out.println("please only use whole numbers");
-              scan.nextLine();
-            }
-          }
+            startWar(scan);
           break;
           
           case "":
           case "blackjack":
-          while (true){
-            try{
-            System.out.println("how many humans will be in the game?");
-            byte human = scan.nextByte();
-            scan.nextLine();
-            System.out.println("how many ai will be in the game?");
-            byte ai = scan.nextByte();
-            scan.nextLine();
-            System.out.println("how many sets of playing cards will be in the game?");
-            byte cards = scan.nextByte();
-            scan.nextLine();
-            BlackJack(human, ai, cards);
-            break;
-            } catch (Exception e){
-              System.out.println("something went wrong");
-              System.out.println(e);
-              e.printStackTrace();
-              scan.nextLine();
-            }
-          }
-          game = true;
+            game = BlackJackStart(scan);
           break;
           
           default:
             System.out.println("this game is not supportet");
             System.out.println("let's play blackJack instead");
-            while (true){
-              try{
-              System.out.println("how many humans will be in the game?");
-              byte human = scan.nextByte();
-              scan.nextLine();
-              System.out.println("how many ai will be in the game?");
-              byte ai = scan.nextByte();
-              scan.nextLine();
-              System.out.println("how many sets of playing cards will be in the game?");
-              byte cards = scan.nextByte();
-              scan.nextLine();
-              BlackJack(human, ai, cards);
-              break;
-              } catch (Exception e){
-                System.out.println("something went wrong");
-                System.out.println(e);
-                e.printStackTrace();
-                scan.nextLine();
-              }
-            }
-            game = true;
-            break;
+            game = BlackJackStart(scan);
+          break;
         }
       }
       if(game)
@@ -97,8 +41,54 @@ public class Main {
     System.out.println("game finished");
   }
 
+  private static boolean BlackJackStart(Scanner scan) {
+    boolean game;
+    while (true){
+      try{
+      System.out.println("how many humans will be in the game?");
+      byte human = scan.nextByte();
+      scan.nextLine();
+      System.out.println("how many ai will be in the game?");
+      byte ai = scan.nextByte();
+      scan.nextLine();
+      System.out.println("how many sets of playing cards will be in the game?");
+      byte cards = scan.nextByte();
+      scan.nextLine();
+      BlackJack(human, ai, cards);
+      scan.close();
+      break;
+      } catch (Exception e){
+        System.out.println("something went wrong");
+        System.out.println(e);
+        e.printStackTrace();
+        scan.nextLine();
+      }
+    }
+    game = true;
+    return game;
+  }
+
+  private static void startWar(Scanner scan) {
+    while (true){
+      try{
+          System.out.println("how many players will be in the game");
+          // Scanner playerNumber = new Scanner(System.in);
+          byte number = scan.nextByte();
+          scan.nextLine();
+          Warcontroller.main(number, scan);
+          break;
+        
+      } catch(InputMismatchException e){
+        System.out.println(e);
+        System.out.println("input mismatch");
+        System.out.println("please only use whole numbers");
+        scan.nextLine();
+      }
+    }
+  }
+
   private static void BlackJack(byte numberOfHumans, byte numberOfAI, byte numberOfCardSets){
-    new BlackJackCom(numberOfHumans,numberOfCardSets, numberOfAI);
-    BlackJackCom.main();
+    new BlackJackController(numberOfHumans,numberOfCardSets, numberOfAI);
+    BlackJackController.main();
   }
 }

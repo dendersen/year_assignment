@@ -127,7 +127,7 @@ public class Draw extends JFrame {
     }
 
     public static void returnBtn(){
-        BlackJackCom.theGame(Trans);
+        BlackJackController.theGame(Trans);
     }
 
 
