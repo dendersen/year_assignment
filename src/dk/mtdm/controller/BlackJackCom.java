@@ -13,7 +13,6 @@ public class BlackJackCom {
     table = new Table((byte)(numberOfPlayers+numberOfAI), numberOfSets);
     table.TableSetup(numberOfAI);
     draw = new Draw();
-    Draw.player();
   }
 
   public static void main (){
