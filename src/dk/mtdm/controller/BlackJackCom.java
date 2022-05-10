@@ -24,10 +24,21 @@ public class BlackJackCom {
     CurrentData transfer = new CurrentData((byte) 1);
     if(!Table.getPlayer(transfer.playerID).IS_AI){
       System.out.println("draw buttons");
+      Draw.playerDraw(Table.getPlayer(transfer.playerID), false);
       Draw.buttons(transfer);
       }
     else{
       System.out.println("don't draw buttons");
+      if(transfer.playerID == 0){
+      Draw.playerDraw(Table.getPlayer((byte) 0), true);
+      }else{
+      Draw.playerDraw(Table.getPlayer(transfer.playerID), false);
+      }
+      try {
+        Thread.sleep(200);
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
       theGame(transfer);
     }
   }
