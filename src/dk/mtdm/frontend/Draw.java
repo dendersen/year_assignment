@@ -1,4 +1,5 @@
 package dk.mtdm.frontend;
+import dk.mtdm.backend.BlackJack.PlayerHandObject;
 import dk.mtdm.controller.*;
 import dk.mtdm.backend.BlackJack.Table;
 
@@ -95,8 +96,8 @@ public class Draw extends JFrame {
             setBackground(new Color(52, 166, 0));
             int[] test = {0,1};
             int[] test1 = {0,1};
-            playerDraw(test,true);
-            playerDraw(test1,false);
+//            playerDraw(test,true);
+//            playerDraw(test1,false);
             if (flip) {
                 showHiden();
             }
@@ -163,11 +164,20 @@ public class Draw extends JFrame {
      * @param range shows players cards, based on they range
      * @param dealer
      */
-    public static void playerDraw(int[] range, boolean dealer) {
+    public static void playerDraw(PlayerHandObject range, boolean dealer) {
+        throw new NullPointerException("playerDraw is in WIP");
+//        range.gethand(): {
+//            "getSymbol" "E",
+//            "getNumber": 3
+//        },
+//        {
+//            "getSymbol" "E",
+//           "getNumber": 3
+//        },
 
-        for (int i = 0; i < range.length; i++) {
-            Cards.get(i).show(g, dealer, List.of(range).indexOf(i), range.length);
-        }
+//        for (int i = 0; i < range.length; i++) {
+//            Cards.get(i).show(g, dealer, List.of(range).indexOf(i), range.length);
+//        }
 //        if (id == 0) {
 //            try {
 //                Cards.get(0).show(g,true);
