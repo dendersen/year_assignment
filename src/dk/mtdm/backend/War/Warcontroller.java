@@ -6,7 +6,39 @@ import java.util.Scanner;
 import dk.mtdm.backend.BlackJack.CardObject;
 
 public class Warcontroller {
-  public static void main(byte numberOfPlayers) {
+
+  private static Scanner scan; 
+
+  public static void main(byte numberOfPlayers, Scanner scan) {
+    Warcontroller.scan = scan;
+    WarTable table = new WarTable(numberOfPlayers);
+    while (true){
+      for(byte playerID = 0; playerID < WarTable.NUMBER_OF_PLAYERS; playerID++){ //needs to allow for only 1 card left
+        boolean deadPlayer = false;
+
+        CardObject[] cards = WarTable.drawHand(playerID);
+        if(cards[0].getSymbol() == -1)
+          deadPlayer = true;
+        
+        if(!deadPlayer && cards.length == 2){
+          talkCard(cards,playerID);
+          boolean action = pickCard(); //true = card 1
+          
+          if(action) WarTable.playCard(cards[1],cards[0],playerID);
+          else       WarTable.playCard(cards[0],cards[1],playerID);
+        }else
+        WarTable.playCard(cards[0], cards[0], playerID);
+      }
+      tempWinner(table);
+      byte winner = checkForWinner();
+      if(winner != -1){
+        win(winner);
+        break;
+      }
+    }
+  }
+
+  public static void main2(byte numberOfPlayers) {
     WarTable table = new WarTable(numberOfPlayers);
     while (true){
       for(byte playerID = 0; playerID < WarTable.NUMBER_OF_PLAYERS; playerID++){ //needs to allow for only 1 card left
@@ -55,7 +87,6 @@ public class Warcontroller {
     while (true){
       String  string;
       boolean succes = false;
-      Scanner scan = new Scanner(System.in);
       try {
         string = scan.nextLine();
         scan.close();
@@ -137,20 +168,23 @@ public class Warcontroller {
   }
 
   private static void NewGame() {
-    try (Scanner reply = new Scanner(System.in)) {
-      if(reply.nextLine().contains("yes")){
-
-        while(true){
-          try {
-            Scanner reply2 = new Scanner(System.in);
-              main(reply2.nextByte());
-              reply2.nextLine();
-              reply2.close();
-              
-              break;
-          } catch (Exception e) {
-            System.out.println("please only use numbers");
+    if(scan.nextLine().contains("yes")){
+      while(true){
+        try {
+          if(scan.hasNextByte()){
+            main2(scan.nextByte());
+            scan.nextLine();
+            scan.close();
+          }else if(scan.hasNext()){
+            scan.next();
+          }else{
+            scan.nextLine();
           }
+          scan.nextLine();
+
+          break;
+        } catch (Exception e) {
+          System.out.println("please only use numbers");
         }
       }
     }

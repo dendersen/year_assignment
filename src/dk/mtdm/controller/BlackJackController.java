@@ -5,14 +5,19 @@ import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
 import dk.mtdm.frontend.Draw;
 
-public class BlackJackCom {
+public class BlackJackController {
   static Table table;
   static Draw draw;
 
-  public BlackJackCom(byte numberOfPlayers, byte numberOfSets, byte numberOfAI) {
+  public BlackJackController(byte numberOfPlayers, byte numberOfSets, byte numberOfAI) {
     table = new Table((byte)(numberOfPlayers+numberOfAI), numberOfSets);
     table.TableSetup(numberOfAI);
     draw = new Draw();
+    try {
+      Thread.sleep(200);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
   }
 
   public static void main (){

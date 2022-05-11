@@ -26,6 +26,7 @@ public class Table {
   static private final byte MAX_CARD_VALUE = 13;
   
   static private ArrayList <CardObject> Deck = new ArrayList<CardObject>();
+  
   /**
    * @param numberOfPlayers the number of players present in the game (1 player means only dealer)
    * @param sets the number of full card sets in play (52 cards each)
