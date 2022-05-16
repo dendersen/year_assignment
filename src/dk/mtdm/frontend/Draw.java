@@ -7,10 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
 import java.util.ArrayList;
-
-import static dk.mtdm.frontend.Draw.MyCanvas.g;
 
 public class Draw extends JFrame {
     public static final int width = 1000;
@@ -18,10 +15,6 @@ public class Draw extends JFrame {
     private static JButton hit;
     private static JButton stand;
     private static CurrentData Trans;
-
-    private static JButton flipBTN;
-    private static boolean flip;
-    private boolean show = true;
 
     public Draw() {
         setLayout(new BorderLayout());
@@ -81,31 +74,6 @@ public class Draw extends JFrame {
         setVisible(true);
     }
 
-    static class MyCanvas extends JPanel {
-        public static ImageObserver paint() {
-            return null;
-        }
-        public static Graphics g;
-
-        /**
-         * @Override
-        */
-        public void paint(Graphics G, String hello) {
-            g = G;
-            setBackground(new Color(52, 166, 0));
-            int[] test = {0,1};
-            int[] test1 = {0,1};
-            if (flip) {
-                showHiden();
-            }
-            System.out.println("Canvas Reloaded");
-            
-
-
-        }
-    }
-
-
     /**
    * @param data booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
    */
@@ -132,7 +100,6 @@ public class Draw extends JFrame {
 
 
     private static final ArrayList<card> Cards = new ArrayList<card>();
-    private static final ArrayList<card> Player = new ArrayList<card>();
     public static void player() {
         if(!Cards.isEmpty()) {
             return;
