@@ -49,7 +49,8 @@ public class Draw extends JFrame {
                 repaint();
             }
         } );
-        MyCanvas canvas = new MyCanvas();
+        MyCanvas canvas = new MyCanvas("paint");
+
 
 
 //        flipBTN = new JButton("Flip");
