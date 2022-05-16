@@ -87,7 +87,6 @@ public class Draw extends JFrame {
         }
         public static Graphics g;
 
-
         /**
          * @Override
         */
@@ -101,7 +100,7 @@ public class Draw extends JFrame {
             }
             System.out.println("Canvas Reloaded");
             
-            
+
 
         }
     }

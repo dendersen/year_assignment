@@ -30,6 +30,8 @@ public class BlackJackController {
       }
     else
       draws((byte)1, false, false);
+    
+    new Thread();
     }
 
 
