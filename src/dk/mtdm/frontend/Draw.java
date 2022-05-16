@@ -88,21 +88,23 @@ public class Draw extends JFrame {
         public static Graphics g;
 
 
-        @Override
-        public void paint(Graphics G) {
+        /**
+         * @Override
+        */
+        public void paint(Graphics G, String hello) {
             g = G;
             setBackground(new Color(52, 166, 0));
             int[] test = {0,1};
             int[] test1 = {0,1};
-//            playerDraw(test,true);
-//            playerDraw(test1,false);
             if (flip) {
                 showHiden();
             }
             System.out.println("Canvas Reloaded");
+            
+            
+
         }
     }
-
 
 
     /**
@@ -156,6 +158,10 @@ public class Draw extends JFrame {
             System.out.println("showHiden() failed");
             System.out.println("Table not created, try run player()");
         }
+    }
+
+    public static void setTransfer(CurrentData Transfer){
+        Trans = Transfer;
     }
 
     /**

@@ -25,19 +25,22 @@ public class BlackJackController {
   }
 
   private static void startGame(){
-    CurrentData transfer = new CurrentData((byte) 1);
-    if(!Table.getPlayer(transfer.playerID).IS_AI){
-      System.out.println("draw buttons");
-      Draw.playerDraw(Table.getPlayer(transfer.playerID), false);
+    if(!Table.getPlayer((byte)1).IS_AI){
+      draws((byte)1,false, true);
+      }
+    else
+      draws((byte)1, false, false);
+    }
+
+
+  public static void draws(byte playerID, boolean dealer, boolean buttons){
+    
+    CurrentData transfer = new CurrentData(playerID);
+    transfer.dealer = dealer;
+
+    if(buttons)
       Draw.buttons(transfer);
-      }
-    else{
-      System.out.println("don't draw buttons");
-      if(transfer.playerID == 0){
-      Draw.playerDraw(Table.getPlayer((byte) 0), true);
-      }else{
-      Draw.playerDraw(Table.getPlayer(transfer.playerID), false);
-      }
+    else{    
       try {
         Thread.sleep(200);
       } catch (InterruptedException e) {
@@ -47,12 +50,11 @@ public class BlackJackController {
     }
   }
 
-
   /**
    * @param data the curent game data that is used to run the game
    */
   public static void theGame(CurrentData data){
-    if(Table.getPlayer(data.playerID).IS_AI){
+    if(!Table.getPlayer(data.playerID).IS_AI){
       performAction(data.playerID, data.action);
     }
     else{
@@ -61,9 +63,12 @@ public class BlackJackController {
       action = Table.getPlayer(data.playerID).aiAction();
       }catch(Exception e){
         System.out.println(e);
+        e.printStackTrace();
       }
       performAction(data.playerID, action);
     }
+  
+  
   }
 
   private static void performAction(byte playerID, boolean action) {
@@ -71,6 +76,7 @@ public class BlackJackController {
     if(action){ //do hit and check for death
       BlackJackProcessing.hit(playerID, false);
       if(!BlackJackProcessing.isAlive(playerID)){
+        System.out.println("player dead");
         currentPlayer++;
       }
     }else { // stand and go to next player
@@ -79,15 +85,15 @@ public class BlackJackController {
     if(currentPlayer != playerID){//starts dealer
       if(currentPlayer >= Table.NUMBER_OF_PLAYERS) currentPlayer = 0;
     }
-    boolean done = false;
-    if(playerID == 0 && currentPlayer != playerID){
-      done = true;
+    
+    if(playerID != 0){
+      draws(currentPlayer,false, !Table.getPlayer(currentPlayer).IS_AI);
+    }else{
+      dealer();
     }
-    if(!done && Table.getPlayer(currentPlayer).IS_AI){
-      CurrentData transfer = new CurrentData(currentPlayer); // impliment some dealer code
-      Draw.buttons(transfer);
-    } else if(!Table.getPlayer(currentPlayer).IS_AI){
-      Draw.winner(BlackJackProcessing.winnerID());
-    }
+  }
+
+  public static void dealer(){
+    
   }
 }
