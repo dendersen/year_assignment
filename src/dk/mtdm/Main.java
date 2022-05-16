@@ -4,12 +4,17 @@ import java.util.Scanner;
 
 import dk.mtdm.backend.War.Warcontroller;
 import dk.mtdm.controller.BlackJackController;
+import dk.mtdm.frontend.window;
+import processing.core.PApplet;
 
 
 public class Main {
 //  public static Draw window;
   public static void main(String[] args) {
-    choose();
+    String[] processingArgs = {"window"};
+    window mySketch = new window();
+    PApplet.runSketch(processingArgs,mySketch);
+//    choose();
   }
 
   private static void choose(){
@@ -74,7 +79,7 @@ public class Main {
           System.out.println("how many players will be in the game");
           byte number = scan.nextByte();
           scan.nextLine();
-          Warcontroller.main(number, scan);
+//          Warcontroller.main(number, scan);
           break;
         
       } catch(InputMismatchException e){
