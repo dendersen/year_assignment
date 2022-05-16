@@ -89,7 +89,7 @@ public class Draw extends JFrame {
 
         /**
          * @Override
-        */
+         */
         public void paint(Graphics G, String hello) {
             g = G;
             setBackground(new Color(52, 166, 0));
@@ -99,7 +99,7 @@ public class Draw extends JFrame {
                 showHiden();
             }
             System.out.println("Canvas Reloaded");
-            
+
 
 
         }
@@ -107,8 +107,8 @@ public class Draw extends JFrame {
 
 
     /**
-   * @param data booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
-   */
+     * @param data booleans that describe available actions: [1] = hit, [2] = stand, [3] = hit can not kill you
+     */
     public static void buttons(CurrentData data) {
         Trans = data;
         if (Trans.AVAILABLE_ACTIONS[0]) {
@@ -141,8 +141,8 @@ public class Draw extends JFrame {
         for (byte j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
             for (byte i = 0; i < Table.getPlayer((byte) (j)).getHand().size(); i++) {
                 Cards.add(new card(
-                    Table.getPlayer(j).getHand().get(i).getSymbol(),
-                    Table.cardNumberString(j, i), i
+                        Table.getPlayer(j).getHand().get(i).getSymbol(),
+                        Table.cardNumberString(j, i), i
                 ));
             }
         }
@@ -203,6 +203,6 @@ public class Draw extends JFrame {
     }
 
     public static void winner(byte winner){
-        
+
     }
 }

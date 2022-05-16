@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="13a41891-29c5-44ff-8f36-843145f87442" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+    <list default="true" id="5868c485-74c5-46f0-b6f6-87cdf61004cd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/core.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dk/mtdm/frontend/icons/window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dk/mtdm/frontend/Draw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dk/mtdm/frontend/Draw.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dk/mtdm/frontend/card.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dk/mtdm/frontend/card.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -16,27 +26,90 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="28wf3ZpSHXKoWEsHzRpaXa5YI2V" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="29G5rVTNzNyRpZmtenSctqfhFWI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "D:/kode/processing-4.0b8/core/library/core.jar",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2"
   }
-}</component>
+}]]></component>
+  <component name="RunManager" selected="Application.window">
+    <configuration name="Draw" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dk.mtdm.frontend.Draw" />
+      <module name="year_assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dk.mtdm.frontend.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dk.mtdm.Main" />
+      <module name="year_assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dk.mtdm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="window" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dk.mtdm.frontend.icons.window" />
+      <module name="year_assignment" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dk.mtdm.frontend.icons.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.window" />
+        <item itemvalue="Application.Draw" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="13a41891-29c5-44ff-8f36-843145f87442" name="Changes" comment="" />
-      <created>1652132373448</created>
+      <changelist id="5868c485-74c5-46f0-b6f6-87cdf61004cd" name="Changes" comment="" />
+      <created>1652726783602</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1652132373448</updated>
+      <updated>1652726783602</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

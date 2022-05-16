@@ -6,6 +6,7 @@ import java.awt.image.ImageObserver;
 import static dk.mtdm.frontend.Draw.height;
 import static dk.mtdm.frontend.Draw.width;
 
+
 public class card implements ImageObserver {
     private final int symbol;
     private final String number;
