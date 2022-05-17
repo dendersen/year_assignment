@@ -76,7 +76,7 @@ public class BlackJackController {
   private static void performAction(byte playerID, boolean action) {
     byte currentPlayer = playerID;
     if(action){ //do hit and check for death
-      BlackJackProcessing.hit(playerID, false);
+      BlackJackProcessing.hit(playerID);
       if(!BlackJackProcessing.isAlive(playerID)){
         System.out.println("player dead");
         currentPlayer++;

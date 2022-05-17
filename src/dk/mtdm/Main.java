@@ -2,7 +2,6 @@ package dk.mtdm;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import dk.mtdm.backend.War.Warcontroller;
 import dk.mtdm.controller.BlackJackController;
 import dk.mtdm.frontend.window;
 import processing.core.PApplet;

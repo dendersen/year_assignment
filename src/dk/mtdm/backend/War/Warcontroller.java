@@ -12,6 +12,7 @@ public class Warcontroller {
   public static void main(byte numberOfPlayers, Scanner scan) {
     Warcontroller.scan = scan;
     WarTable table = new WarTable(numberOfPlayers);
+
     while (true){
       for(byte playerID = 0; playerID < WarTable.NUMBER_OF_PLAYERS; playerID++){ //needs to allow for only 1 card left
         boolean deadPlayer = false;

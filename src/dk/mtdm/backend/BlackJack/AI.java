@@ -9,6 +9,9 @@ public class AI {
   final float TrueDare;
   final byte playerID;
   final boolean IsDealer;
+
+  byte[] specialValues = BlackJackProcessing.getFinals();
+
   /**
    * 
    * @param dareLevel a value between -100 and 100 that decides how daring the ai is. -100 rarely ever plays something that could be dangeruse 100 almost always plays a card. if equal to 123 it will be dealer
@@ -44,14 +47,14 @@ public class AI {
       return (true);
     }
     
-    if(value == 21 && !(check > 0.95) && !(TrueDare > 25)){
+    if(value == specialValues[0] && !(check > 0.95) && !(TrueDare > 25)){
       return (false);
     }
     
-    if(value - es*10 < 10 && (check > 0.75)){
+    if(value - es * specialValues[2] - specialValues[1] < 10 && (check > 0.75)){
       return (true);
     }
-    if((1- (value/21)*check) > check && check*66-33 > TrueDare){
+    if((1- (value/specialValues[0])*check) > check && check*66-33 > TrueDare){
       return (false);
     }else if(check < TrueDare){
       return (true);
@@ -88,11 +91,11 @@ public class AI {
     }
     byte average = (byte) (total / cards.size());
     
-    if(21-value < average && (check*66-33)+TrueDare > 0){
+    if(specialValues[0]-value < average && (check*66-33)+TrueDare > 0){
       return (true);
     }
     
-    if(average < (21-value)*(TrueDare/33)){
+    if(average < (specialValues[0]-value)*(TrueDare/33)){
       return (true);
     }
     return (false);
