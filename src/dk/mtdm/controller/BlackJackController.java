@@ -3,24 +3,22 @@ package dk.mtdm.controller;
 
 import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
-import dk.mtdm.frontend.Draw;
-
+import dk.mtdm.frontend.window;
+import processing.core.PApplet;
 public class BlackJackController {
   static Table table;
-  static Draw draw;
 
   public BlackJackController(byte numberOfPlayers, byte numberOfSets, byte numberOfAI) {
     table = new Table((byte)(numberOfPlayers+numberOfAI), numberOfSets);
     table.TableSetup(numberOfAI);
-    draw = new Draw();
-    try {
-      Thread.sleep(200);
-    } catch (InterruptedException e) {
-      e.printStackTrace();
-    }
   }
 
   public static void main (){
+
+    String[] processingArgs = {"window"};
+    window mySketch = new window();
+    PApplet.runSketch(processingArgs,mySketch);
+    
     startGame();
   }
 
@@ -40,9 +38,9 @@ public class BlackJackController {
     CurrentData transfer = new CurrentData(playerID);
     transfer.dealer = dealer;
 
-    if(buttons)
-      Draw.buttons(transfer);
-    else{    
+    if(buttons){
+      //does button stuff
+    }else{    
       try {
         Thread.sleep(200);
       } catch (InterruptedException e) {
