@@ -4,7 +4,7 @@
     <list default="true" id="5868c485-74c5-46f0-b6f6-87cdf61004cd" name="Changes" comment="added procressing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dk/mtdm/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dk/mtdm/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dk/mtdm/frontend/icons/window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dk/mtdm/frontend/window.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dk/mtdm/frontend/window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dk/mtdm/frontend/window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,7 +104,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652727268651</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added procressing">
+      <created>1652728417469</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1652728417469</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

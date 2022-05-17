@@ -14,7 +14,7 @@ public class Main {
     String[] processingArgs = {"window"};
     window mySketch = new window();
     PApplet.runSketch(processingArgs,mySketch);
-//    choose();
+    choose();
   }
 
   private static void choose(){
