@@ -34,7 +34,7 @@ public class BlackJackProcessing {
       else if(currentNumber <= STANDARD_BIG_CARD_VALUE)
         total += currentNumber;
       else 
-        total += 10;
+        total += STANDARD_BIG_CARD_VALUE;
     }
     while (total >= MAX_DEATH_VALUE){
       if (es > 0){
