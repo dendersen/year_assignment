@@ -62,7 +62,9 @@ public class AI {
     if(TrueDare> 25){
       return (true);
     }
-    return(prediction(check,value));
+    boolean actions = prediction(check,value);
+    System.out.println(actions);
+    return(actions);
   }
 
   private boolean dealer(){

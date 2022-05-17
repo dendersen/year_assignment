@@ -3,8 +3,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import dk.mtdm.controller.BlackJackController;
-import dk.mtdm.frontend.window;
-import processing.core.PApplet;
 
 
 public class Main {

@@ -47,12 +47,13 @@ public class BlackJackController {
     if(buttons){
       window.buttons(transfer);
     }else{    
+
       try {
         Thread.sleep(200);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      theGame(transfer);
+      
     }
   }
 
@@ -79,6 +80,7 @@ public class BlackJackController {
 
   private static void performAction(byte playerID, boolean action) {
     byte currentPlayer = playerID;
+    System.out.println(currentPlayer);
     if(action){ //do hit and check for death
       BlackJackProcessing.hit(playerID);
       if(!BlackJackProcessing.isAlive(playerID)){
