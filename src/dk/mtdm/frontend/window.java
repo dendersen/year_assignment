@@ -1,6 +1,8 @@
 package dk.mtdm.frontend;
 
 import dk.mtdm.backend.BlackJack.Table;
+import dk.mtdm.controller.BlackJackController;
+import dk.mtdm.controller.CurrentData;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -11,37 +13,27 @@ public class window extends PApplet {
     public static void main(String[] args) {
         PApplet.main("window");
     }
-    private button Button;
-    private button test;
-
+    private static button Hit;
+    private static button Stand;
+    private static CurrentData Trans;
     public void settings() {
         size(1000,1000);
     }
 
     public void setup() {
         background(0,200,0);
-        Button = new button(width/2 - 200,height/2,"Hit");
-        test = new button(width/2 + 200,height/2,"Stand");
+        Hit = new button(width/2 - 200,height/2,"Hit");
+        Stand = new button(width/2 + 200,height/2,"Stand");
     }
 
     public void draw() {
         background(0,200,0);
-        Button.show();
-        test.show();
         checkDeck();
+        checkButton();
     }
 
     private final ArrayList<ArrayList<card>> players = new ArrayList<ArrayList<card>>();
     private void checkDeck() {
-//        deck.add(new card("hjerter","B"));
-//        deck.get(0).show();
-        //        for (int i = 0; i < 10; i++) {
-//            deck.add(new card(
-//                    Table.getPlayer((byte) i).getHand().get(i).getSymbolString(),
-//                    Table.getPlayer((byte) i).getHand().get(i).getNumberString()
-//            ));
-//        }
-        
         for(int j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
             ArrayList<card> deck = new ArrayList<>();
             for(int i = 0; i < Table.getPlayer((byte) j).getHand().size(); i++) {
@@ -63,18 +55,48 @@ public class window extends PApplet {
         players.clear();
     }
 
-
-    public void mousePressed() {
-        Button.clicked();
-        test.clicked();
+    public void checkButton() {
+        if (!Hit.hide) {
+            Hit.show();
+        }
+        if (!Stand.hide) {
+            Stand.show();
+        }
     }
+
+    public static void buttons(CurrentData data) {
+        Trans = data;
+        if (Trans.AVAILABLE_ACTIONS[0]) {
+            Hit.showBoolean();
+            // laver en knap til hit
+        }
+        if (Trans.AVAILABLE_ACTIONS[1]){
+            // laver en knap til stand
+            println("eo" + Trans.AVAILABLE_ACTIONS[1]);
+            Stand.showBoolean();
+
+        }
+    }
+    public void mousePressed() {
+        Hit.clicked("Hit");
+        Stand.clicked("Stand");
+    }
+
+    public static void setTransfer(CurrentData Transfer){
+        Trans = Transfer;
+    }
+
+    public static void returnBtn(){
+        BlackJackController.theGame(Trans);
+    }
+
     public class button {
-        private int x;
-        private int y;
-        private int w = 150;
-        private int h = 50;
+        private final int x;
+        private final int y;
+        private final int w = 150;
+        private final int h = 50;
         private final String input;
-        public boolean hide = false;
+        public boolean hide = true;
         button(int x,int y,String input) {
             this.x = x;
             this.y = y;
@@ -82,11 +104,11 @@ public class window extends PApplet {
         }
 
         public void show() {
-            if(hide) {
-                return;
-            }
+//            if(hide) {
+//                return;
+//            }
             push();
-            if(mouseX > x - w / 2 && mouseX < x + w / 2 && mouseY > y - h / 2&& mouseY < y + h / 2){
+            if(mouseX > x - w / 2 && mouseX < x + w / 2 && mouseY > y - h / 2 && mouseY < y + h / 2){
                 fill(220);
             } else {
                 fill(255);
@@ -100,11 +122,21 @@ public class window extends PApplet {
             pop();
         }
 
-        public void clicked() {
-            if(mouseX > x - w / 2 && mouseX < x + w / 2 && mouseY > y - h / 2&& mouseY < y + h / 2){
-               print("test");
-               hide = true;
+        private void showBoolean(){
+            hide = false;
+        }
+        private void hideBoolean(){
+            hide = true;
+        }
+        public void clicked(String id) {
+            if(hide) {
+                return;
             }
+            if(!(mouseX > x - w / 2 && mouseX < x + w / 2 && mouseY > y - h / 2&& mouseY < y + h / 2)){
+               return;
+            }
+            hide = true;
+            returnBtn();
         }
     }
 
@@ -118,15 +150,11 @@ public class window extends PApplet {
         private int x = width / 2;
         private int y = height - h - 25;
         private final String path = "src/dk/mtdm/frontend/icons/";
-        private int dealer;
-        private int id;
         private boolean hide = false;
 
         card(String symbol, String Number, int id, int dealer, int size) {
             this.symbol = symbol;
             this.Number = Number;
-            this.id = id;
-            this.dealer = dealer;
             this.x += id * 125;
             this.x -= ((size - 1) * 175 + 200) / 2;
             if (dealer == 0) {

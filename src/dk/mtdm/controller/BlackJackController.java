@@ -7,6 +7,7 @@ import dk.mtdm.frontend.window;
 import processing.core.PApplet;
 public class BlackJackController {
   static Table table;
+  static window mySketch;
 
   public BlackJackController(byte numberOfPlayers, byte numberOfSets, byte numberOfAI) {
     table = new Table((byte)(numberOfPlayers+numberOfAI), numberOfSets);
@@ -16,9 +17,13 @@ public class BlackJackController {
   public static void main (){
 
     String[] processingArgs = {"window"};
-    window mySketch = new window();
+    mySketch = new window();
     PApplet.runSketch(processingArgs,mySketch);
-    
+    try {
+      Thread.sleep(200);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
     startGame();
   }
 
@@ -39,7 +44,7 @@ public class BlackJackController {
     transfer.dealer = dealer;
 
     if(buttons){
-      //does button stuff
+      window.buttons(transfer);
     }else{    
       try {
         Thread.sleep(200);
