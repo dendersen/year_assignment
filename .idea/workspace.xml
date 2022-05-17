@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5868c485-74c5-46f0-b6f6-87cdf61004cd" name="Changes" comment="added cards and stuff v2">
+    <list default="true" id="5868c485-74c5-46f0-b6f6-87cdf61004cd" name="Changes" comment="added working buttons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dk/mtdm/controller/BlackJackController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dk/mtdm/controller/BlackJackController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dk/mtdm/frontend/window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dk/mtdm/frontend/window.java" afterDir="false" />
@@ -29,18 +29,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "last_opened_file_path": "D:/kode/processing-4.0b8/core/library/core.jar",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/kode/processing-4.0b8/core/library/core.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Draw" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dk.mtdm.frontend.Draw" />
@@ -119,7 +119,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652795825309</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added working buttons">
+      <created>1652803214854</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1652803214854</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,6 +143,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added procressing" />
     <MESSAGE value="added cards and stuff v2" />
-    <option name="LAST_COMMIT_MESSAGE" value="added cards and stuff v2" />
+    <MESSAGE value="added working buttons" />
+    <option name="LAST_COMMIT_MESSAGE" value="added working buttons" />
   </component>
 </project>

@@ -15,15 +15,18 @@ public class window extends PApplet {
     }
     private static button Hit;
     private static button Stand;
+    private static button AI;
     private static CurrentData Trans;
     public void settings() {
         size(1000,1000);
     }
+    private static int showPlayerID;
 
     public void setup() {
         background(0,200,0);
         Hit = new button(width/2 - 200,height/2,"Hit");
         Stand = new button(width/2 + 200,height/2,"Stand");
+        AI = new button(+225, height-225,"AI");
     }
 
     public void draw() {
@@ -47,10 +50,11 @@ public class window extends PApplet {
             }
             players.add(deck);
         }
-        for (int j = 0; j < players.size(); j++) {
-            for (int i = 0; i < players.get(j).size(); i++ ) {
-                players.get(j).get(i).show();
-            }
+        for (int i = 0; i < players.get(0).size(); i++ ) {
+            players.get(0).get(i).show();
+        }
+        for (int i = 0; i < players.get(showPlayerID).size(); i++ ) {
+            players.get(showPlayerID).get(i).show();
         }
         players.clear();
     }
@@ -62,24 +66,29 @@ public class window extends PApplet {
         if (!Stand.hide) {
             Stand.show();
         }
+        AI.hide = false;
+        AI.show();
+
     }
 
     public static void buttons(CurrentData data) {
         Trans = data;
+
         if (Trans.AVAILABLE_ACTIONS[0]) {
             Hit.showBoolean();
             // laver en knap til hit
         }
         if (Trans.AVAILABLE_ACTIONS[1]){
             // laver en knap til stand
-            println("eo" + Trans.AVAILABLE_ACTIONS[1]);
             Stand.showBoolean();
-
         }
+
+        showPlayerID = Trans.playerID;
     }
     public void mousePressed() {
         Hit.clicked("Hit");
         Stand.clicked("Stand");
+        AI.clicked("AI");
     }
 
     public static void setTransfer(CurrentData Transfer){
@@ -134,6 +143,16 @@ public class window extends PApplet {
             }
             if(!(mouseX > x - w / 2 && mouseX < x + w / 2 && mouseY > y - h / 2&& mouseY < y + h / 2)){
                return;
+            }
+            if(Objects.equals(id, "Hit")){
+                Trans.setAction(true);
+            }
+            if(Objects.equals(id, "Stand")) {
+                Trans.setAction(false);
+            }
+            if(Objects.equals(id, "AI")) {
+                BlackJackController.theGame(Trans);
+                print("test");
             }
             hide = true;
             returnBtn();

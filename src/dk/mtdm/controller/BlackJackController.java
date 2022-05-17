@@ -31,9 +31,10 @@ public class BlackJackController {
     if(!Table.getPlayer((byte)1).IS_AI){
       draws((byte)1,false, true);
       }
-    else
+    else {
       draws((byte)1, false, false);
-    
+    }
+
     new Thread();
     }
 
