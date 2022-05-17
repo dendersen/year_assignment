@@ -10,9 +10,9 @@ import processing.core.PApplet;
 public class Main {
 //  public static Draw window;
   public static void main(String[] args) {
-    String[] processingArgs = {"window"};
-    window mySketch = new window();
-    PApplet.runSketch(processingArgs,mySketch);
+//    String[] processingArgs = {"window"};
+//    window mySketch = new window();
+//    PApplet.runSketch(processingArgs,mySketch);
     choose();
   }
 
