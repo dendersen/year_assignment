@@ -93,6 +93,7 @@ public class window extends PApplet {
 
     public static void setTransfer(CurrentData Transfer){
         Trans = Transfer;
+        System.out.println("Trans saved with player id = " + Trans.playerID);
     }
 
     public static void returnBtn(){
@@ -142,7 +143,7 @@ public class window extends PApplet {
                 return;
             }
             if(!(mouseX > x - w / 2 && mouseX < x + w / 2 && mouseY > y - h / 2&& mouseY < y + h / 2)){
-               return;
+                return;
             }
             if(Objects.equals(id, "Hit")){
                 Trans.setAction(true);
@@ -151,8 +152,8 @@ public class window extends PApplet {
                 Trans.setAction(false);
             }
             if(Objects.equals(id, "AI")) {
+                print("ai is hit");
                 BlackJackController.theGame(Trans);
-                print("test");
             }
             hide = true;
             returnBtn();

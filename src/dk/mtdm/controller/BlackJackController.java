@@ -28,6 +28,7 @@ public class BlackJackController {
       e.printStackTrace();
     }
     startGame();
+    
   }
 
   private static void startGame(){
@@ -43,18 +44,21 @@ public class BlackJackController {
   public static void draws(byte playerID, boolean dealer, boolean buttons){
     
     CurrentData transfer = new CurrentData(playerID);
+    System.out.println("transfer loaded, player ID = " + playerID);
     transfer.dealer = dealer;
+    System.out.println("is dealer = " + dealer);
 
     if(buttons){
+      System.out.println("drawing buttons");
       window.buttons(transfer);
     }else{    
-
+      System.out.println("no buttons, waiting 200ms before next action");
       try {
         Thread.sleep(200);
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-      
+      System.out.println("ready for new action, please press ai button");
     }
   }
 
@@ -91,23 +95,31 @@ public class BlackJackController {
 
   private static void performAction(byte playerID, boolean action) {
     byte currentPlayer = playerID;
-    System.out.println(currentPlayer);
+    System.out.println("performing action from player " + currentPlayer);
+
     if(action){ //do hit and check for death
       BlackJackProcessing.hit(playerID);
       if(!BlackJackProcessing.isAlive(playerID)){
         System.out.println("player dead");
         currentPlayer++;
+        System.out.println("player shift to " + currentPlayer);
       }
     }else { // stand and go to next player
       currentPlayer++;
+      System.out.println("player shift to " + currentPlayer);
     }
     if(currentPlayer != playerID){//starts dealer
-      if(currentPlayer >= Table.NUMBER_OF_PLAYERS) currentPlayer = 0;
+      if(currentPlayer >= Table.NUMBER_OF_PLAYERS){ 
+        currentPlayer = 0;
+        System.out.println("player shift to " + currentPlayer);
+      }
     }
     
     if(playerID != 0){
+      System.out.println("action processed, draw starting");
       draws(currentPlayer,false, !Table.getPlayer(currentPlayer).IS_AI);
     }else{
+      System.out.println("dealer turn");
       dealer();
     }
   }
