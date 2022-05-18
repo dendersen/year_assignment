@@ -3,11 +3,14 @@ package dk.mtdm.controller;
 
 import dk.mtdm.backend.BlackJack.BlackJackProcessing;
 import dk.mtdm.backend.BlackJack.Table;
+import dk.mtdm.frontend.Draw;
 import dk.mtdm.frontend.window;
 import processing.core.PApplet;
 public class BlackJackController {
   static Table table;
   static window mySketch;
+  static boolean winner = false;
+  static boolean dealer = false;
 
   public BlackJackController(byte numberOfPlayers, byte numberOfSets, byte numberOfAI) {
     table = new Table((byte)(numberOfPlayers+numberOfAI), numberOfSets);
@@ -34,8 +37,6 @@ public class BlackJackController {
     else {
       draws((byte)1, false, false);
     }
-
-    new Thread();
     }
 
 
@@ -61,6 +62,16 @@ public class BlackJackController {
    * @param data the curent game data that is used to run the game
    */
   public static void theGame(CurrentData data){
+    if(winner){
+      Draw.winner(BlackJackProcessing.winnerID());
+      return;
+    }
+
+    if(dealer){
+      dealer();
+      return;
+    }
+
     if(!Table.getPlayer(data.playerID).IS_AI){
       performAction(data.playerID, data.action);
     }

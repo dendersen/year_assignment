@@ -1,7 +1,7 @@
 package dk.mtdm;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+import dk.mtdm.backend.War.Warcontroller;
 import dk.mtdm.controller.BlackJackController;
 
 
@@ -76,7 +76,7 @@ public class Main {
           System.out.println("how many players will be in the game");
           byte number = scan.nextByte();
           scan.nextLine();
-//          Warcontroller.main(number, scan);
+          Warcontroller.main(number, scan);
           break;
         
       } catch(InputMismatchException e){
