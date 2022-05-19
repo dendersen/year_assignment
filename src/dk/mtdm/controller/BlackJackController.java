@@ -130,7 +130,7 @@ public class BlackJackController {
   }
 
   public static void dealer(){
-    Draw.showHiden();
+    //flip dealer kort
     System.out.println("dealer code here");
     CurrentData transfer = new CurrentData((byte)0);
     transfer.dealer = dealer;
