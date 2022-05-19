@@ -22,7 +22,7 @@ public class window extends PApplet {
         size(1000,1000);
     }
     private static int showPlayerID;
-    private boolean showDealer;
+    public boolean showDealer = false;
 
     public void setup() {
         background(0,200,0);
@@ -60,16 +60,22 @@ public class window extends PApplet {
             }
             players.add(deck);
         }
-        for (int i = 0; i < players.get(0).size(); i++ ) {
-            players.get(0).get(i).show();
+        if(showDealer) {
+            players.get(0).get(0).showHiden();
+            for (int i = 1; i < players.get(0).size(); i++ ) {
+                players.get(0).get(i).show();
+            }
+        } else {
+            for (int i = 0; i < players.get(0).size(); i++ ) {
+                players.get(0).get(i).show();
+            }
         }
+
         for (int i = 0; i < players.get(showPlayerID).size(); i++ ) {
             players.get(showPlayerID).get(i).show();
         }
 
-        if(showDealer) {
-            players.get(0).get(0).showHiden();
-        }
+
 
 
         players.clear();
