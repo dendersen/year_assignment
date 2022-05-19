@@ -22,13 +22,14 @@ public class window extends PApplet {
         size(1000,1000);
     }
     private static int showPlayerID;
+    private boolean showDealer;
 
     public void setup() {
         background(0,200,0);
         Hit = new button(width/2 - 200,height/2,"Hit");
         Stand = new button(width/2 + 200,height/2,"Stand");
-        AI = new button(+225, height-225,"AI");
-        AI.hide = true;
+        AI = new button(100, height - 40,"END");
+        AI.hide = false;
     }
 
     public void draw() {
@@ -40,9 +41,11 @@ public class window extends PApplet {
     public static void hideButtons(){
         Hit.hide = true;
         Stand.hide = true;
+        AI.hide = true;
     }
 
     private final ArrayList<ArrayList<card>> players = new ArrayList<ArrayList<card>>();
+
     private void checkDeck() {
         for(int j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
             ArrayList<card> deck = new ArrayList<>();
@@ -63,31 +66,41 @@ public class window extends PApplet {
         for (int i = 0; i < players.get(showPlayerID).size(); i++ ) {
             players.get(showPlayerID).get(i).show();
         }
+
+        if(showDealer) {
+            players.get(0).get(0).showHiden();
+        }
+
+
         players.clear();
+        push();
+        textAlign(CENTER);
+        textSize(50);
+        text("Player: " + showPlayerID,width / 2, height / 2);
+        pop();
     }
 
     public void checkButton() {
+        AI.hide = false;
+        AI.show();
         if (!Hit.hide) {
             Hit.show();
         }
         if (!Stand.hide) {
             Stand.show();
         }
-        AI.hide = false;
-        AI.show();
-
     }
 
     public static void buttons(CurrentData data) {
         Trans = data;
 
         if (Trans.AVAILABLE_ACTIONS[0]) {
-            Hit.showBoolean();
+            Hit.hide = false;;
             // laver en knap til hit
         }
         if (Trans.AVAILABLE_ACTIONS[1]){
             // laver en knap til stand
-            Stand.showBoolean();
+            Stand.hide = false;;
         }
 
         showPlayerID = Trans.playerID;
@@ -142,9 +155,7 @@ public class window extends PApplet {
             pop();
         }
 
-        private void showBoolean(){
-            hide = false;
-        }
+
         private void hideBoolean(){
             hide = true;
         }
@@ -212,7 +223,7 @@ public class window extends PApplet {
             pop();
         }
 
-        public void showHiden() {
+        private void showHiden() {
             hide = false;
             show();
         }

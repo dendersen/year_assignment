@@ -24,12 +24,12 @@ public class Main {
           case "war":
             startWar(scan);
           break;
-          
+
           case "":
           case "blackjack":
             game = BlackJackStart(scan);
           break;
-          
+
           default:
             System.out.println("this game is not supportet");
             System.out.println("let's play blackJack instead");
@@ -38,7 +38,7 @@ public class Main {
         }
       }
       if(game)
-      break;
+        break;
     }
     System.out.println("game finished");
   }
