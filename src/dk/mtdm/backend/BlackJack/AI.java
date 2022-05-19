@@ -2,7 +2,6 @@ package dk.mtdm.backend.BlackJack;
 
 import java.util.ArrayList;
 
-import dk.mtdm.controller.BlackJackController;
 import dk.mtdm.frontend.window;
 
 public class AI {
