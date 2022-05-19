@@ -1,5 +1,6 @@
 package dk.mtdm.frontend;
 
+import dk.mtdm.backend.BlackJack.AI;
 import dk.mtdm.backend.BlackJack.Table;
 import dk.mtdm.controller.BlackJackController;
 import dk.mtdm.controller.CurrentData;
@@ -15,7 +16,7 @@ public class window extends PApplet {
     }
     private static button Hit;
     private static button Stand;
-    private static button AI;
+    public static button AI;
     private static CurrentData Trans;
     public void settings() {
         size(1000,1000);
@@ -27,12 +28,18 @@ public class window extends PApplet {
         Hit = new button(width/2 - 200,height/2,"Hit");
         Stand = new button(width/2 + 200,height/2,"Stand");
         AI = new button(+225, height-225,"AI");
+        AI.hide = true;
     }
 
     public void draw() {
         background(0,200,0);
         checkDeck();
         checkButton();
+    }
+
+    public static void hideButtons(){
+        Hit.hide = true;
+        Stand.hide = true;
     }
 
     private final ArrayList<ArrayList<card>> players = new ArrayList<ArrayList<card>>();
@@ -97,6 +104,9 @@ public class window extends PApplet {
     }
 
     public static void returnBtn(){
+        Hit.hide = true;
+        Stand.hide = true;
+        AI.hide = true;
         BlackJackController.theGame(Trans);
     }
 
@@ -146,16 +156,18 @@ public class window extends PApplet {
                 return;
             }
             if(Objects.equals(id, "Hit")){
+                print("hit is hit");
                 Trans.setAction(true);
             }
             if(Objects.equals(id, "Stand")) {
+                print("stand is hit");
                 Trans.setAction(false);
             }
             if(Objects.equals(id, "AI")) {
                 print("ai is hit");
                 BlackJackController.theGame(Trans);
             }
-            hide = true;
+
             returnBtn();
         }
     }

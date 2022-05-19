@@ -32,11 +32,11 @@ public class Table {
    * @param sets the number of full card sets in play (52 cards each)
    */
   public Table( byte numberOfPlayers, byte sets){
-    Table.NUMBER_OF_PLAYERS = numberOfPlayers;
+    Table.NUMBER_OF_PLAYERS = (byte) (numberOfPlayers + 1);
     if(sets<=0)
     sets = 1;
     Table.NUMBER_OF_SETS = sets;
-    Table.players = new PlayerHandObject[numberOfPlayers];
+    Table.players = new PlayerHandObject[numberOfPlayers + 1];
     this.NUMBER_OF_CARDS = NUMBER_OF_SYMBOLS * MAX_CARD_VALUE * NUMBER_OF_SETS;
   }
   

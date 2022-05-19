@@ -2,6 +2,9 @@ package dk.mtdm.backend.BlackJack;
 
 import java.util.ArrayList;
 
+import dk.mtdm.controller.BlackJackController;
+import dk.mtdm.frontend.window;
+
 public class AI {
   /**
    * @param TrueDare -33 -> 33
@@ -39,10 +42,15 @@ public class AI {
    * @return true = hit, false = stand
    */
   public boolean action(){
-    if(IsDealer) return(dealer());
+    if(IsDealer){
+      Boolean deal = dealer();
+      System.out.println("dealer action = " + deal);
+      return(deal);
+    }
     byte value = BlackJackProcessing.playerValue(playerID);
     byte es = BlackJackProcessing.hasEs(playerID);
     double check = Math.random();
+    window.AI.show();
     if (TrueDare > 25 && check > 0.7){
       return (true);
     }
@@ -64,11 +72,12 @@ public class AI {
     }
     boolean actions = prediction(check,value);
     System.out.println(actions);
+    System.out.println(actions);
     return(actions);
   }
 
   private boolean dealer(){
-    if(BlackJackProcessing.playerValue(playerID) >= 16){
+    if(BlackJackProcessing.playerValue(playerID) <= 16){
       return (true);
     }
     if(

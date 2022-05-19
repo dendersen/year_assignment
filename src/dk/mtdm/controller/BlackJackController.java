@@ -8,7 +8,7 @@ import dk.mtdm.frontend.window;
 import processing.core.PApplet;
 public class BlackJackController {
   static Table table;
-  static window mySketch;
+  static public window mySketch;
   static boolean winner = false;
   static boolean dealer = false;
 
@@ -21,6 +21,7 @@ public class BlackJackController {
 
     String[] processingArgs = {"window"};
     mySketch = new window();
+    
     PApplet.runSketch(processingArgs,mySketch);
     try {
       Thread.sleep(200);
@@ -34,11 +35,13 @@ public class BlackJackController {
   private static void startGame(){
     if(!Table.getPlayer((byte)1).IS_AI){
       draws((byte)1,false, true);
+      System.out.println("player one not ai");
       }
     else {
       draws((byte)1, false, false);
+      System.out.println("player one is ai");
     }
-    }
+  }
 
 
   public static void draws(byte playerID, boolean dealer, boolean buttons){
@@ -52,6 +55,8 @@ public class BlackJackController {
       System.out.println("drawing buttons");
       window.buttons(transfer);
     }else{    
+      window.hideButtons();
+      window.setTransfer(transfer);
       System.out.println("no buttons, waiting 200ms before next action");
       try {
         Thread.sleep(200);
@@ -109,7 +114,7 @@ public class BlackJackController {
       System.out.println("player shift to " + currentPlayer);
     }
     if(currentPlayer != playerID){//starts dealer
-      if(currentPlayer >= Table.NUMBER_OF_PLAYERS){ 
+      if(currentPlayer > Table.NUMBER_OF_PLAYERS-1){ 
         currentPlayer = 0;
         System.out.println("player shift to " + currentPlayer);
       }
@@ -125,6 +130,12 @@ public class BlackJackController {
   }
 
   public static void dealer(){
-    
+    Draw.showHiden();
+    System.out.println("dealer code here");
+    CurrentData transfer = new CurrentData((byte)0);
+    transfer.dealer = dealer;
+    window.setTransfer(transfer);
+
+    draws((byte)0, true, false);
   }
 }

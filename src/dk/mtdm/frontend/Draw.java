@@ -10,8 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
-import static dk.mtdm.frontend.Draw.MyCanvas.g;
-
 public class Draw extends JFrame {
     public static final int width = 1000;
     public static final int height = 800;
