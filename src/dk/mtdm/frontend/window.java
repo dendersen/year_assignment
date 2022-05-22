@@ -269,28 +269,28 @@ public class window extends PApplet {
             switch (this.Number) {
                 case "K" -> {
                     if (Objects.equals(this.symbol, "hjerter") || Objects.equals(this.symbol, "romber")) {
-                        imgNumber = loadImage(path + "rød_konge.png");
+                        imgNumber = loadImage(path + "roed_konge.png");
                     } else {
                         imgNumber = loadImage(path + "sort_konge.png");
                     }
                 }
                 case "D" -> {
                     if (Objects.equals(this.symbol, "hjerter") || Objects.equals(this.symbol, "romber")) {
-                        imgNumber = loadImage(path + "rød_dronning.png");
+                        imgNumber = loadImage(path + "roed_dronning.png");
                     } else {
                         imgNumber = loadImage(path + "sort_dronning.png");
                     }
                 }
                 case "B" -> {
                     if (Objects.equals(this.symbol, "hjerter") || Objects.equals(this.symbol, "romber")) {
-                        imgNumber = loadImage(path + "rød_bonde.png");
+                        imgNumber = loadImage(path + "roed_bonde.png");
                     } else {
                         imgNumber = loadImage(path + "sort_bonde.png");
                     }
                 }
                 case "A" -> {
                     if (Objects.equals(this.symbol, "hjerter") || Objects.equals(this.symbol, "romber")) {
-                        imgNumber = loadImage(path + "rød_es.png");
+                        imgNumber = loadImage(path + "roed_es.png");
                     } else {
                         imgNumber = loadImage(path + "sort_es.png");
                     }
@@ -320,7 +320,7 @@ public class window extends PApplet {
                     imgSymbol = loadImage(path + "romber.png");
                 }
                 case "klør" -> {
-                    imgSymbol = loadImage(path + "klør.png");
+                    imgSymbol = loadImage(path + "kloer.png");
                 }
                 case "spar" -> {
                     imgSymbol = loadImage(path + "spar.png");
