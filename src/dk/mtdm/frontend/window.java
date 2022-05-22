@@ -22,6 +22,7 @@ public class window extends PApplet {
     }
     private static int showPlayerID;
     public boolean showDealer = false;
+    private boolean finished = false;
 
     public void setup() {
         background(0,200,0);
@@ -32,14 +33,18 @@ public class window extends PApplet {
     }
 
     public void draw() {
-        background(0,200,0);
+        if (!finished) {
+            background(0,200,0);
+        }
         checkDeck();
         checkButton();
-        if((Stand.hide || Hit.hide)) {
-            AI.hide = false;
-        } else {
-            AI.hide = true;
+        if (!finished) {
+            if ((Stand.hide || Hit.hide)) {
+                AI.hide = false;
+            } else {
+                AI.hide = true;
 
+            }
         }
     }
 
@@ -52,6 +57,9 @@ public class window extends PApplet {
     private final ArrayList<ArrayList<card>> players = new ArrayList<ArrayList<card>>();
 
     private void checkDeck() {
+        if (finished) {
+            return;
+        }
         for(int j = 0; j < Table.NUMBER_OF_PLAYERS; j++) {
             ArrayList<card> deck = new ArrayList<>();
             for(int i = 0; i < Table.getPlayer((byte) j).getHand().size(); i++) {
@@ -91,7 +99,6 @@ public class window extends PApplet {
             text("AI: " + showPlayerID,width / 2, height / 2);
         } else {
             text("Player: " + showPlayerID,width / 2, height / 2);
-            println(Table.getPlayer((byte) showPlayerID).IS_AI);
         }
         pop();
     }
@@ -105,6 +112,9 @@ public class window extends PApplet {
     }
 
     public void winner(Byte winner) {
+        background(0,200,0);
+
+        finished = true;
         Hit.hide = true;
         Stand.hide = true;
         AI.hide = true;
@@ -114,7 +124,7 @@ public class window extends PApplet {
         if (winner == 0) {
             text("Vinder: \n" + "Dealer",width / 2,height / 3);
         } else {
-            text("Vinder: \n" + winner,width / 2,height / 3);
+            text("Vinder: \n" + "Player " + winner,width / 2,height / 3);
         }
         pop();
     }

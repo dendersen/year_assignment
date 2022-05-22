@@ -50,9 +50,10 @@ public class Main {
       System.out.println("how many humans will be in the game?");
       byte human = scan.nextByte();
       scan.nextLine();
-      System.out.println("how many ai will be in the game?");
-      byte ai = scan.nextByte();
-      scan.nextLine();
+//      System.out.println("how many ai will be in the game?");
+//      byte ai = scan.nextByte();
+//      scan.nextLine();
+        byte ai = 0; //AI Off
       System.out.println("how many sets of playing cards will be in the game?");
       byte cards = scan.nextByte();
       scan.nextLine();
