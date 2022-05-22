@@ -133,8 +133,20 @@ public class BlackJackController {
     mySketch.showDealer = true;
     System.out.println("dealer code here");
     CurrentData transfer = new CurrentData((byte)0);
-    transfer.dealer = dealer;
-    window.setTransfer(transfer);
+    transfer.dealer = dealer;;
+    boolean Action = false;
+      action = Table.getPlayer(data.playerID).aiAction();
+      }catch(Exception e){
+        System.out.println(e);
+        e.printStackTrace();
+      transfer.action = action
+    if (!transfer.action){
+winner = true;
+return();
+}
+
+
+window.setTransfer(transfer);
 
     draws((byte)0, true, false);
   }
