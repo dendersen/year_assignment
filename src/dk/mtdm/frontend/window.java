@@ -1,6 +1,5 @@
 package dk.mtdm.frontend;
 
-import dk.mtdm.backend.BlackJack.AI;
 import dk.mtdm.backend.BlackJack.Table;
 import dk.mtdm.controller.BlackJackController;
 import dk.mtdm.controller.CurrentData;
@@ -106,7 +105,6 @@ public class window extends PApplet {
     }
 
     public void winner(Byte winner) {
-        Finish = true;
         Hit.hide = true;
         Stand.hide = true;
         AI.hide = true;
@@ -132,7 +130,6 @@ public class window extends PApplet {
             // laver en knap til stand
             Stand.hide = false;
         }
-
 
 
         showPlayerID = Trans.playerID;
@@ -187,10 +184,6 @@ public class window extends PApplet {
             pop();
         }
 
-
-        private void hideBoolean(){
-            hide = true;
-        }
         public void clicked(String id) {
             if(hide) {
                 return;

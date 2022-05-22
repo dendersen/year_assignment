@@ -71,7 +71,6 @@ public class AI {
     }
     boolean actions = prediction(check,value);
     System.out.println(actions);
-    System.out.println(actions);
     return(actions);
   }
 
