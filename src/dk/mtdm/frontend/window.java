@@ -28,14 +28,20 @@ public class window extends PApplet {
         background(0,200,0);
         Hit = new button(width/2 - 200,height/2,"Hit");
         Stand = new button(width/2 + 200,height/2,"Stand");
-        AI = new button(100, height - 40,"END");
-        AI.hide = false;
+        AI = new button(width/2, height/2 + 100,"END");
+        AI.hide = true;
     }
 
     public void draw() {
         background(0,200,0);
         checkDeck();
         checkButton();
+        if((Stand.hide || Hit.hide)) {
+            AI.hide = false;
+        } else {
+            AI.hide = true;
+
+        }
     }
 
     public static void hideButtons(){
@@ -82,32 +88,40 @@ public class window extends PApplet {
         push();
         textAlign(CENTER);
         textSize(50);
-        text("Player: " + showPlayerID,width / 2, height / 2);
+        if(Table.getPlayer((byte) showPlayerID).IS_AI) {
+            text("AI: " + showPlayerID,width / 2, height / 2);
+        } else {
+            text("Player: " + showPlayerID,width / 2, height / 2);
+            println(Table.getPlayer((byte) showPlayerID).IS_AI);
+        }
         pop();
     }
 
     public void checkButton() {
-        AI.hide = false;
+//        AI.hide = false;
         AI.show();
-        if (!Hit.hide) {
-            Hit.show();
-        }
-        if (!Stand.hide) {
-            Stand.show();
-        }
+        Hit.show();
+        Stand.show();
+
+//        if (!Hit.hide) {
+//        }
+//        if (!Stand.hide) {
+//        }
     }
 
     public static void buttons(CurrentData data) {
         Trans = data;
 
         if (Trans.AVAILABLE_ACTIONS[0]) {
-            Hit.hide = false;;
+            Hit.hide = false;
             // laver en knap til hit
         }
         if (Trans.AVAILABLE_ACTIONS[1]){
             // laver en knap til stand
-            Stand.hide = false;;
+            Stand.hide = false;
         }
+
+
 
         showPlayerID = Trans.playerID;
     }
@@ -143,9 +157,9 @@ public class window extends PApplet {
         }
 
         public void show() {
-//            if(hide) {
-//                return;
-//            }
+            if(hide) {
+                return;
+            }
             push();
             if(mouseX > x - w / 2 && mouseX < x + w / 2 && mouseY > y - h / 2 && mouseY < y + h / 2){
                 fill(220);
