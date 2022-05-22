@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2822c85-f4b4-413d-8bd4-8195abf9ff2b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+    <list default="true" id="a37450fd-b29d-4cb1-98fc-96daa0ed7199" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dk/mtdm/frontend/window.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dk/mtdm/frontend/window.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +17,8 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="29Vv4GNr6YAuzqkYijWOoAPJa8d" />
+  <component name="ProjectId" id="29XFra17QtmNAr3YBHIaqbnW3wk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -54,11 +56,11 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e2822c85-f4b4-413d-8bd4-8195abf9ff2b" name="Changes" comment="" />
-      <created>1653210877245</created>
+      <changelist id="a37450fd-b29d-4cb1-98fc-96daa0ed7199" name="Changes" comment="" />
+      <created>1653251725552</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1653210877245</updated>
+      <updated>1653251725552</updated>
     </task>
     <servers />
   </component>
