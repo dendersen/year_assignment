@@ -103,10 +103,22 @@ public class window extends PApplet {
         Hit.show();
         Stand.show();
 
-//        if (!Hit.hide) {
-//        }
-//        if (!Stand.hide) {
-//        }
+    }
+
+    public void winner(Byte winner) {
+        Finish = true;
+        Hit.hide = true;
+        Stand.hide = true;
+        AI.hide = true;
+        push();
+        textSize(200);
+        textAlign(CENTER);
+        if (winner == 0) {
+            text("Vinder: \n" + "Dealer",width / 2,height / 3);
+        } else {
+            text("Vinder: \n" + winner,width / 2,height / 3);
+        }
+        pop();
     }
 
     public static void buttons(CurrentData data) {

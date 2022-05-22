@@ -72,7 +72,7 @@ public class BlackJackController {
    */
   public static void theGame(CurrentData data){
     if(winner){
-      Draw.winner(BlackJackProcessing.winnerID());
+      mySketch.winner(BlackJackProcessing.winnerID());
       return;
     }
 
